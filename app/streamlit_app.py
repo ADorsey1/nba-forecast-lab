@@ -93,7 +93,7 @@ html, body, [class*="css"] { font-family: 'DM Sans', sans-serif; }
 .brand-mark { color:var(--orange); }
 .st-key-desktop-navigation { display:block; }
 .st-key-mobile-navigation { display:none; }
-.st-key-desktop-navigation .stButton > button { min-height:2.65rem; padding:.25rem .45rem; font-size:.78rem; }
+.st-key-desktop-navigation .stButton > button { min-height:2.65rem; padding:.25rem .35rem; font-size:.78rem; white-space:nowrap; }
 .st-key-mobile-navigation .stButton > button { min-height:2.65rem; padding:.25rem .5rem; font-size:.9rem; }
 .st-key-account-actions .stButton > button { min-height:2.65rem; padding:.25rem .5rem; font-size:.74rem; }
 .auth-shell { max-width: 540px; margin: 8vh auto 1.25rem; padding: 2.2rem 2.3rem 1.4rem; background: linear-gradient(145deg, rgba(27,60,87,.98), rgba(16,34,53,.98)); border: 1px solid var(--line); border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,.24); }
@@ -128,10 +128,13 @@ html, body, [class*="css"] { font-family: 'DM Sans', sans-serif; }
 .stApp [data-testid="stDataFrame"] * { color:#142434 !important; }
 .stApp [data-testid="stExpander"] { background:var(--surface); border:1px solid var(--line); }
 div[data-testid="stPopover"] button { min-width: 88px; }
-@media (max-width: 1080px) {
+@media (max-width: 1280px) {
   .block-container { padding: .9rem 1.1rem 3rem; }
   .st-key-desktop-navigation { display:none; }
   .st-key-mobile-navigation { display:block; }
+  div[data-testid="column"]:has(.st-key-desktop-navigation-slot) { display:none; }
+  .st-key-account-actions { display:none; }
+  div[data-testid="column"]:has(.st-key-account-actions) { display:none; }
   .hero { padding-top:2.4rem; }
 }
 @media (max-width: 600px) {
@@ -142,6 +145,7 @@ div[data-testid="stPopover"] button { min-width: 88px; }
   .card { min-height:0; margin-bottom:.8rem; }
   .st-key-mobile-navigation .stButton > button { min-width:3.2rem; }
   .st-key-account-actions { display:none; }
+  div[data-testid="column"]:has(.st-key-account-actions) { display:none; }
   .auth-shell { margin-top: 3vh; padding: 1.4rem 1.2rem 1rem; }
   .stApp [data-testid="stForm"] { padding: 1.1rem 1.2rem 1.25rem; }
 }
@@ -307,17 +311,18 @@ st.markdown(
 
 
 with st.container():
-    brand_col, nav_col, focus_col, mobile_col, account_col = st.columns([1.9, 6.6, 2.4, .8, 1.0], vertical_alignment="center")
+    brand_col, nav_col, focus_col, mobile_col, account_col = st.columns([1.8, 8.4, 2.5, .7, 1.0], gap="small", vertical_alignment="center")
     with brand_col:
         st.markdown('<div class="topbar"><span class="brand"><span class="brand-mark">N</span>BA Forecast Lab</span></div>', unsafe_allow_html=True)
     with nav_col:
-        with st.container(key="desktop-navigation"):
-            nav_buttons = st.columns(len(PAGES))
-            for button_col, nav_page in zip(nav_buttons, PAGES):
-                with button_col:
-                    if st.button(nav_page, key=f"top_nav_{nav_page}", type="primary" if st.session_state["page"] == nav_page else "secondary", use_container_width=True):
-                        go_to(nav_page)
-                        st.rerun()
+        with st.container(key="desktop-navigation-slot"):
+            with st.container(key="desktop-navigation"):
+                nav_buttons = st.columns(len(PAGES), gap="small")
+                for button_col, nav_page in zip(nav_buttons, PAGES):
+                    with button_col:
+                        if st.button(nav_page, key=f"top_nav_{nav_page}", type="primary" if st.session_state["page"] == nav_page else "secondary", use_container_width=True):
+                            go_to(nav_page)
+                            st.rerun()
     with focus_col:
         st.selectbox("Focus team", team_options, format_func=team_label, key="focus_team_widget", on_change=persist_focus_team)
     with mobile_col:
