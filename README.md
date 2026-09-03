@@ -29,6 +29,16 @@ streamlit run app/streamlit_app.py
 
 The pipeline automatically uses `data/raw/llimllib_nba_data` when the public historical dump is present. Pass `--public-source` to use a different local copy.
 
+## Login setup
+
+The app requires a configured username and password before showing forecasts or live context. Generate a local secrets file interactively so the password never appears in shell history:
+
+```powershell
+& ".venv\Scripts\python.exe" scripts\setup_auth.py
+```
+
+The setup script writes `.streamlit/secrets.toml`, which is ignored by Git. For a hosted deployment, add the same `[auth]` values through the host's secrets manager. See `.streamlit/secrets.toml.example` for the expected shape. This is a lightweight app gate for a private portfolio deployment, not a replacement for an identity provider in a multi-user production system.
+
 ## Pipeline outputs
 
 - `audit_report.json`: sheet-level row counts, missingness, key checks, and warnings

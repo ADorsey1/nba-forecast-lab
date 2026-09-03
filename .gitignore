@@ -5,6 +5,7 @@ __pycache__/
 .streamlit/*
 !.streamlit/
 !.streamlit/config.toml
+!.streamlit/secrets.toml.example
 .venv/
 data/interim/
 data/logs/

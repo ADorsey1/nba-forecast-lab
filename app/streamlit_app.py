@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import re
 import sys
+import time
 from html import escape
 from pathlib import Path
 
@@ -15,6 +16,15 @@ import streamlit as st
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
+from nba_forecast.auth import (
+    clear_auth_state,
+    load_auth_config,
+    login_is_allowed,
+    mark_authenticated,
+    record_failed_login,
+    session_is_valid,
+    verify_password,
+)
 from nba_forecast.team_colors import get_team_theme
 
 PAGES = [
@@ -85,6 +95,12 @@ html, body, [class*="css"] { font-family: 'DM Sans', sans-serif; }
 .st-key-mobile-navigation { display:none; }
 .st-key-desktop-navigation .stButton > button { min-height:2.65rem; padding:.25rem .45rem; font-size:.78rem; }
 .st-key-mobile-navigation .stButton > button { min-height:2.65rem; padding:.25rem .5rem; font-size:.9rem; }
+.st-key-account-actions .stButton > button { min-height:2.65rem; padding:.25rem .5rem; font-size:.74rem; }
+.auth-shell { max-width: 540px; margin: 8vh auto 1.25rem; padding: 2.2rem 2.3rem 1.4rem; background: linear-gradient(145deg, rgba(27,60,87,.98), rgba(16,34,53,.98)); border: 1px solid var(--line); border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,.24); }
+.auth-shell h1 { margin: .45rem 0 .8rem; color: var(--text) !important; }
+.auth-shell p { color: var(--muted) !important; line-height: 1.55; }
+.auth-shell .auth-kicker { color: var(--orange) !important; font-size: .74rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.stApp [data-testid="stForm"] { max-width: 540px; margin: 0 auto; padding: 1.3rem 2.3rem 1.5rem; background: var(--surface); border: 1px solid var(--line); border-radius: 0 0 20px 20px; }
 .hero { padding: 3.3rem 0 1.8rem; }
 .eyebrow, .section-label { color: var(--orange) !important; font-size: .74rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
 .hero h1 { font-size: clamp(2.8rem, 6vw, 5.3rem); line-height: .94; margin: .45rem 0 1.1rem; color: var(--text) !important; }
@@ -125,11 +141,60 @@ div[data-testid="stPopover"] button { min-width: 88px; }
   .hero p { font-size:1rem; }
   .card { min-height:0; margin-bottom:.8rem; }
   .st-key-mobile-navigation .stButton > button { min-width:3.2rem; }
+  .st-key-account-actions { display:none; }
+  .auth-shell { margin-top: 3vh; padding: 1.4rem 1.2rem 1rem; }
+  .stApp [data-testid="stForm"] { padding: 1.1rem 1.2rem 1.25rem; }
 }
 </style>
 """,
     unsafe_allow_html=True,
 )
+
+
+def render_auth_gate() -> None:
+    config = load_auth_config()
+    if config is None:
+        st.markdown(
+            '<div class="auth-shell"><div class="auth-kicker">Private workspace</div><h1>Sign in to NBA Forecast Lab</h1><p>This app requires an administrator-configured account. Credentials stay outside the repository and are never hardcoded into the forecast code.</p></div>',
+            unsafe_allow_html=True,
+        )
+        st.error("Authentication is not configured for this environment.")
+        st.markdown("Run the one-time setup command below, then reload the app:")
+        st.code('& ".venv\\Scripts\\python.exe" scripts\\setup_auth.py', language="powershell")
+        st.stop()
+
+    now = time.time()
+    if session_is_valid(st.session_state, config, now=now):
+        return
+
+    st.markdown(
+        '<div class="auth-shell"><div class="auth-kicker">Private workspace</div><h1>Sign in to NBA Forecast Lab</h1><p>Use the workspace credentials configured by the administrator to access forecasts, live context, rosters, and diagnostics.</p></div>',
+        unsafe_allow_html=True,
+    )
+    allowed, seconds_remaining = login_is_allowed(st.session_state, now=now)
+    if not allowed:
+        st.warning(f"Too many failed attempts. Try again in {seconds_remaining} seconds.")
+        st.stop()
+
+    with st.form("login_form", clear_on_submit=False):
+        username = st.text_input("Username", autocomplete="username")
+        password = st.text_input("Password", type="password", autocomplete="current-password")
+        submitted = st.form_submit_button("Sign in", type="primary", use_container_width=True)
+
+    if submitted:
+        normalized_username = username.strip()
+        if normalized_username == config.username and verify_password(password, config.password_hash):
+            mark_authenticated(st.session_state, normalized_username, config, now=now)
+            st.rerun()
+        remaining_attempts = record_failed_login(st.session_state, config, now=now)
+        if remaining_attempts:
+            st.error(f"Sign-in failed. {remaining_attempts} attempt(s) remain before a temporary lockout.")
+        else:
+            st.warning(f"Too many failed attempts. Try again in {config.lockout_seconds} seconds.")
+    st.stop()
+
+
+render_auth_gate()
 
 try:
     data = load_outputs()
@@ -242,7 +307,7 @@ st.markdown(
 
 
 with st.container():
-    brand_col, nav_col, focus_col, mobile_col = st.columns([2.0, 7.2, 2.5, .8], vertical_alignment="center")
+    brand_col, nav_col, focus_col, mobile_col, account_col = st.columns([1.9, 6.6, 2.4, .8, 1.0], vertical_alignment="center")
     with brand_col:
         st.markdown('<div class="topbar"><span class="brand"><span class="brand-mark">N</span>BA Forecast Lab</span></div>', unsafe_allow_html=True)
     with nav_col:
@@ -265,6 +330,14 @@ with st.container():
                         go_to(nav_page)
                         st.rerun()
                 st.caption("The team focus is available in the header on every screen.")
+                if st.button("Sign out", key="mobile_sign_out", use_container_width=True):
+                    clear_auth_state(st.session_state)
+                    st.rerun()
+    with account_col:
+        with st.container(key="account-actions"):
+            if st.button("Sign out", key="desktop_sign_out", use_container_width=True):
+                clear_auth_state(st.session_state)
+                st.rerun()
 
 def safe_float(row: pd.Series, key: str, default: float = 0.0) -> float:
     value = row.get(key, default)
