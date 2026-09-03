@@ -39,6 +39,8 @@ The app requires a configured username and password before showing forecasts or 
 
 The setup script writes `.streamlit/secrets.toml`, which is ignored by Git. For a hosted deployment, add the same `[auth]` values through the host's secrets manager. See `.streamlit/secrets.toml.example` for the expected shape. This is a lightweight app gate for a private portfolio deployment, not a replacement for an identity provider in a multi-user production system.
 
+The interface includes a dark/light theme toggle, responsive navigation, site search, session-only privacy notice, scroll progress and top controls, print-friendly styles, expandable FAQs, and copy-ready team summaries. UTM query parameters are captured only for the current session and displayed on Diagnostics for transparent campaign-context inspection.
+
 ## Pipeline outputs
 
 - `audit_report.json`: sheet-level row counts, missingness, key checks, and warnings

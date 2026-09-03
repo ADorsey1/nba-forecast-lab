@@ -10,6 +10,8 @@ NBA Forecast Lab is a local Streamlit application that reads public basketball d
 - `scripts/security_audit.py` scans project text files for common API keys, tokens, passwords, bearer credentials, and private-key blocks without printing matched secret values.
 - Passwords are stored as salted PBKDF2-SHA256 hashes, not plaintext values.
 - Login sessions use a sliding expiration window and per-session failure throttling.
+- The cookie notice records dismissal only in the current Streamlit session; it does not set an advertising or analytics cookie.
+- UTM parameters are retained only in the current session for diagnostics and are not sent to an analytics provider.
 - Raw HTML rendering is limited to static layout plus escaped values from data files.
 - Live JSON and HTML provider responses have size limits and request timeouts to reduce resource-exhaustion risk.
 - Streamlit XSRF protection is enabled, usage statistics are disabled, upload size is capped, and user-facing errors are reduced to error types.

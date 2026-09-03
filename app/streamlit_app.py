@@ -36,7 +36,19 @@ PAGES = [
     "Methodology",
     "Diagnostics",
 ]
+SEARCH_INDEX = {
+    "Home": "League overview, current system snapshot, and league leaders.",
+    "Forecast": "Projected wins, live context, uncertainty ranges, and team AI overview.",
+    "Standings": "League-wide, East, and West projected seeds.",
+    "Rosters": "Current player roster rows joined to injury context.",
+    "Recent Moves": "Trades, signings, waives, releases, and transaction history.",
+    "Methodology": "Feature construction, Ridge model, ensemble weights, and simulation math.",
+    "Diagnostics": "Backtesting metrics, data provenance, contract checks, and limitations.",
+}
+NAV_LABELS = {"Recent Moves": "Moves", "Methodology": "Methods"}
 EAST = {"ATL", "BOS", "BRK", "CHO", "CLE", "DET", "IND", "MIA", "MIL", "NYK", "ORL", "PHI", "TOR", "WAS"}
+UTM_KEYS = ("utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content")
+CONTACT_URL = "https://github.com/ADorsey1/nba-forecast-lab/issues"
 
 
 def load_outputs() -> dict[str, pd.DataFrame | dict]:
@@ -93,14 +105,36 @@ html, body, [class*="css"] { font-family: 'DM Sans', sans-serif; }
 .brand-mark { color:var(--orange); }
 .st-key-desktop-navigation { display:block; }
 .st-key-mobile-navigation { display:none; }
+.st-key-desktop-tools { display:block; }
 .st-key-desktop-navigation .stButton > button { min-height:2.65rem; padding:.25rem .35rem; font-size:.78rem; white-space:nowrap; }
 .st-key-mobile-navigation .stButton > button { min-height:2.65rem; padding:.25rem .5rem; font-size:.9rem; }
+.st-key-desktop-tools .stButton > button { min-height:2.65rem; padding:.25rem .5rem; font-size:.76rem; white-space:nowrap; }
 .st-key-account-actions .stButton > button { min-height:2.65rem; padding:.25rem .5rem; font-size:.74rem; }
+.st-key-topbar-row { position:sticky; top:.45rem; z-index:100; padding:.45rem .55rem; background:var(--surface); border:1px solid var(--line); border-radius:18px; box-shadow:0 12px 28px rgba(0,0,0,.16); }
 .auth-shell { max-width: 540px; margin: 8vh auto 1.25rem; padding: 2.2rem 2.3rem 1.4rem; background: linear-gradient(145deg, rgba(27,60,87,.98), rgba(16,34,53,.98)); border: 1px solid var(--line); border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,.24); }
 .auth-shell h1 { margin: .45rem 0 .8rem; color: var(--text) !important; }
 .auth-shell p { color: var(--muted) !important; line-height: 1.55; }
 .auth-shell .auth-kicker { color: var(--orange) !important; font-size: .74rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
 .stApp [data-testid="stForm"] { max-width: 540px; margin: 0 auto; padding: 1.3rem 2.3rem 1.5rem; background: var(--surface); border: 1px solid var(--line); border-radius: 0 0 20px 20px; }
+.last-updated { margin:.35rem 0 1rem; color:var(--muted); font-size:.78rem; letter-spacing:.02em; }
+.last-updated strong { color:var(--text); }
+.cookie-banner { position:fixed; left:1.5rem; right:1.5rem; bottom:1.25rem; z-index:120; display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:.8rem 1rem; background:var(--surface); border:1px solid var(--line); border-radius:14px; box-shadow:0 14px 35px rgba(0,0,0,.3); }
+.cookie-banner p { margin:0; color:var(--text) !important; font-size:.82rem; line-height:1.4; }
+.st-key-cookie-banner-container { position:fixed; left:1.5rem; right:1.5rem; bottom:1.25rem; z-index:120; display:grid; grid-template-columns:1fr auto; align-items:center; gap:1rem; padding:.8rem 1rem; background:var(--surface); border:1px solid var(--line); border-radius:14px; box-shadow:0 14px 35px rgba(0,0,0,.3); }
+.st-key-cookie-banner-container .cookie-banner { position:static; padding:0; background:transparent; border:0; box-shadow:none; }
+.st-key-cookie-banner-container .stButton { margin:0; }
+.skip-link { position:fixed; left:1rem; top:-4rem; z-index:150; padding:.7rem 1rem; background:var(--team-button); color:var(--team-button-text) !important; border-radius:0 0 10px 10px; font-weight:700; text-decoration:none; }
+.skip-link:focus { top:0; }
+.scroll-top, .floating-contact { position:fixed; right:1.25rem; z-index:110; display:inline-flex; align-items:center; justify-content:center; min-width:3rem; min-height:2.7rem; padding:.35rem .7rem; background:var(--surface); color:var(--text) !important; border:1px solid var(--line); border-radius:999px; box-shadow:0 10px 24px rgba(0,0,0,.24); text-decoration:none; font-size:.78rem; font-weight:700; }
+.scroll-top { bottom:1.25rem; }
+.floating-contact { bottom:4.5rem; background:var(--team-button); color:var(--team-button-text) !important; border-color:var(--team-button); }
+.scroll-top:hover, .floating-contact:hover { transform:translateY(-2px); border-color:var(--team-display); }
+#scroll-progress { position:fixed; left:0; top:0; z-index:200; width:0; height:4px; background:var(--team-display, var(--orange)); box-shadow:0 0 12px var(--team-display, var(--orange)); }
+@keyframes nba-rise-in { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+.hero, .card, .stat-card { animation:nba-rise-in .55s ease both; }
+.card:hover, .stat-card:hover { transform:translateY(-3px); border-color:var(--team-display); box-shadow:0 18px 34px rgba(0,0,0,.25); transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+.stButton > button, .stSelectbox [data-baseweb="select"], .stTextInput input { transition:border-color .2s ease, box-shadow .2s ease, transform .2s ease; }
+.stButton > button:hover { box-shadow:0 5px 14px rgba(0,0,0,.16); transform:translateY(-1px); }
 .hero { padding: 3.3rem 0 1.8rem; }
 .eyebrow, .section-label { color: var(--orange) !important; font-size: .74rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
 .hero h1 { font-size: clamp(2.8rem, 6vw, 5.3rem); line-height: .94; margin: .45rem 0 1.1rem; color: var(--text) !important; }
@@ -132,9 +166,15 @@ div[data-testid="stPopover"] button { min-width: 88px; }
   .block-container { padding: .9rem 1.1rem 3rem; }
   .st-key-desktop-navigation { display:none; }
   .st-key-mobile-navigation { display:block; }
+  .st-key-desktop-tools { display:none; }
   div[data-testid="column"]:has(.st-key-desktop-navigation-slot) { display:none; }
+  div[data-testid="column"]:has(.st-key-desktop-tools) { display:none; }
   .st-key-account-actions { display:none; }
   div[data-testid="column"]:has(.st-key-account-actions) { display:none; }
+  .cookie-banner { left:.7rem; right:.7rem; bottom:.7rem; align-items:flex-start; flex-direction:column; }
+  .st-key-cookie-banner-container { left:.7rem; right:.7rem; bottom:.7rem; grid-template-columns:1fr; gap:.4rem; }
+  .scroll-top { right:.7rem; bottom:.7rem; }
+  .floating-contact { right:.7rem; bottom:4rem; }
   .hero { padding-top:2.4rem; }
 }
 @media (max-width: 600px) {
@@ -148,6 +188,15 @@ div[data-testid="stPopover"] button { min-width: 88px; }
   div[data-testid="column"]:has(.st-key-account-actions) { display:none; }
   .auth-shell { margin-top: 3vh; padding: 1.4rem 1.2rem 1rem; }
   .stApp [data-testid="stForm"] { padding: 1.1rem 1.2rem 1.25rem; }
+}
+@media print {
+  @page { margin: .65in; }
+  body, .stApp, .stAppViewContainer, .main { background:#ffffff !important; color:#102a43 !important; }
+  .st-key-topbar-row, .skip-link, .scroll-top, .floating-contact, #scroll-progress, .cookie-banner,
+  [data-testid="stHeader"], [data-testid="stToolbar"], .stButton, [data-testid="stPopover"] { display:none !important; }
+  .block-container { max-width:none !important; padding:0 !important; }
+  .stApp h1, .stApp h2, .stApp h3, .stApp h4, .stApp p, .stApp label, .stApp [data-testid="stMarkdownContainer"] { color:#102a43 !important; }
+  .card, .stat-card, [data-testid="stDataFrame"] { background:#ffffff !important; border:1px solid #b8c7d3 !important; box-shadow:none !important; }
 }
 </style>
 """,
@@ -189,6 +238,7 @@ def render_auth_gate() -> None:
         normalized_username = username.strip()
         if normalized_username == config.username and verify_password(password, config.password_hash):
             mark_authenticated(st.session_state, normalized_username, config, now=now)
+            st.session_state["auth_flash"] = "Signed in successfully."
             st.rerun()
         remaining_attempts = record_failed_login(st.session_state, config, now=now)
         if remaining_attempts:
@@ -250,6 +300,12 @@ if st.session_state["focus_team"] not in team_options:
     st.session_state["focus_team"] = "ALL"
 if st.session_state["focus_team_widget"] not in team_options:
     st.session_state["focus_team_widget"] = st.session_state["focus_team"]
+st.session_state.setdefault("dark_mode", True)
+st.session_state.setdefault("site_search_query", "")
+st.session_state.setdefault("site_search_desktop", st.session_state["site_search_query"])
+st.session_state.setdefault("site_search_mobile", st.session_state["site_search_query"])
+st.session_state.setdefault("dark_mode_desktop", st.session_state["dark_mode"])
+st.session_state.setdefault("dark_mode_mobile", st.session_state["dark_mode"])
 
 
 def go_to(page: str) -> None:
@@ -264,11 +320,103 @@ def persist_focus_team() -> None:
     st.session_state["focus_team"] = st.session_state["focus_team_widget"]
 
 
+def sync_search(source_key: str) -> None:
+    st.session_state["site_search_query"] = st.session_state.get(source_key, "")
+
+
+def sync_dark_mode(source_key: str) -> None:
+    st.session_state["dark_mode"] = bool(st.session_state.get(source_key, True))
+
+
+def capture_utm_parameters() -> None:
+    captured: dict[str, str] = {}
+    for key in UTM_KEYS:
+        value = st.query_params.get(key)
+        if value:
+            captured[key] = str(value)
+    if captured:
+        st.session_state["utm_params"] = captured
+
+
+def render_search_results() -> None:
+    query = str(st.session_state.get("site_search_query", "")).strip()
+    if not query:
+        return
+    needle = query.casefold()
+    matches = [(page_name, description) for page_name, description in SEARCH_INDEX.items() if needle in f"{page_name} {description}".casefold()]
+    for team_code in teams:
+        if needle in team_code.casefold():
+            matches.append((team_code, f"Focus the workspace on the {team_code} forecast."))
+    st.markdown(f'<div class="section-label">Search results for {escape(query)}</div>', unsafe_allow_html=True)
+    if not matches:
+        st.info("No pages, topics, or teams matched that search.")
+        return
+    for result_name, description in matches[:8]:
+        result_col, action_col = st.columns([5, 1], vertical_alignment="center")
+        with result_col:
+            st.markdown(f"**{escape(result_name)}**  \n<span class=\"helper\">{escape(description)}</span>", unsafe_allow_html=True)
+        with action_col:
+            if st.button("Open", key=f"search_open_{result_name}", use_container_width=True):
+                if result_name in PAGES:
+                    go_to(result_name)
+                elif result_name in teams:
+                    st.session_state["focus_team"] = result_name
+                    st.session_state["focus_team_widget"] = result_name
+                st.session_state["site_search_query"] = ""
+                st.rerun()
+
+
+def dark_theme(theme: dict[str, str]) -> dict[str, str]:
+    """Keep team accents while moving team-focused themes onto dark surfaces."""
+
+    return {
+        **theme,
+        "background": "#08131f",
+        "surface": "#102235",
+        "surface_2": "#153149",
+        "surface_3": "#1b3c57",
+        "text": "#f7f3ec",
+        "muted": "#b9c8d3",
+        "line": "rgba(233, 242, 248, .18)",
+        "app_background": "radial-gradient(circle at 82% 4%, #1d4b68 0, transparent 32%), #08131f",
+        "topbar_background": "rgba(16,34,53,.94)",
+        "card_background": "linear-gradient(145deg, rgba(27,60,87,.98), rgba(16,34,53,.98))",
+        "dataframe_background": "#f7f3ec",
+        "dataframe_text": "#142434",
+    }
+
+
+capture_utm_parameters()
 page = st.session_state["page"]
 selected_team = None if st.session_state["focus_team"] == "ALL" else st.session_state["focus_team"]
 east = EAST & set(teams)
 west = set(teams) - east
+dark_mode = bool(st.session_state["dark_mode"])
 theme = get_team_theme(selected_team)
+if dark_mode:
+    theme = dark_theme(theme)
+elif selected_team is None:
+    theme = {
+        **theme,
+        "background": "#f3f7fa",
+        "surface": "#ffffff",
+        "surface_2": "#e7eef4",
+        "surface_3": "#dce7ef",
+        "text": "#102a43",
+        "muted": "#516679",
+        "line": "rgba(16, 42, 67, .18)",
+        "app_background": "linear-gradient(135deg, #ffffff 0%, #edf4f8 70%, #dce7ef 100%)",
+        "topbar_background": "rgba(255,255,255,.96)",
+        "card_background": "linear-gradient(145deg, #ffffff, #e7eef4)",
+        "dataframe_background": "#ffffff",
+        "dataframe_text": "#102a43",
+        "button": "#ff7345",
+        "button_text": "#08131f",
+        "soft_button": "#ffd1bf",
+        "soft_button_text": "#6f2410",
+        "display": "#d9572b",
+        "display_text": "#ffffff",
+    }
 st.markdown(
     f"""
 <style>
@@ -310,8 +458,52 @@ st.markdown(
 )
 
 
-with st.container():
-    brand_col, nav_col, focus_col, mobile_col, account_col = st.columns([1.8, 8.4, 2.5, .7, 1.0], gap="small", vertical_alignment="center")
+@st.dialog("Confirm sign out")
+def confirm_sign_out() -> None:
+    st.write("Sign out of NBA Forecast Lab on this browser session?")
+    cancel_col, confirm_col = st.columns(2)
+    with cancel_col:
+        if st.button("Cancel", key="cancel_sign_out", use_container_width=True):
+            st.rerun()
+    with confirm_col:
+        if st.button("Sign out", key="confirm_sign_out", type="primary", use_container_width=True):
+            clear_auth_state(st.session_state)
+            st.rerun()
+
+
+st.session_state["site_search_desktop"] = st.session_state.get("site_search_query", "")
+st.session_state["site_search_mobile"] = st.session_state.get("site_search_query", "")
+st.session_state["dark_mode_desktop"] = bool(st.session_state.get("dark_mode", True))
+st.session_state["dark_mode_mobile"] = bool(st.session_state.get("dark_mode", True))
+
+st.html(
+    f"""
+    <div id="app-top"></div>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <a class="floating-contact" href="{CONTACT_URL}" target="_blank" rel="noreferrer">Feedback</a>
+    <a class="scroll-top" href="#app-top" aria-label="Scroll to top">Top</a>
+    <div id="scroll-progress" role="progressbar" aria-label="Page scroll progress"></div>
+    <script>
+    (() => {{
+      const bar = document.getElementById("scroll-progress");
+      if (!bar) return;
+      const update = () => {{
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = max > 0 ? Math.min(100, Math.max(0, (window.scrollY / max) * 100)) : 0;
+        bar.style.width = progress + "%";
+      }};
+      window.addEventListener("scroll", update, {{ passive: true }});
+      window.addEventListener("resize", update);
+      update();
+    }})();
+    </script>
+    """,
+    unsafe_allow_javascript=True,
+)
+
+
+with st.container(key="topbar-row"):
+    brand_col, nav_col, focus_col, tools_col, mobile_col, account_col = st.columns([1.8, 7.7, 2.35, 1.0, .7, 1.0], gap="small", vertical_alignment="center")
     with brand_col:
         st.markdown('<div class="topbar"><span class="brand"><span class="brand-mark">N</span>BA Forecast Lab</span></div>', unsafe_allow_html=True)
     with nav_col:
@@ -320,11 +512,17 @@ with st.container():
                 nav_buttons = st.columns(len(PAGES), gap="small")
                 for button_col, nav_page in zip(nav_buttons, PAGES):
                     with button_col:
-                        if st.button(nav_page, key=f"top_nav_{nav_page}", type="primary" if st.session_state["page"] == nav_page else "secondary", use_container_width=True):
+                        if st.button(NAV_LABELS.get(nav_page, nav_page), key=f"top_nav_{nav_page}", type="primary" if st.session_state["page"] == nav_page else "secondary", use_container_width=True):
                             go_to(nav_page)
                             st.rerun()
     with focus_col:
         st.selectbox("Focus team", team_options, format_func=team_label, key="focus_team_widget", on_change=persist_focus_team)
+    with tools_col:
+        with st.container(key="desktop-tools"):
+            with st.popover("Tools", use_container_width=True):
+                st.markdown("### Workspace tools")
+                st.text_input("Search pages, topics, or teams", key="site_search_desktop", on_change=sync_search, args=("site_search_desktop",), placeholder="Try methodology or PHI")
+                st.toggle("Dark mode", key="dark_mode_desktop", on_change=sync_dark_mode, args=("dark_mode_desktop",))
     with mobile_col:
         with st.container(key="mobile-navigation"):
             with st.popover("☰", use_container_width=True):
@@ -334,15 +532,36 @@ with st.container():
                     if st.button(nav_page, key=f"menu_nav_{nav_page}", use_container_width=True):
                         go_to(nav_page)
                         st.rerun()
+                st.markdown("### Tools")
+                st.text_input("Search pages, topics, or teams", key="site_search_mobile", on_change=sync_search, args=("site_search_mobile",), placeholder="Try methodology or PHI")
+                st.toggle("Dark mode", key="dark_mode_mobile", on_change=sync_dark_mode, args=("dark_mode_mobile",))
                 st.caption("The team focus is available in the header on every screen.")
                 if st.button("Sign out", key="mobile_sign_out", use_container_width=True):
-                    clear_auth_state(st.session_state)
-                    st.rerun()
+                    confirm_sign_out()
     with account_col:
         with st.container(key="account-actions"):
             if st.button("Sign out", key="desktop_sign_out", use_container_width=True):
-                clear_auth_state(st.session_state)
-                st.rerun()
+                confirm_sign_out()
+
+st.html('<div id="main-content" tabindex="-1"></div>')
+
+auth_flash = st.session_state.pop("auth_flash", None)
+if auth_flash:
+    st.success(auth_flash)
+
+if manifest.get("fetched_at_utc"):
+    refreshed_at = pd.to_datetime(manifest.get("fetched_at_utc"), errors="coerce", utc=True)
+    if pd.notna(refreshed_at):
+        st.markdown(f'<div class="last-updated">Live context last updated <strong>{refreshed_at.strftime("%b %d, %Y at %I:%M %p UTC")}</strong></div>', unsafe_allow_html=True)
+
+if not st.session_state.get("cookie_notice_dismissed", False):
+    with st.container(key="cookie-banner-container"):
+        st.markdown('<div class="cookie-banner"><p>This app uses session-only preferences for login, theme, and search. No advertising cookies are used.</p></div>', unsafe_allow_html=True)
+        if st.button("Got it", key="dismiss_cookie_notice", type="primary"):
+            st.session_state["cookie_notice_dismissed"] = True
+            st.rerun()
+
+render_search_results()
 
 def safe_float(row: pd.Series, key: str, default: float = 0.0) -> float:
     value = row.get(key, default)
@@ -517,6 +736,15 @@ if page == "Home":
     st.markdown('<div class="section-label">League leaders</div>', unsafe_allow_html=True)
     leaders = next_forecast.sort_values("holistic_predicted_wins", ascending=False).head(5)[["team_abbr", "holistic_predicted_wins", "market_win_total"]].rename(columns={"team_abbr": "team", "holistic_predicted_wins": "projected wins", "market_win_total": "market prior"}).round(1)
     st.dataframe(leaders, hide_index=True, width="stretch")
+    st.markdown('<div class="section-label">FAQ</div>', unsafe_allow_html=True)
+    with st.expander("Why can the model differ from another projection?"):
+        st.write("NBA Forecast Lab blends historical form, roster-aware talent, live context, and a dated market prior. Other systems may use different priors, projected minutes, injury assumptions, or schedule timing.")
+    with st.expander("Does live injury context directly lower wins?"):
+        st.write("The injury snapshot is shown as risk context and feeds the live rotation diagnostic. It is not silently converted into an uncalibrated win penalty.")
+    with st.expander("How often should I refresh the forecast?"):
+        st.write("Run the refresh script after meaningful transactions, injury updates, or schedule changes. The app displays the timestamp of the most recent live snapshot.")
+    with st.expander("Can I use this as a betting recommendation?"):
+        st.write("No. This is an analytical portfolio project. Forecast ranges and diagnostics communicate uncertainty rather than guarantee outcomes.")
 
 elif page == "Forecast":
     st.markdown('<div class="eyebrow">FORECAST</div>', unsafe_allow_html=True)
@@ -550,7 +778,10 @@ elif page == "Forecast":
             st.write(f"The game-level simulation centers {selected_team} at {safe_float(future_simulation, 'expected_wins'):.1f} wins, with a 10th-90th percentile range of {safe_int(future_simulation, 'wins_p10')}-{safe_int(future_simulation, 'wins_p90')}. It places the team in the simulated top-10 of its conference in {safe_float(future_simulation, 'playoff_probability'):.1%} of runs.")
             st.caption(str(future_simulation.get("simulation_note", "")))
         st.markdown('<div class="section-label">AI overview</div>', unsafe_allow_html=True)
-        st.info(team_overview())
+        overview = team_overview()
+        st.info(overview)
+        st.caption("Copy-ready summary")
+        st.code(overview, language="text")
     else:
         st.markdown('<div class="section-label">League view</div>', unsafe_allow_html=True)
         st.info("This is a league-wide view. Set a team focus from MENU to see a team-specific component breakdown, uncertainty range, and AI overview.")
@@ -676,6 +907,13 @@ else:
         st.markdown("### Data provenance")
         st.write(f"Live snapshot fetched: {manifest.get('fetched_at_utc', 'unknown')}")
         st.json(manifest.get("sources", {}))
+    st.markdown("### Session campaign context")
+    utm_params = st.session_state.get("utm_params", {})
+    if utm_params:
+        st.caption("UTM parameters are retained for this browser session only and are not sent to an analytics provider.")
+        st.json(utm_params)
+    else:
+        st.caption("No UTM campaign parameters were present in the current URL.")
     quality_path = ROOT / "data" / "processed" / "data_quality_report.json"
     if quality_path.exists():
         quality = json.loads(quality_path.read_text(encoding="utf-8"))
