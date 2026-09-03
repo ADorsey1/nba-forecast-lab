@@ -1,0 +1,1546 @@
+{
+  "sheets": {
+    "players_season_stats": {
+      "rows": 297,
+      "columns": 54,
+      "column_profile": [
+        {
+          "column": "player_name",
+          "dtype": "object",
+          "rows": 297,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 297
+        },
+        {
+          "column": "player_id",
+          "dtype": "object",
+          "rows": 297,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 297
+        },
+        {
+          "column": "season",
+          "dtype": "object",
+          "rows": 297,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 1
+        },
+        {
+          "column": "team_abbr",
+          "dtype": "object",
+          "rows": 297,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 31
+        },
+        {
+          "column": "age",
+          "dtype": "float64",
+          "rows": 297,
+          "null_count": 68,
+          "null_rate": 0.229,
+          "distinct_count": 20
+        },
+        {
+          "column": "pos",
+          "dtype": "object",
+          "rows": 297,
+          "null_count": 68,
+          "null_rate": 0.229,
+          "distinct_count": 5
+        },
+        {
+          "column": "g",
+          "dtype": "float64",
+          "rows": 297,
+          "null_count": 68,
+          "null_rate": 0.229,
+          "distinct_count": 70
+        },
+        {
+          "column": "gs",
+          "dtype": "float64",
+          "rows": 297,
+          "null_count": 68,
+          "null_rate": 0.229,
+          "distinct_count": 75
+        },
+        {
+          "column": "mp",
+          "dtype": "float64",
+          "rows": 297,
+          "null_count": 68,
+          "null_rate": 0.229,
+          "distinct_count": 131
+        },
+        {
+          "column": "fg",
+          "dtype": "float64",
+          "rows": 297,
+          "null_count": 68,
+          "null_rate": 0.229,
+          "distinct_count": 62
+        },
+        {
+          "column": "fga",
+          "dtype": "float64",
+          "rows": 297,
+          "null_count": 68,
+          "null_rate": 0.229,
+          "distinct_count": 108
+        },
+        {
+          "column": "fg_pct",
+          "dtype": "float64",
+          "rows": 297,
+          "null_count": 68,
+          "null_rate": 0.229,
+          "distinct_count": 140
+        },
+        {
+          "column": "3p",
+          "dtype": "float64",
+          "rows": 297,
+          "null_count": 68,
+          "null_rate": 0.229,
+          "distinct_count": 38
+        },
+        {
+          "column": "3pa",
+          "dtype": "float64",
+          "rows": 297,
+          "null_count": 68,
+          "null_rate": 0.229,
+          "distinct_count": 83
+        },
+        {
+          "column": "3p_pct",
+          "dtype": "float64",
+          "rows": 297,
+          "null_count": 75,
+          "null_rate": 0.2525,
+          "distinct_count": 131
+        },
+        {
+          "column": "2p",
+          "dtype": "float64",
+          "rows": 297,
+          "null_count": 68,
+          "null_rate": 0.229,
+          "distinct_count": 72
+        },
+        {
+          "column": "2pa",
+          "dtype": "float64",
+          "rows": 297,
+          "null_count": 68,
+          "null_rate": 0.229,
+          "distinct_count": 107
+        },
+        {
+          "column": "2p_pct",
+          "dtype": "float64",
+          "rows": 297,
+          "null_count": 68,
+          "null_rate": 0.229,
+          "distinct_count": 144
+        },
+        {
+          "column": "efg_pct",
+          "dtype": "float64",
+          "rows": 297,
+          "null_count": 68,
+          "null_rate": 0.229,
+          "distinct_count": 124
+        },
+        {
+          "column": "ft",
+          "dtype": "float64",
+          "rows": 297,
+          "null_count": 68,
+          "null_rate": 0.229,
+          "distinct_count": 63
+        },
+        {
+          "column": "fta",
+          "dtype": "float64",
+          "rows": 297,
+          "null_count": 68,
+          "null_rate": 0.229,
+          "distinct_count": 70
+        },
+        {
+          "column": "ft_pct",
+          "dtype": "float64",
+          "rows": 297,
+          "null_count": 68,
+          "null_rate": 0.229,
+          "distinct_count": 156
+        },
+        {
+          "column": "orb",
+          "dtype": "float64",
+          "rows": 297,
+          "null_count": 68,
+          "null_rate": 0.229,
+          "distinct_count": 35
+        },
+        {
+          "column": "drb",
+          "dtype": "float64",
+          "rows": 297,
+          "null_count": 68,
+          "null_rate": 0.229,
+          "distinct_count": 62
+        },
+        {
+          "column": "trb",
+          "dtype": "float64",
+          "rows": 297,
+          "null_count": 68,
+          "null_rate": 0.229,
+          "distinct_count": 79
+        },
+        {
+          "column": "ast",
+          "dtype": "float64",
+          "rows": 297,
+          "null_count": 68,
+          "null_rate": 0.229,
+          "distinct_count": 68
+        },
+        {
+          "column": "stl",
+          "dtype": "float64",
+          "rows": 297,
+          "null_count": 68,
+          "null_rate": 0.229,
+          "distinct_count": 20
+        },
+        {
+          "column": "blk",
+          "dtype": "float64",
+          "rows": 297,
+          "null_count": 68,
+          "null_rate": 0.229,
+          "distinct_count": 22
+        },
+        {
+          "column": "tov",
+          "dtype": "float64",
+          "rows": 297,
+          "null_count": 68,
+          "null_rate": 0.229,
+          "distinct_count": 37
+        },
+        {
+          "column": "pf",
+          "dtype": "float64",
+          "rows": 297,
+          "null_count": 68,
+          "null_rate": 0.229,
+          "distinct_count": 29
+        },
+        {
+          "column": "pts",
+          "dtype": "float64",
+          "rows": 297,
+          "null_count": 68,
+          "null_rate": 0.229,
+          "distinct_count": 118
+        },
+        {
+          "column": "ts_pct",
+          "dtype": "float64",
+          "rows": 297,
+          "null_count": 51,
+          "null_rate": 0.1717,
+          "distinct_count": 132
+        },
+        {
+          "column": "usg_pct",
+          "dtype": "float64",
+          "rows": 297,
+          "null_count": 51,
+          "null_rate": 0.1717,
+          "distinct_count": 144
+        },
+        {
+          "column": "orb_pct",
+          "dtype": "float64",
+          "rows": 297,
+          "null_count": 51,
+          "null_rate": 0.1717,
+          "distinct_count": 97
+        },
+        {
+          "column": "drb_pct",
+          "dtype": "float64",
+          "rows": 297,
+          "null_count": 51,
+          "null_rate": 0.1717,
+          "distinct_count": 132
+        },
+        {
+          "column": "trb_pct",
+          "dtype": "float64",
+          "rows": 297,
+          "null_count": 51,
+          "null_rate": 0.1717,
+          "distinct_count": 108
+        },
+        {
+          "column": "ast_pct",
+          "dtype": "float64",
+          "rows": 297,
+          "null_count": 51,
+          "null_rate": 0.1717,
+          "distinct_count": 158
+        },
+        {
+          "column": "stl_pct",
+          "dtype": "float64",
+          "rows": 297,
+          "null_count": 51,
+          "null_rate": 0.1717,
+          "distinct_count": 28
+        },
+        {
+          "column": "blk_pct",
+          "dtype": "float64",
+          "rows": 297,
+          "null_count": 51,
+          "null_rate": 0.1717,
+          "distinct_count": 55
+        },
+        {
+          "column": "tov_pct",
+          "dtype": "float64",
+          "rows": 297,
+          "null_count": 51,
+          "null_rate": 0.1717,
+          "distinct_count": 108
+        },
+        {
+          "column": "per",
+          "dtype": "float64",
+          "rows": 297,
+          "null_count": 51,
+          "null_rate": 0.1717,
+          "distinct_count": 124
+        },
+        {
+          "column": "bpm",
+          "dtype": "float64",
+          "rows": 297,
+          "null_count": 51,
+          "null_rate": 0.1717,
+          "distinct_count": 96
+        },
+        {
+          "column": "obpm",
+          "dtype": "float64",
+          "rows": 297,
+          "null_count": 51,
+          "null_rate": 0.1717,
+          "distinct_count": 88
+        },
+        {
+          "column": "dbpm",
+          "dtype": "float64",
+          "rows": 297,
+          "null_count": 51,
+          "null_rate": 0.1717,
+          "distinct_count": 56
+        },
+        {
+          "column": "vorp",
+          "dtype": "float64",
+          "rows": 297,
+          "null_count": 51,
+          "null_rate": 0.1717,
+          "distinct_count": 60
+        },
+        {
+          "column": "ws",
+          "dtype": "float64",
+          "rows": 297,
+          "null_count": 51,
+          "null_rate": 0.1717,
+          "distinct_count": 93
+        },
+        {
+          "column": "ws_per_48",
+          "dtype": "float64",
+          "rows": 297,
+          "null_count": 51,
+          "null_rate": 0.1717,
+          "distinct_count": 146
+        },
+        {
+          "column": "career_minutes",
+          "dtype": "float64",
+          "rows": 297,
+          "null_count": 297,
+          "null_rate": 1.0,
+          "distinct_count": 0
+        },
+        {
+          "column": "career_ws",
+          "dtype": "float64",
+          "rows": 297,
+          "null_count": 297,
+          "null_rate": 1.0,
+          "distinct_count": 0
+        },
+        {
+          "column": "career_vorp",
+          "dtype": "float64",
+          "rows": 297,
+          "null_count": 297,
+          "null_rate": 1.0,
+          "distinct_count": 0
+        },
+        {
+          "column": "rolling_3y_pts",
+          "dtype": "float64",
+          "rows": 297,
+          "null_count": 297,
+          "null_rate": 1.0,
+          "distinct_count": 0
+        },
+        {
+          "column": "rolling_3y_ts_pct",
+          "dtype": "float64",
+          "rows": 297,
+          "null_count": 297,
+          "null_rate": 1.0,
+          "distinct_count": 0
+        },
+        {
+          "column": "age_adjusted_per",
+          "dtype": "float64",
+          "rows": 297,
+          "null_count": 297,
+          "null_rate": 1.0,
+          "distinct_count": 0
+        },
+        {
+          "column": "decline_flag",
+          "dtype": "float64",
+          "rows": 297,
+          "null_count": 297,
+          "null_rate": 1.0,
+          "distinct_count": 0
+        }
+      ]
+    },
+    "team_season_stats": {
+      "rows": 30,
+      "columns": 30,
+      "column_profile": [
+        {
+          "column": "team_abbr",
+          "dtype": "object",
+          "rows": 30,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 30
+        },
+        {
+          "column": "season",
+          "dtype": "object",
+          "rows": 30,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 1
+        },
+        {
+          "column": "wins",
+          "dtype": "int64",
+          "rows": 30,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 22
+        },
+        {
+          "column": "losses",
+          "dtype": "int64",
+          "rows": 30,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 22
+        },
+        {
+          "column": "win_pct",
+          "dtype": "float64",
+          "rows": 30,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 22
+        },
+        {
+          "column": "pace",
+          "dtype": "float64",
+          "rows": 30,
+          "null_count": 30,
+          "null_rate": 1.0,
+          "distinct_count": 0
+        },
+        {
+          "column": "off_rtg",
+          "dtype": "float64",
+          "rows": 30,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 30
+        },
+        {
+          "column": "def_rtg",
+          "dtype": "float64",
+          "rows": 30,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 29
+        },
+        {
+          "column": "net_rtg",
+          "dtype": "float64",
+          "rows": 30,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 29
+        },
+        {
+          "column": "srs",
+          "dtype": "float64",
+          "rows": 30,
+          "null_count": 30,
+          "null_rate": 1.0,
+          "distinct_count": 0
+        },
+        {
+          "column": "playoffs_result",
+          "dtype": "object",
+          "rows": 30,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 6
+        },
+        {
+          "column": "seed",
+          "dtype": "int64",
+          "rows": 30,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 15
+        },
+        {
+          "column": "final_rank",
+          "dtype": "int64",
+          "rows": 30,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 30
+        },
+        {
+          "column": "pts_per_game",
+          "dtype": "float64",
+          "rows": 30,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 27
+        },
+        {
+          "column": "opp_pts_per_game",
+          "dtype": "float64",
+          "rows": 30,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 29
+        },
+        {
+          "column": "fg_pct",
+          "dtype": "float64",
+          "rows": 30,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 25
+        },
+        {
+          "column": "3p_pct",
+          "dtype": "float64",
+          "rows": 30,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 22
+        },
+        {
+          "column": "ft_pct",
+          "dtype": "float64",
+          "rows": 30,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 24
+        },
+        {
+          "column": "orb",
+          "dtype": "float64",
+          "rows": 30,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 24
+        },
+        {
+          "column": "drb",
+          "dtype": "float64",
+          "rows": 30,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 25
+        },
+        {
+          "column": "trb",
+          "dtype": "float64",
+          "rows": 30,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 25
+        },
+        {
+          "column": "ast",
+          "dtype": "float64",
+          "rows": 30,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 23
+        },
+        {
+          "column": "stl",
+          "dtype": "float64",
+          "rows": 30,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 20
+        },
+        {
+          "column": "blk",
+          "dtype": "float64",
+          "rows": 30,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 16
+        },
+        {
+          "column": "tov",
+          "dtype": "float64",
+          "rows": 30,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 19
+        },
+        {
+          "column": "roster_continuity_pct",
+          "dtype": "float64",
+          "rows": 30,
+          "null_count": 30,
+          "null_rate": 1.0,
+          "distinct_count": 0
+        },
+        {
+          "column": "salary_total",
+          "dtype": "float64",
+          "rows": 30,
+          "null_count": 30,
+          "null_rate": 1.0,
+          "distinct_count": 0
+        },
+        {
+          "column": "salary_top_3_share",
+          "dtype": "float64",
+          "rows": 30,
+          "null_count": 30,
+          "null_rate": 1.0,
+          "distinct_count": 0
+        },
+        {
+          "column": "injury_games_lost",
+          "dtype": "float64",
+          "rows": 30,
+          "null_count": 30,
+          "null_rate": 1.0,
+          "distinct_count": 0
+        },
+        {
+          "column": "returning_minutes_share",
+          "dtype": "float64",
+          "rows": 30,
+          "null_count": 30,
+          "null_rate": 1.0,
+          "distinct_count": 0
+        }
+      ]
+    },
+    "player_game_logs": {
+      "rows": 748,
+      "columns": 24,
+      "column_profile": [
+        {
+          "column": "player_name",
+          "dtype": "object",
+          "rows": 748,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 30
+        },
+        {
+          "column": "player_id",
+          "dtype": "object",
+          "rows": 748,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 30
+        },
+        {
+          "column": "season",
+          "dtype": "object",
+          "rows": 748,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 1
+        },
+        {
+          "column": "game_date",
+          "dtype": "datetime64[ns]",
+          "rows": 748,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 120
+        },
+        {
+          "column": "team_abbr",
+          "dtype": "object",
+          "rows": 748,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 30
+        },
+        {
+          "column": "opponent",
+          "dtype": "object",
+          "rows": 748,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 31
+        },
+        {
+          "column": "home_away",
+          "dtype": "object",
+          "rows": 748,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 2
+        },
+        {
+          "column": "result",
+          "dtype": "object",
+          "rows": 748,
+          "null_count": 12,
+          "null_rate": 0.016,
+          "distinct_count": 2
+        },
+        {
+          "column": "minutes",
+          "dtype": "int64",
+          "rows": 748,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 39
+        },
+        {
+          "column": "points",
+          "dtype": "int64",
+          "rows": 748,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 48
+        },
+        {
+          "column": "rebounds",
+          "dtype": "int64",
+          "rows": 748,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 21
+        },
+        {
+          "column": "assists",
+          "dtype": "int64",
+          "rows": 748,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 18
+        },
+        {
+          "column": "steals",
+          "dtype": "int64",
+          "rows": 748,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 6
+        },
+        {
+          "column": "blocks",
+          "dtype": "int64",
+          "rows": 748,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 8
+        },
+        {
+          "column": "turnovers",
+          "dtype": "int64",
+          "rows": 748,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 11
+        },
+        {
+          "column": "fga",
+          "dtype": "int64",
+          "rows": 748,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 32
+        },
+        {
+          "column": "fgm",
+          "dtype": "int64",
+          "rows": 748,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 20
+        },
+        {
+          "column": "3pa",
+          "dtype": "int64",
+          "rows": 748,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 20
+        },
+        {
+          "column": "3pm",
+          "dtype": "int64",
+          "rows": 748,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 11
+        },
+        {
+          "column": "fta",
+          "dtype": "int64",
+          "rows": 748,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 22
+        },
+        {
+          "column": "ftm",
+          "dtype": "int64",
+          "rows": 748,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 19
+        },
+        {
+          "column": "plus_minus",
+          "dtype": "int64",
+          "rows": 748,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 73
+        },
+        {
+          "column": "usage_est",
+          "dtype": "float64",
+          "rows": 748,
+          "null_count": 748,
+          "null_rate": 1.0,
+          "distinct_count": 0
+        },
+        {
+          "column": "ts_est",
+          "dtype": "float64",
+          "rows": 748,
+          "null_count": 748,
+          "null_rate": 1.0,
+          "distinct_count": 0
+        }
+      ]
+    },
+    "player_contracts": {
+      "rows": 55,
+      "columns": 15,
+      "column_profile": [
+        {
+          "column": "player_name",
+          "dtype": "object",
+          "rows": 55,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 55
+        },
+        {
+          "column": "player_id",
+          "dtype": "object",
+          "rows": 55,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 55
+        },
+        {
+          "column": "team_abbr",
+          "dtype": "object",
+          "rows": 55,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 29
+        },
+        {
+          "column": "season",
+          "dtype": "object",
+          "rows": 55,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 1
+        },
+        {
+          "column": "salary",
+          "dtype": "int64",
+          "rows": 55,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 34
+        },
+        {
+          "column": "contract_year",
+          "dtype": "float64",
+          "rows": 55,
+          "null_count": 55,
+          "null_rate": 1.0,
+          "distinct_count": 0
+        },
+        {
+          "column": "contract_total",
+          "dtype": "float64",
+          "rows": 55,
+          "null_count": 55,
+          "null_rate": 1.0,
+          "distinct_count": 0
+        },
+        {
+          "column": "guaranteed",
+          "dtype": "float64",
+          "rows": 55,
+          "null_count": 55,
+          "null_rate": 1.0,
+          "distinct_count": 0
+        },
+        {
+          "column": "option_type",
+          "dtype": "float64",
+          "rows": 55,
+          "null_count": 55,
+          "null_rate": 1.0,
+          "distinct_count": 0
+        },
+        {
+          "column": "cap_hit",
+          "dtype": "float64",
+          "rows": 55,
+          "null_count": 55,
+          "null_rate": 1.0,
+          "distinct_count": 0
+        },
+        {
+          "column": "age",
+          "dtype": "float64",
+          "rows": 55,
+          "null_count": 2,
+          "null_rate": 0.0364,
+          "distinct_count": 16
+        },
+        {
+          "column": "pos",
+          "dtype": "object",
+          "rows": 55,
+          "null_count": 2,
+          "null_rate": 0.0364,
+          "distinct_count": 5
+        },
+        {
+          "column": "signed_date",
+          "dtype": "float64",
+          "rows": 55,
+          "null_count": 55,
+          "null_rate": 1.0,
+          "distinct_count": 0
+        },
+        {
+          "column": "free_agent_year",
+          "dtype": "float64",
+          "rows": 55,
+          "null_count": 55,
+          "null_rate": 1.0,
+          "distinct_count": 0
+        },
+        {
+          "column": "salary_rank_on_team",
+          "dtype": "float64",
+          "rows": 55,
+          "null_count": 55,
+          "null_rate": 1.0,
+          "distinct_count": 0
+        }
+      ]
+    },
+    "team_roster_context": {
+      "rows": 282,
+      "columns": 15,
+      "column_profile": [
+        {
+          "column": "team_abbr",
+          "dtype": "object",
+          "rows": 282,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 30
+        },
+        {
+          "column": "season",
+          "dtype": "object",
+          "rows": 282,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 1
+        },
+        {
+          "column": "player_name",
+          "dtype": "object",
+          "rows": 282,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 282
+        },
+        {
+          "column": "player_id",
+          "dtype": "object",
+          "rows": 282,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 282
+        },
+        {
+          "column": "minutes_share",
+          "dtype": "float64",
+          "rows": 282,
+          "null_count": 282,
+          "null_rate": 1.0,
+          "distinct_count": 0
+        },
+        {
+          "column": "usage_share",
+          "dtype": "float64",
+          "rows": 282,
+          "null_count": 282,
+          "null_rate": 1.0,
+          "distinct_count": 0
+        },
+        {
+          "column": "starter",
+          "dtype": "float64",
+          "rows": 282,
+          "null_count": 282,
+          "null_rate": 1.0,
+          "distinct_count": 0
+        },
+        {
+          "column": "age",
+          "dtype": "float64",
+          "rows": 282,
+          "null_count": 67,
+          "null_rate": 0.2376,
+          "distinct_count": 20
+        },
+        {
+          "column": "pos",
+          "dtype": "object",
+          "rows": 282,
+          "null_count": 67,
+          "null_rate": 0.2376,
+          "distinct_count": 5
+        },
+        {
+          "column": "games_played",
+          "dtype": "float64",
+          "rows": 282,
+          "null_count": 67,
+          "null_rate": 0.2376,
+          "distinct_count": 70
+        },
+        {
+          "column": "injured_games",
+          "dtype": "float64",
+          "rows": 282,
+          "null_count": 282,
+          "null_rate": 1.0,
+          "distinct_count": 0
+        },
+        {
+          "column": "salary",
+          "dtype": "float64",
+          "rows": 282,
+          "null_count": 233,
+          "null_rate": 0.8262,
+          "distinct_count": 32
+        },
+        {
+          "column": "efficiency_rank",
+          "dtype": "float64",
+          "rows": 282,
+          "null_count": 282,
+          "null_rate": 1.0,
+          "distinct_count": 0
+        },
+        {
+          "column": "lineup_role",
+          "dtype": "float64",
+          "rows": 282,
+          "null_count": 282,
+          "null_rate": 1.0,
+          "distinct_count": 0
+        },
+        {
+          "column": "returning_from_prev_season",
+          "dtype": "float64",
+          "rows": 282,
+          "null_count": 282,
+          "null_rate": 1.0,
+          "distinct_count": 0
+        }
+      ]
+    },
+    "team_model_features": {
+      "rows": 30,
+      "columns": 31,
+      "column_profile": [
+        {
+          "column": "team_abbr",
+          "dtype": "object",
+          "rows": 30,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 30
+        },
+        {
+          "column": "season",
+          "dtype": "object",
+          "rows": 30,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 1
+        },
+        {
+          "column": "target_wins",
+          "dtype": "float64",
+          "rows": 30,
+          "null_count": 30,
+          "null_rate": 1.0,
+          "distinct_count": 0
+        },
+        {
+          "column": "target_seed",
+          "dtype": "float64",
+          "rows": 30,
+          "null_count": 30,
+          "null_rate": 1.0,
+          "distinct_count": 0
+        },
+        {
+          "column": "target_playoff_flag",
+          "dtype": "float64",
+          "rows": 30,
+          "null_count": 30,
+          "null_rate": 1.0,
+          "distinct_count": 0
+        },
+        {
+          "column": "predicted_record",
+          "dtype": "float64",
+          "rows": 30,
+          "null_count": 30,
+          "null_rate": 1.0,
+          "distinct_count": 0
+        },
+        {
+          "column": "predicted_net_rating",
+          "dtype": "float64",
+          "rows": 30,
+          "null_count": 30,
+          "null_rate": 1.0,
+          "distinct_count": 0
+        },
+        {
+          "column": "predicted_playoff_prob",
+          "dtype": "float64",
+          "rows": 30,
+          "null_count": 30,
+          "null_rate": 1.0,
+          "distinct_count": 0
+        },
+        {
+          "column": "avg_age",
+          "dtype": "float64",
+          "rows": 30,
+          "null_count": 30,
+          "null_rate": 1.0,
+          "distinct_count": 0
+        },
+        {
+          "column": "minutes_weighted_age",
+          "dtype": "float64",
+          "rows": 30,
+          "null_count": 30,
+          "null_rate": 1.0,
+          "distinct_count": 0
+        },
+        {
+          "column": "top_3_players_minutes_share",
+          "dtype": "float64",
+          "rows": 30,
+          "null_count": 30,
+          "null_rate": 1.0,
+          "distinct_count": 0
+        },
+        {
+          "column": "top_5_players_usage_share",
+          "dtype": "float64",
+          "rows": 30,
+          "null_count": 30,
+          "null_rate": 1.0,
+          "distinct_count": 0
+        },
+        {
+          "column": "team_avg_ts_pct",
+          "dtype": "float64",
+          "rows": 30,
+          "null_count": 30,
+          "null_rate": 1.0,
+          "distinct_count": 0
+        },
+        {
+          "column": "team_avg_per",
+          "dtype": "float64",
+          "rows": 30,
+          "null_count": 30,
+          "null_rate": 1.0,
+          "distinct_count": 0
+        },
+        {
+          "column": "team_avg_bpm",
+          "dtype": "float64",
+          "rows": 30,
+          "null_count": 30,
+          "null_rate": 1.0,
+          "distinct_count": 0
+        },
+        {
+          "column": "team_total_ws",
+          "dtype": "float64",
+          "rows": 30,
+          "null_count": 30,
+          "null_rate": 1.0,
+          "distinct_count": 0
+        },
+        {
+          "column": "team_total_vorp",
+          "dtype": "float64",
+          "rows": 30,
+          "null_count": 30,
+          "null_rate": 1.0,
+          "distinct_count": 0
+        },
+        {
+          "column": "team_net_rtg_prev_season",
+          "dtype": "float64",
+          "rows": 30,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 30
+        },
+        {
+          "column": "team_off_rtg_prev_season",
+          "dtype": "float64",
+          "rows": 30,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 30
+        },
+        {
+          "column": "team_def_rtg_prev_season",
+          "dtype": "float64",
+          "rows": 30,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 30
+        },
+        {
+          "column": "roster_continuity_pct",
+          "dtype": "float64",
+          "rows": 30,
+          "null_count": 30,
+          "null_rate": 1.0,
+          "distinct_count": 0
+        },
+        {
+          "column": "salary_total",
+          "dtype": "float64",
+          "rows": 30,
+          "null_count": 30,
+          "null_rate": 1.0,
+          "distinct_count": 0
+        },
+        {
+          "column": "salary_top_3_share",
+          "dtype": "float64",
+          "rows": 30,
+          "null_count": 30,
+          "null_rate": 1.0,
+          "distinct_count": 0
+        },
+        {
+          "column": "injury_games_lost",
+          "dtype": "float64",
+          "rows": 30,
+          "null_count": 30,
+          "null_rate": 1.0,
+          "distinct_count": 0
+        },
+        {
+          "column": "games_by_returning_players",
+          "dtype": "float64",
+          "rows": 30,
+          "null_count": 30,
+          "null_rate": 1.0,
+          "distinct_count": 0
+        },
+        {
+          "column": "new_player_minutes_share",
+          "dtype": "float64",
+          "rows": 30,
+          "null_count": 30,
+          "null_rate": 1.0,
+          "distinct_count": 0
+        },
+        {
+          "column": "age_curve_index",
+          "dtype": "float64",
+          "rows": 30,
+          "null_count": 30,
+          "null_rate": 1.0,
+          "distinct_count": 0
+        },
+        {
+          "column": "bench_depth_index",
+          "dtype": "float64",
+          "rows": 30,
+          "null_count": 30,
+          "null_rate": 1.0,
+          "distinct_count": 0
+        },
+        {
+          "column": "pace_prev_season",
+          "dtype": "float64",
+          "rows": 30,
+          "null_count": 30,
+          "null_rate": 1.0,
+          "distinct_count": 0
+        },
+        {
+          "column": "strength_of_schedule",
+          "dtype": "float64",
+          "rows": 30,
+          "null_count": 30,
+          "null_rate": 1.0,
+          "distinct_count": 0
+        },
+        {
+          "column": "feature_notes",
+          "dtype": "object",
+          "rows": 30,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 1
+        }
+      ]
+    },
+    "sources_and_dictionary": {
+      "rows": 27,
+      "columns": 5,
+      "column_profile": [
+        {
+          "column": "sheet_name",
+          "dtype": "object",
+          "rows": 27,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 6
+        },
+        {
+          "column": "field_name",
+          "dtype": "object",
+          "rows": 27,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 27
+        },
+        {
+          "column": "definition",
+          "dtype": "object",
+          "rows": 27,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 27
+        },
+        {
+          "column": "recommended_source",
+          "dtype": "object",
+          "rows": 27,
+          "null_count": 6,
+          "null_rate": 0.2222,
+          "distinct_count": 17
+        },
+        {
+          "column": "notes",
+          "dtype": "object",
+          "rows": 27,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 24
+        }
+      ]
+    }
+  },
+  "warnings": [
+    "Only one season is present; this is insufficient for out-of-time model validation.",
+    "Player game logs are partial and do not represent every rotation player.",
+    "Contract coverage is limited; salary-derived features should be treated as incomplete."
+  ],
+  "team_key": {
+    "rows_after_load": 30,
+    "unique_teams": 30,
+    "unique_seasons": [
+      "2025-26"
+    ],
+    "duplicate_team_season_rows": 0
+  },
+  "player_key": {
+    "rows_after_2tm_removal": 282,
+    "unique_players": 282,
+    "unique_teams": 30
+  },
+  "sparse_fields": [
+    "players_season_stats.age (23% null)",
+    "players_season_stats.pos (23% null)",
+    "players_season_stats.g (23% null)",
+    "players_season_stats.gs (23% null)",
+    "players_season_stats.mp (23% null)",
+    "players_season_stats.fg (23% null)",
+    "players_season_stats.fga (23% null)",
+    "players_season_stats.fg_pct (23% null)",
+    "players_season_stats.3p (23% null)",
+    "players_season_stats.3pa (23% null)",
+    "players_season_stats.3p_pct (25% null)",
+    "players_season_stats.2p (23% null)",
+    "players_season_stats.2pa (23% null)",
+    "players_season_stats.2p_pct (23% null)",
+    "players_season_stats.efg_pct (23% null)",
+    "players_season_stats.ft (23% null)",
+    "players_season_stats.fta (23% null)",
+    "players_season_stats.ft_pct (23% null)",
+    "players_season_stats.orb (23% null)",
+    "players_season_stats.drb (23% null)",
+    "players_season_stats.trb (23% null)",
+    "players_season_stats.ast (23% null)",
+    "players_season_stats.stl (23% null)",
+    "players_season_stats.blk (23% null)",
+    "players_season_stats.tov (23% null)",
+    "players_season_stats.pf (23% null)",
+    "players_season_stats.pts (23% null)",
+    "players_season_stats.career_minutes (100% null)",
+    "players_season_stats.career_ws (100% null)",
+    "players_season_stats.career_vorp (100% null)",
+    "players_season_stats.rolling_3y_pts (100% null)",
+    "players_season_stats.rolling_3y_ts_pct (100% null)",
+    "players_season_stats.age_adjusted_per (100% null)",
+    "players_season_stats.decline_flag (100% null)",
+    "team_season_stats.pace (100% null)",
+    "team_season_stats.srs (100% null)",
+    "team_season_stats.roster_continuity_pct (100% null)",
+    "team_season_stats.salary_total (100% null)",
+    "team_season_stats.salary_top_3_share (100% null)",
+    "team_season_stats.injury_games_lost (100% null)",
+    "team_season_stats.returning_minutes_share (100% null)",
+    "player_game_logs.usage_est (100% null)",
+    "player_game_logs.ts_est (100% null)",
+    "player_contracts.contract_year (100% null)",
+    "player_contracts.contract_total (100% null)",
+    "player_contracts.guaranteed (100% null)",
+    "player_contracts.option_type (100% null)",
+    "player_contracts.cap_hit (100% null)",
+    "player_contracts.signed_date (100% null)",
+    "player_contracts.free_agent_year (100% null)",
+    "player_contracts.salary_rank_on_team (100% null)",
+    "team_roster_context.minutes_share (100% null)",
+    "team_roster_context.usage_share (100% null)",
+    "team_roster_context.starter (100% null)",
+    "team_roster_context.age (24% null)",
+    "team_roster_context.pos (24% null)",
+    "team_roster_context.games_played (24% null)",
+    "team_roster_context.injured_games (100% null)",
+    "team_roster_context.salary (83% null)",
+    "team_roster_context.efficiency_rank (100% null)",
+    "team_roster_context.lineup_role (100% null)",
+    "team_roster_context.returning_from_prev_season (100% null)",
+    "team_model_features.target_wins (100% null)",
+    "team_model_features.target_seed (100% null)",
+    "team_model_features.target_playoff_flag (100% null)",
+    "team_model_features.predicted_record (100% null)",
+    "team_model_features.predicted_net_rating (100% null)",
+    "team_model_features.predicted_playoff_prob (100% null)",
+    "team_model_features.avg_age (100% null)",
+    "team_model_features.minutes_weighted_age (100% null)",
+    "team_model_features.top_3_players_minutes_share (100% null)",
+    "team_model_features.top_5_players_usage_share (100% null)",
+    "team_model_features.team_avg_ts_pct (100% null)",
+    "team_model_features.team_avg_per (100% null)",
+    "team_model_features.team_avg_bpm (100% null)",
+    "team_model_features.team_total_ws (100% null)",
+    "team_model_features.team_total_vorp (100% null)",
+    "team_model_features.roster_continuity_pct (100% null)",
+    "team_model_features.salary_total (100% null)",
+    "team_model_features.salary_top_3_share (100% null)",
+    "team_model_features.injury_games_lost (100% null)",
+    "team_model_features.games_by_returning_players (100% null)",
+    "team_model_features.new_player_minutes_share (100% null)",
+    "team_model_features.age_curve_index (100% null)",
+    "team_model_features.bench_depth_index (100% null)",
+    "team_model_features.pace_prev_season (100% null)",
+    "team_model_features.strength_of_schedule (100% null)",
+    "sources_and_dictionary.recommended_source (22% null)"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "test_rows": 360,
+  "mae": 8.479,
+  "rmse": 10.477,
+  "roster_aware_mae": 8.162,
+  "roster_aware_rmse": 10.237,
+  "roster_transition_model_mae": 8.243,
+  "roster_transition_model_rmse": 10.602
+}

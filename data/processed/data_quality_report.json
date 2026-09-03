@@ -1,0 +1,105 @@
+{
+  "status": "pass",
+  "error_count": 0,
+  "warning_count": 0,
+  "checks": [
+    {
+      "name": "feature_team_season_grain",
+      "status": "pass",
+      "observed": 30,
+      "expected": 30,
+      "detail": "Features should contain one row per team-season."
+    },
+    {
+      "name": "feature_team_count",
+      "status": "pass",
+      "observed": 30,
+      "expected": 30,
+      "detail": ""
+    },
+    {
+      "name": "historical_team_count",
+      "status": "pass",
+      "observed": 30,
+      "expected": 30,
+      "detail": ""
+    },
+    {
+      "name": "historical_season_count",
+      "status": "pass",
+      "observed": 17,
+      "expected": ">= 5",
+      "detail": ""
+    },
+    {
+      "name": "next_forecast_team_count",
+      "status": "pass",
+      "observed": 30,
+      "expected": 30,
+      "detail": ""
+    },
+    {
+      "name": "next_forecast_missing_wins",
+      "status": "pass",
+      "observed": 0,
+      "expected": 0,
+      "detail": ""
+    },
+    {
+      "name": "live_roster_team_count",
+      "status": "pass",
+      "observed": 30,
+      "expected": 30,
+      "detail": ""
+    },
+    {
+      "name": "live_roster_duplicate_keys",
+      "status": "pass",
+      "observed": 0,
+      "expected": 0,
+      "detail": ""
+    },
+    {
+      "name": "injury_snapshot_available",
+      "status": "pass",
+      "observed": 76,
+      "expected": "> 0",
+      "detail": ""
+    },
+    {
+      "name": "transaction_ledger_available",
+      "status": "pass",
+      "observed": 604,
+      "expected": "> 0",
+      "detail": ""
+    },
+    {
+      "name": "schedule_duplicate_games",
+      "status": "pass",
+      "observed": 0,
+      "expected": 0,
+      "detail": ""
+    },
+    {
+      "name": "schedule_game_count",
+      "status": "pass",
+      "observed": 1200,
+      "expected": ">= 1000",
+      "detail": ""
+    }
+  ],
+  "fetched_at_utc": "2026-09-02T19:49:20.921475+00:00",
+  "source_manifest": {
+    "nba_players": "https://www.nba.com/players",
+    "espn": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba",
+    "espn_injuries": "https://www.espn.com/nba/injuries",
+    "nba_player_movement": "https://stats.nba.com/js/data/playermovement/NBA_Player_Movement.json",
+    "schedule": "https://www.nba.com/schedule",
+    "schedule_provider": "Basketball-Reference",
+    "market_prior": "data/raw/external_market_wintotals.csv"
+  },
+  "artifact_paths": {
+    "processed_dir": "data\\processed",
+    "live_dir": "data\\raw\\live"
+  }
+}

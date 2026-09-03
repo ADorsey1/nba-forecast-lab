@@ -1,0 +1,12 @@
+[server]
+address = "127.0.0.1"
+enableCORS = true
+enableXsrfProtection = true
+headless = true
+maxUploadSize = 5
+
+[browser]
+gatherUsageStats = false
+
+[client]
+showErrorDetails = "type"
