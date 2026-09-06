@@ -1,8 +1,8 @@
 {
-  "fetched_at_utc": "2026-09-06T20:34:36.497280+00:00",
+  "fetched_at_utc": "2026-09-06T20:36:52.901117+00:00",
   "availability": {
     "rosters": true,
-    "injuries": true,
+    "injuries": false,
     "schedule": false,
     "transactions": true,
     "official_roster_signings": true
