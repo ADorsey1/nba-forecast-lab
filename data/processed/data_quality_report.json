@@ -62,44 +62,31 @@
     {
       "name": "injury_snapshot_available",
       "status": "pass",
-      "observed": 76,
+      "observed": 75,
       "expected": "> 0",
       "detail": ""
     },
     {
       "name": "transaction_ledger_available",
       "status": "pass",
-      "observed": 604,
+      "observed": 745,
       "expected": "> 0",
-      "detail": ""
-    },
-    {
-      "name": "schedule_duplicate_games",
-      "status": "pass",
-      "observed": 0,
-      "expected": 0,
-      "detail": ""
-    },
-    {
-      "name": "schedule_game_count",
-      "status": "pass",
-      "observed": 1200,
-      "expected": ">= 1000",
       "detail": ""
     }
   ],
-  "fetched_at_utc": "2026-09-02T19:49:20.921475+00:00",
+  "fetched_at_utc": "2026-09-06T20:31:44.370643+00:00",
   "source_manifest": {
     "nba_players": "https://www.nba.com/players",
     "espn": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba",
     "espn_injuries": "https://www.espn.com/nba/injuries",
     "nba_player_movement": "https://stats.nba.com/js/data/playermovement/NBA_Player_Movement.json",
+    "nba_team_rosters": "https://www.nba.com/team/{team_id}",
     "schedule": "https://www.nba.com/schedule",
-    "schedule_provider": "Basketball-Reference",
+    "schedule_provider": "unavailable",
     "market_prior": "data/raw/external_market_wintotals.csv"
   },
   "artifact_paths": {
-    "processed_dir": "data\\processed",
-    "live_dir": "data\\raw\\live"
+    "processed_dir": "data/processed",
+    "live_dir": "data/raw/live"
   }
 }

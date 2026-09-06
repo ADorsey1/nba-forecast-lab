@@ -3,19 +3,14 @@ import json
 from uuid import uuid4
 import pandas as pd
 import streamlit as st
-from .lab import player_pool, projection
-
-
-@st.cache_data(show_spinner=False)
-def load_pool(rosters, history_path):
-    return player_pool(rosters, history_path)
+from .lab import projection
 
 
 def render_lab(data, root, selected_team):
     st.title('Creative Lab')
     st.caption('Build an alternate NBA. Move players, invent prospects, tune rotations, and compare your scenario with the published league.')
     if 'lab_base' not in st.session_state:
-        st.session_state.lab_base = load_pool(data['rosters'], root / 'data/raw/llimllib_nba_data/data/playerstats.parquet')
+        st.session_state.lab_base = data['player_ratings'].copy(deep=True)
         st.session_state.lab_roster = st.session_state.lab_base.copy(deep=True)
         st.session_state.lab_forecast = data['next_forecast'].copy(deep=True)
         st.session_state.lab_snapshot = data['snapshot_root']

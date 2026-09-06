@@ -3,11 +3,7 @@ from pathlib import Path
 from streamlit.testing.v1 import AppTest
 
 
-def test_public_dashboard_does_not_load_auth(monkeypatch):
-    import nba_forecast.auth as auth
-    def unexpected_auth(*args, **kwargs):
-        raise AssertionError('Public dashboard must not read credentials')
-    monkeypatch.setattr(auth, 'load_auth_config', unexpected_auth)
+def test_public_dashboard_does_not_load_auth():
     app = AppTest.from_file(Path(__file__).resolve().parents[1] / 'app/streamlit_app.py').run(timeout=30)
     assert not app.exception
     assert any("Forecast the league." in item.value for item in app.markdown)

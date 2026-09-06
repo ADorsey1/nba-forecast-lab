@@ -50,7 +50,7 @@ def refresh(*, input_path: Path, public_source: Path, data_root: Path, check: bo
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--input', type=Path, default=ROOT / 'nba_forecast_data_2025_26 (1).xlsx')
+    parser.add_argument('--input', type=Path, default=ROOT / 'nba_forecast_data_2025_26.xlsx')
     parser.add_argument('--public-source', type=Path, default=ROOT / 'data/raw/llimllib_nba_data')
     parser.add_argument('--data-root', type=Path, default=Path(os.environ.get('NBA_FORECAST_DATA_ROOT', ROOT / 'data')))
     parser.add_argument('--check', action='store_true', help='Validate required input files without fetching or running models')

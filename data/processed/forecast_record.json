@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "recorded_at_utc": "2026-09-06T20:32:09.965495+00:00",
+  "season": "2026-27",
+  "first_game_utc": null,
+  "features_observed_at_utc": "2026-09-06T20:31:44.370643+00:00",
+  "forecast_sha256": "b9b91b28c6edcca1355840c20be66e6ed772b8517142939d4449737c06caaeeb",
+  "preseason_eligible": false,
+  "ineligibility_reasons": [
+    "Publication is not verified before the first scheduled game"
+  ],
+  "validation_status": "Awaiting completed-season outcomes; ensemble accuracy is not yet measured"
+}

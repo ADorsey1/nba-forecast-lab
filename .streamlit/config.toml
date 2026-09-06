@@ -9,4 +9,5 @@ maxUploadSize = 5
 gatherUsageStats = false
 
 [client]
+toolbarMode = "viewer"
 showErrorDetails = "type"

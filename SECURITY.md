@@ -2,13 +2,12 @@
 
 ## Current Scope
 
-NBA Forecast Lab is a local Streamlit application that reads public basketball data and writes local forecast artifacts. It is a public read-only dashboard with no user database, payment flow, file upload, or private-user-data surface. The app does not read legacy local login secrets.
+Public, read-only NBA forecasts and session-local roster experiments. There is no login, database, payment processing, upload endpoint, or web-accessible refresh command.
 
 ## Controls Implemented
 
 - Secret-bearing files are ignored by default, including `.env`, key files, certificate files, `secrets/`, and generated logs.
 - `scripts/security_audit.py` scans project text files for common API keys, tokens, passwords, bearer credentials, and private-key blocks without printing matched secret values.
-- The cookie notice records dismissal only in the current Streamlit session; it does not set an advertising or analytics cookie.
 - UTM parameters are retained only in the current session for diagnostics and are not sent to an analytics provider.
 - Raw HTML rendering is limited to static layout plus escaped values from data files.
 - Live JSON and HTML provider responses have size limits and request timeouts to reduce resource-exhaustion risk.
@@ -32,4 +31,4 @@ Database row-level security, parameterized SQL, bot protection, encrypted sensit
 
 ## Hosted Deployment Requirements
 
-Host the public read-only dashboard behind managed HTTPS. Keep secrets and refresh credentials in the host secret store, restrict raw provider payloads and logs to operators, and run dependency scanning in CI. Refresh jobs must run separately from web requests. The local loopback server is for development. If private user features are added later, use managed identity and server-side authorization before exposing those features; the legacy single-account helpers are not a production identity system.
+Use managed HTTPS with WebSocket support. Refresh jobs run separately from the web process; monitor failures and stale data. See [deployment instructions](deploy/README.md).

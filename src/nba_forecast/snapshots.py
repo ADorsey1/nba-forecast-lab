@@ -19,6 +19,7 @@ class SnapshotError(ValueError):
 
 
 TABLES = {
+    'player_ratings': ('processed/player_ratings.csv', {'player_id', 'player_name', 'team_abbr', 'minutes', 'impact', 'availability', 'evidence'}),
     'features': ('processed/team_model_features.csv', {'team_abbr', 'season'}),
     'forecasts': ('processed/baseline_forecasts.csv', {'team_abbr'}),
     'simulations': ('processed/simulation_summary.csv', {'team_abbr'}),
@@ -39,6 +40,13 @@ def read_snapshot(root: Path) -> dict:
             if not required.issubset(frame.columns):
                 raise SnapshotError(f'{relative}: missing required columns')
             result[key] = frame
+        ratings = result['player_ratings']
+        if ratings.empty or ratings.player_id.duplicated().any():
+            raise SnapshotError('Player ratings must contain unique players')
+        for column, low, high in [('minutes', 0, 48), ('impact', -20, 20), ('availability', 0, 100)]:
+            if not pd.to_numeric(ratings[column], errors='coerce').between(low, high).all():
+                raise SnapshotError(f'Invalid player ratings: {column}')
+        ratings['player_id'] = ratings.player_id.astype(str).str.replace(r'\.0$', '', regex=True)
         forecast = result['next_forecast']
         simulation = result['next_simulation']
         if 'conference' in forecast and not forecast.conference.eq(forecast.team_abbr.map(conference_for)).all():

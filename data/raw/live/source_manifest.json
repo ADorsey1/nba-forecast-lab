@@ -1,13 +1,21 @@
 {
-  "fetched_at_utc": "2026-09-02T19:49:20.921475+00:00",
+  "fetched_at_utc": "2026-09-06T20:31:44.370643+00:00",
+  "availability": {
+    "rosters": true,
+    "injuries": true,
+    "schedule": false,
+    "transactions": true,
+    "official_roster_signings": true
+  },
   "season": "2026-27",
   "sources": {
     "nba_players": "https://www.nba.com/players",
     "espn": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba",
     "espn_injuries": "https://www.espn.com/nba/injuries",
     "nba_player_movement": "https://stats.nba.com/js/data/playermovement/NBA_Player_Movement.json",
+    "nba_team_rosters": "https://www.nba.com/team/{team_id}",
     "schedule": "https://www.nba.com/schedule",
-    "schedule_provider": "Basketball-Reference",
+    "schedule_provider": "unavailable",
     "market_prior": "data/raw/external_market_wintotals.csv"
   }
 }

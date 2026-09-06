@@ -18,22 +18,37 @@ Important safeguards:
 
 ## Quick start
 
+Python 3.12, macOS/Linux:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+streamlit run app/streamlit_app.py
+```
+
+Windows PowerShell:
+
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 pip install -r requirements.txt
-$env:PYTHONPATH = "src"
-python -m nba_forecast.cli --input "nba_forecast_data_2025_26 (1).xlsx" --output data/processed
 streamlit run app/streamlit_app.py
 ```
 
-The pipeline automatically uses `data/raw/llimllib_nba_data` when the public historical dump is present. Pass `--public-source` to use a different local copy.
+The app and Creative Lab work directly from the committed snapshot. Training history is needed only to generate a new snapshot:
+
+```bash
+python scripts/setup_history.py
+python scripts/refresh_forecast.py
+python scripts/export_snapshot.py
+```
 
 ## Public access
 
-The dashboard is public and read-only. Visitors do not need credentials, and existing local authentication secrets are not read by the app. Data refresh runs separately through a command-line job; the website exposes no refresh, upload, or administrative actions. The legacy authentication helpers and setup script are retained for reference only and do not protect this public dashboard.
+The dashboard is public and read-only. Visitors do not need credentials, and existing local authentication secrets are not read by the app. Data refresh runs separately through a command-line job; the website exposes no refresh, upload, or administrative actions.
 
-The interface includes a dark/light theme toggle, responsive navigation, site search, session-only privacy notice, scroll progress and top controls, print-friendly styles, expandable FAQs, and copy-ready team summaries. UTM query parameters are captured only for the current session and displayed on Diagnostics for transparent campaign-context inspection.
+The interface includes a dark/light theme toggle, responsive navigation, site search, scroll progress, print-friendly styles, expandable FAQs, and copy-ready team summaries. UTM query parameters are captured only for the current session and displayed on Diagnostics for transparent campaign-context inspection.
 
 ## Pipeline outputs
 
@@ -60,24 +75,16 @@ The live layer can be refreshed before a forecast run:
 
 ```powershell
 $env:PYTHONPATH = "src"
-& ".venv\Scripts\python.exe" -m nba_forecast.cli --input "nba_forecast_data_2025_26 (1).xlsx" --output data/processed --public-source data/raw/llimllib_nba_data --refresh-live
+& ".venv\Scripts\python.exe" -m nba_forecast.cli --input "nba_forecast_data_2025_26.xlsx" --output data/processed --public-source data/raw/llimllib_nba_data --refresh-live
 ```
 
 The live context is timestamped and source-labeled. It is used as current-season diagnostic context; the historical win model is not silently retrained on future information. Schedule-aware simulation uses published games when available and fills unresolved NBA Cup-dependent games with neutral average-opponent draws.
 
-### Optional historical source
+### Historical source and scheduled updates
 
-The historical training extension uses the public `llimllib/nba_data` dump. It is intentionally kept outside this repository because it is a separate Git repository. To restore it after cloning:
+`python scripts/setup_history.py` installs the pinned public history used by the refresh worker. It is excluded from Git and is unnecessary for visitors or the Creative Lab.
 
-```powershell
-New-Item -ItemType Directory -Force -Path data/raw | Out-Null
-git clone --filter=blob:none --no-checkout https://github.com/llimllib/nba_data.git data/raw/llimllib_nba_data
-git -C data/raw/llimllib_nba_data sparse-checkout init --no-cone
-git -C data/raw/llimllib_nba_data sparse-checkout set data/team_summary.json data/team_summary.parquet data/playerstats.parquet data/gamelogs.parquet data/player_game_logs.parquet data/metadata.json
-git -C data/raw/llimllib_nba_data checkout
-```
-
-The Recent Moves page reads the cumulative, deduplicated transaction ledger. The scheduled refresh job updates the published snapshot every six hours, and an open dashboard reloads itself every 15 minutes to pick up the latest validated snapshot. A manual `python scripts/refresh_forecast.py --data-root data` run is available when an immediate update is needed. The app keeps the navy/orange league-wide theme by default and applies an accessibility-checked full-site team theme when a team is focused, including the page background, cards, navigation, controls, charts, and tables.
+The Recent Moves page reads the cumulative transaction ledger. The GitHub Actions refresh workflow attempts publication every six hours once enabled on the default branch. Failed jobs leave the previous bundle in place. Open dashboards check for local snapshot changes every minute; Creative Lab scenarios keep their initial baseline until reset. Team color schemes remain available across the site.
 
 The next-season forecast now exposes separate `independent_predicted_wins` and `roster_aware_predicted_wins` columns. The independent model uses prior team, player, and game-log features. The roster-aware model adds a player-ID-based season-roster transition proxy. Because the public historical dump does not include a complete historical transaction ledger, that proxy is explicitly labeled as retrospective season-roster evidence rather than a perfect preseason snapshot. A separate `live_roster_projection_wins` field is a minutes- and availability-weighted current-rotation diagnostic.
 
@@ -93,9 +100,9 @@ Replace the retrospective season-roster proxy with historical opening-night rost
 
 ## Publication and freshness policies
 
-Use `python scripts/refresh_forecast.py` for portable refreshes. See [hosting and refresh](deploy/README.md) for the persistent volume and timer setup. Failed updates preserve the last validated snapshot.
+Use `python scripts/refresh_forecast.py` for portable refreshes. See [hosting and refresh](deploy/README.md) for Community Cloud setup and the optional Linux host. Failed updates preserve the last validated snapshot.
 
-The dashboard labels context older than 24 hours as stale and distinguishes unavailable or unverified provider coverage. Market input rows require `team_abbr`, `season`, `market_win_total`, `source`, and `source_date`. A refresh rejects duplicate, wrong-season, future-dated, missing, or more than 30-day-old market inputs rather than silently reusing them. Refresh that dated input when the market moves. Bundled forecasts created before these checks are explicitly labeled as lacking validated market provenance.
+The dashboard labels context older than 24 hours as stale and distinguishes unavailable or unverified provider coverage. Market input rows require `team_abbr`, `season`, `market_win_total`, `source`, and `source_date`. A refresh rejects duplicate, wrong-season, future-dated, missing, or invalid market inputs. Inputs older than 30 days are retained as an explicitly labeled stale benchmark, preserving their original source date and ensemble weight while allowing live refreshes to continue. This benchmark is not current odds; update the CSV when new market totals are available.
 
 ## Forward evaluation
 
@@ -116,3 +123,9 @@ The Creative Lab is a browser-session sandbox. Visitors can move or trade curren
 Scenario wins equal published wins plus 2.7 (adjustable) times the change in minutes-weighted on-court net rating. Team minutes above 240 are normalized; missing or unavailable minutes use a neutral replacement. Player history uses the latest available season, with neutral assumptions explicitly labeled for unmatched players. This is an illustrative roster diagnostic, not a retrained model, causal player valuation, salary-cap validator or calibrated season simulation. Export before closing the session.
 
 UI audit: branding/status overlap fixed with two-row navigation; mobile navigation wraps; dark team accents are lightened for readability; floating overlays removed; obsolete MENU copy corrected; reduced-motion preference respected. Published snapshot checks run every minute without reloading the browser or discarding lab state.
+
+## License
+
+Project code is MIT licensed; see [LICENSE](LICENSE). External datasets, provider content, and team marks retain their respective rights and terms.
+
+Live providers are best-effort ESPN and NBA sources; coverage can be partial or unavailable. Basketball-Reference scraping is not used as a fallback. Schedule gaps are labeled and handled by the simulation fallback.

@@ -17,7 +17,7 @@ import streamlit as st
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from nba_forecast.freshness import live_status, MARKET_MAX_AGE_DAYS
+from nba_forecast.freshness import live_status, freshness, MARKET_MAX_AGE_DAYS
 from nba_forecast.snapshots import SnapshotError, read_snapshot, resolve_snapshot
 from nba_forecast.teams import EAST, WEST
 from nba_forecast.team_colors import get_team_theme
@@ -46,7 +46,6 @@ SEARCH_INDEX = {
 NAV_LABELS = {"Recent Moves": "Moves", "Methodology": "Methods"}
 UTM_KEYS = ("utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content")
 CONTACT_URL = "https://github.com/ADorsey1/nba-forecast-lab/issues"
-AUTO_RELOAD_MINUTES = 15
 
 
 def load_outputs() -> dict:
@@ -80,7 +79,7 @@ html, body, [class*="css"] { font-family: 'DM Sans', sans-serif; }
 .stApp, .stApp p, .stApp label, .stApp small, .stApp [data-testid="stMarkdownContainer"] { color: var(--text) !important; }
 .stApp h1, .stApp h2, .stApp h3, .stApp h4 { font-family: 'Space Grotesk', sans-serif; color: var(--text) !important; letter-spacing: -.04em; }
 .block-container { max-width: 1480px; padding: 1.2rem 3rem 5rem; }
-[data-testid="stSidebar"] { display: none; }
+[data-testid="stSidebar"], [data-testid="stHeader"] { display: none; }
 .topbar { display:flex; align-items:center; gap:1rem; background:rgba(16,34,53,.94); border:1px solid var(--line); border-radius:18px; padding:.55rem .7rem; box-shadow:0 14px 35px rgba(0,0,0,.18); }
 .brand-lockup { display:flex; align-items:center; gap:.7rem; min-width:0; padding:.1rem .15rem; }
 .brand-mark-wrap { display:grid; place-items:center; width:2.5rem; height:2.5rem; flex:0 0 2.5rem; color:var(--team-display, var(--orange)); background:linear-gradient(145deg, var(--team-primary, #ff7345), var(--team-secondary, #153149)); border:1px solid rgba(255,255,255,.2); border-radius:13px; box-shadow:0 7px 16px rgba(0,0,0,.22); }
@@ -92,31 +91,16 @@ html, body, [class*="css"] { font-family: 'DM Sans', sans-serif; }
 .brand-status-dot { width:.4rem; height:.4rem; border-radius:50%; background:#53d18a; box-shadow:0 0 0 .2rem rgba(83,209,138,.14); }
 .brand-status.is-degraded .brand-status-dot { background:#f2bf62; box-shadow:0 0 0 .2rem rgba(242,191,98,.14); }
 .st-key-desktop-navigation { display:block; }
-.st-key-mobile-navigation { display:none; }
 .st-key-desktop-tools { display:block; }
 .st-key-desktop-navigation .stButton > button { min-height:2.65rem; padding:.25rem .35rem; font-size:.78rem; white-space:nowrap; }
-.st-key-mobile-navigation .stButton > button { min-height:2.65rem; padding:.25rem .5rem; font-size:.9rem; }
 .st-key-desktop-tools .stButton > button { min-height:2.65rem; padding:.25rem .5rem; font-size:.76rem; white-space:nowrap; }
 .st-key-account-actions .stButton > button { min-height:2.65rem; padding:.25rem .5rem; font-size:.74rem; }
 .st-key-topbar-row { position:sticky; top:3.4rem; z-index:100; padding:.45rem .55rem; background:var(--surface); border:1px solid var(--line); border-radius:18px; box-shadow:0 12px 28px rgba(0,0,0,.16); }
-.auth-shell { max-width: 540px; margin: 8vh auto 1.25rem; padding: 2.2rem 2.3rem 1.4rem; background: linear-gradient(145deg, rgba(27,60,87,.98), rgba(16,34,53,.98)); border: 1px solid var(--line); border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,.24); }
-.auth-shell h1 { margin: .45rem 0 .8rem; color: var(--text) !important; }
-.auth-shell p { color: var(--muted) !important; line-height: 1.55; }
-.auth-shell .auth-kicker { color: var(--orange) !important; font-size: .74rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
 .stApp [data-testid="stForm"] { max-width: 540px; margin: 0 auto; padding: 1.3rem 2.3rem 1.5rem; background: var(--surface); border: 1px solid var(--line); border-radius: 0 0 20px 20px; }
 .last-updated { margin:.35rem 0 1rem; color:var(--muted); font-size:.78rem; letter-spacing:.02em; }
 .last-updated strong { color:var(--text); }
-.cookie-banner { position:fixed; left:auto; right:1.25rem; bottom:1.25rem; z-index:120; display:flex; align-items:center; justify-content:space-between; gap:.8rem; padding:.65rem .8rem; background:var(--surface); border:1px solid var(--line); border-radius:13px; box-shadow:0 14px 35px rgba(0,0,0,.3); }
-.cookie-banner p { margin:0; color:var(--text) !important; font-size:.72rem; line-height:1.35; }
-.st-key-cookie-banner-container { position:fixed; left:auto; right:1.25rem; bottom:1.25rem; z-index:120; width:min(420px, calc(100vw - 2.5rem)); display:grid; grid-template-columns:1fr auto; align-items:center; gap:.7rem; padding:.65rem .8rem; background:var(--surface); border:1px solid var(--line); border-radius:13px; box-shadow:0 14px 35px rgba(0,0,0,.3); }
-.st-key-cookie-banner-container .cookie-banner { position:static; padding:0; background:transparent; border:0; box-shadow:none; }
-.st-key-cookie-banner-container .stButton { margin:0; }
 .skip-link { position:fixed; left:1rem; top:-4rem; z-index:150; padding:.7rem 1rem; background:var(--team-button); color:var(--team-button-text) !important; border-radius:0 0 10px 10px; font-weight:700; text-decoration:none; }
 .skip-link:focus { top:0; }
-.scroll-top, .floating-contact { position:fixed; right:1.25rem; z-index:110; display:inline-flex; align-items:center; justify-content:center; min-width:3rem; min-height:2.7rem; padding:.35rem .7rem; background:var(--surface); color:var(--text) !important; border:1px solid var(--line); border-radius:999px; box-shadow:0 10px 24px rgba(0,0,0,.24); text-decoration:none; font-size:.78rem; font-weight:700; }
-.scroll-top { bottom:1.25rem; }
-.floating-contact { bottom:4.5rem; background:var(--team-button); color:var(--team-button-text) !important; border-color:var(--team-button); }
-.scroll-top:hover, .floating-contact:hover { transform:translateY(-2px); border-color:var(--team-display); }
 #scroll-progress { position:fixed; left:0; top:0; z-index:200; width:0; height:4px; background:var(--team-display, var(--orange)); box-shadow:0 0 12px var(--team-display, var(--orange)); }
 @keyframes nba-rise-in { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
 .hero, .card, .stat-card { animation:nba-rise-in .55s ease both; }
@@ -170,17 +154,10 @@ html, body, [class*="css"] { font-family: 'DM Sans', sans-serif; }
 div[data-testid="stPopover"] button { min-width: 88px; }
 @media (max-width: 1280px) {
   .block-container { padding: .9rem 1.1rem 3rem; }
-  .st-key-desktop-navigation { display:none; }
-  .st-key-mobile-navigation { display:block; }
   .st-key-desktop-tools { display:none; }
-  div[data-testid="column"]:has(.st-key-desktop-navigation-slot) { display:none; }
   div[data-testid="column"]:has(.st-key-desktop-tools) { display:none; }
   .st-key-account-actions { display:none; }
   div[data-testid="column"]:has(.st-key-account-actions) { display:none; }
-  .cookie-banner { left:.7rem; right:.7rem; bottom:.7rem; align-items:flex-start; flex-direction:column; }
-  .st-key-cookie-banner-container { left:auto; right:.7rem; bottom:.7rem; width:min(390px, calc(100vw - 1.4rem)); grid-template-columns:1fr auto; gap:.5rem; }
-  .scroll-top { right:.7rem; bottom:.7rem; }
-  .floating-contact { right:.7rem; bottom:4rem; }
   .hero { padding-top:2.4rem; }
 }
 @media (max-width: 1080px) {
@@ -199,12 +176,9 @@ div[data-testid="stPopover"] button { min-width: 88px; }
   .hero-panel { padding:1.1rem; border-radius:17px; }
   .section-heading { display:block; }
   .section-heading .helper { margin-top:.35rem; text-align:left; }
-  .st-key-cookie-banner-container { grid-template-columns:1fr; }
   .card { min-height:0; margin-bottom:.8rem; }
-  .st-key-mobile-navigation .stButton > button { min-width:3.2rem; }
   .st-key-account-actions { display:none; }
   div[data-testid="column"]:has(.st-key-account-actions) { display:none; }
-  .auth-shell { margin-top: 3vh; padding: 1.4rem 1.2rem 1rem; }
   .stApp [data-testid="stForm"] { padding: 1.1rem 1.2rem 1.25rem; }
 }
 
@@ -213,11 +187,10 @@ div[data-testid="stPopover"] button { min-width: 88px; }
 .brand-lockup { flex-wrap:wrap; }
 .brand-mark-wrap { color:white; }
 .st-key-topbar-row { position:relative; top:0; }
-.st-key-desktop-navigation, .st-key-desktop-tools { display:block !important; }
+.st-key-desktop-tools { display:block; }
 .st-key-desktop-navigation [data-testid="stHorizontalBlock"] { flex-wrap:wrap; gap:.3rem; }
 .st-key-desktop-navigation [data-testid="stColumn"] { min-width:85px; flex:1 1 85px; }
 .st-key-desktop-navigation button { width:100%; }
-.floating-contact, .scroll-top { display:none; }
 .stApp a:focus-visible, .stApp button:focus-visible { outline:3px solid var(--team-display); outline-offset:3px; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation:none !important; transition:none !important; } }
 @media (max-width: 700px) { .st-key-topbar-row [data-testid="stColumn"] { min-width:0; } .brand-status { display:none; } }
@@ -229,7 +202,6 @@ div[data-testid="stPopover"] button { min-width: 88px; }
 @media print {
   @page { margin: .65in; }
   body, .stApp, .stAppViewContainer, .main { background:#ffffff !important; color:#102a43 !important; }
-  .st-key-topbar-row, .skip-link, .scroll-top, .floating-contact, #scroll-progress, .cookie-banner,
   [data-testid="stHeader"], [data-testid="stToolbar"], .stButton, [data-testid="stPopover"] { display:none !important; }
   .block-container { max-width:none !important; padding:0 !important; }
   .stApp h1, .stApp h2, .stApp h3, .stApp h4, .stApp p, .stApp label, .stApp [data-testid="stMarkdownContainer"] { color:#102a43 !important; }
@@ -479,8 +451,6 @@ st.html(
     f"""
     <div id="app-top"></div>
     <a class="skip-link" href="#main-content">Skip to content</a>
-    <a class="floating-contact" href="{CONTACT_URL}" target="_blank" rel="noreferrer">Feedback</a>
-    <a class="scroll-top" href="#app-top" aria-label="Scroll to top">Top</a>
     <div id="scroll-progress" role="progressbar" aria-label="Page scroll progress"></div>
     <script>
     (() => {{
@@ -771,7 +741,9 @@ elif page == "Forecast":
     if "market_source_date" in next_forecast.columns:
         dates = ", ".join(sorted(next_forecast.market_source_date.dropna().astype(str).unique()))
         sources = ", ".join(sorted(next_forecast.market_source.dropna().astype(str).unique())) if "market_source" in next_forecast else "Unknown source"
-        st.caption(f"Market prior: {sources}; dated {dates}. Publication requires a matching season and a source date within {MARKET_MAX_AGE_DAYS} days.")
+        st.caption(f"Market prior: {sources}; dated {dates}. Inputs older than {MARKET_MAX_AGE_DAYS} days remain a dated benchmark until replaced.")
+        if next_forecast.market_source_date.map(lambda value: freshness(value, max_age_hours=24 * MARKET_MAX_AGE_DAYS)).eq("Stale").any():
+            st.warning("Market inputs are older than 30 days. The ensemble retains this dated benchmark; it does not represent current market odds.")
     else:
         st.warning("This bundled forecast predates market provenance tracking. Its market date and season were not validated by the new publication checks.")
     team_metric_strip()

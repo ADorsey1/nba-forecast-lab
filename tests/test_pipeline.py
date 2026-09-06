@@ -12,7 +12,7 @@ from nba_forecast.team_colors import TEAM_COLORS, get_team_theme
 from nba_forecast.training import expanding_backtest
 
 
-WORKBOOK = Path("nba_forecast_data_2025_26 (1).xlsx")
+WORKBOOK = Path("nba_forecast_data_2025_26.xlsx")
 PUBLIC_SOURCE = Path("data/raw/llimllib_nba_data")
 
 

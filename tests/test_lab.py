@@ -38,3 +38,23 @@ def test_lab_navigation_and_fantasy_signing():
     assert not app.exception
     assert len(app.session_state['lab_roster'])==len(before)+1
     assert len(app.session_state['lab_base'])==len(before)
+
+
+def test_portable_lab_without_history(tmp_path, monkeypatch):
+    import shutil
+    root = Path(__file__).resolve().parents[1]
+    for folder in ['processed', 'raw/live']:
+        shutil.copytree(root / 'data' / folder, tmp_path / folder)
+    monkeypatch.setenv('NBA_FORECAST_DATA_ROOT', str(tmp_path))
+    def no_history(*args, **kwargs):
+        raise AssertionError('Deployed lab must not read parquet history')
+    monkeypatch.setattr(pd, 'read_parquet', no_history)
+    app = AppTest.from_file(root / 'app/streamlit_app.py').run(timeout=30)
+    app.button(key='top_nav_Creative Lab').click().run(timeout=30)
+    assert not app.exception
+    baseline = app.session_state['lab_base']
+    player = baseline.loc[baseline.impact.abs().idxmax()]
+    scenario = baseline.copy()
+    scenario.loc[scenario.player_id.eq(player.player_id), 'team_abbr'] = 'Free agents'
+    result = projection(baseline, scenario, app.session_state['lab_forecast'])
+    assert result.change.abs().max() > 0

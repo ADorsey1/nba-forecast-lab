@@ -13,6 +13,7 @@ import pandas as pd
 from .audit import profile_workbook
 from .evaluation import archive_forecast
 from .freshness import attach_market_priors
+from .lab import player_pool
 from .features import build_team_model_features
 from .historical import build_historical_training_table, build_live_roster_features, build_next_season_frame
 from .io import load_workbook, require_sheets
@@ -92,7 +93,7 @@ def _run_into(input_path: str | Path, output_dir: str | Path, public_source: str
         market_path = Path(market_path)
         if market_path.exists():
             market = pd.read_csv(market_path)
-            next_forecast = attach_market_priors(next_forecast, market)
+            next_forecast = attach_market_priors(next_forecast, market, allow_stale=True)
         if "market_win_total" not in next_forecast.columns:
             next_forecast["market_win_total"] = np.nan
         live_context_path = live_dir / "live_team_context.csv"
@@ -147,6 +148,10 @@ def _run_into(input_path: str | Path, output_dir: str | Path, public_source: str
         next_forecast.to_csv(output / "next_season_forecast.csv", index=False)
         next_simulation.to_csv(output / "next_season_simulation.csv", index=False)
         live_rosters = pd.read_csv(live_dir / "current_rosters.csv") if (live_dir / "current_rosters.csv").exists() else pd.DataFrame()
+        history_path = source / 'data/playerstats.parquet'
+        if not history_path.exists():
+            history_path = source / 'playerstats.parquet'
+        player_pool(live_rosters, history_path).to_csv(output / 'player_ratings.csv', index=False)
         live_injuries = pd.read_csv(live_dir / "current_injuries.csv") if (live_dir / "current_injuries.csv").exists() else pd.DataFrame()
         live_moves = pd.read_csv(live_dir / "transaction_ledger.csv") if (live_dir / "transaction_ledger.csv").exists() else pd.DataFrame()
         live_schedule = pd.read_csv(live_dir / "current_schedule.csv") if (live_dir / "current_schedule.csv").exists() else pd.DataFrame()

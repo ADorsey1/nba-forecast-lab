@@ -5,7 +5,6 @@ from __future__ import annotations
 import json
 import re
 from datetime import datetime, timezone
-from io import StringIO
 from pathlib import Path
 from typing import Any
 
@@ -49,7 +48,6 @@ NBA_TEAM_IDS = {
     "POR": 1610612757, "SAC": 1610612758, "SAS": 1610612759, "TOR": 1610612761,
     "UTA": 1610612762, "WAS": 1610612764,
 }
-BBR_CODES = {"BRK": "BRK", "CHO": "CHO", "PHO": "PHO"}
 TEAM_NAME_TO_ABBR = {
     "Atlanta Hawks": "ATL", "Boston Celtics": "BOS", "Brooklyn Nets": "BRK", "Charlotte Hornets": "CHO",
     "Chicago Bulls": "CHI", "Cleveland Cavaliers": "CLE", "Dallas Mavericks": "DAL", "Denver Nuggets": "DEN",
@@ -222,56 +220,6 @@ def _schedule_rows(team: dict[str, Any], payload: dict[str, Any]) -> list[dict[s
     return rows
 
 
-def _bbr_roster(team_abbr: str, season: int) -> list[dict[str, Any]]:
-    code = BBR_CODES.get(team_abbr, team_abbr)
-    page = _get_text(f"https://www.basketball-reference.com/teams/{code}/{season}.html")
-    tables = pd.read_html(StringIO(page))
-    table = tables[0]
-    rows = []
-    for row in table.to_dict("records"):
-        name = row.get("Player")
-        if not isinstance(name, str) or not name.strip() or name.strip() == "Player":
-            continue
-        rows.append({
-            "team_abbr": team_abbr,
-            "team_id": NBA_TEAM_IDS.get(team_abbr),
-            "season": f"{season - 1}-{str(season)[-2:]}",
-            "player_id": name.lower().replace(" ", "-"),
-            "player_name": name,
-            "age": np.nan,
-            "position": row.get("Pos"),
-            "roster_status": "Current roster",
-            "experience_years": row.get("Exp"),
-            "salary": np.nan,
-            "years_remaining": np.nan,
-            "roster_injury_count": 0,
-        })
-    return rows
-
-
-def _bbr_schedule(team_abbr: str, season: int) -> list[dict[str, Any]]:
-    code = BBR_CODES.get(team_abbr, team_abbr)
-    page = _get_text(f"https://www.basketball-reference.com/teams/{code}/{season}_games.html")
-    table = pd.read_html(StringIO(page))[0]
-    rows = []
-    for row in table.to_dict("records"):
-        game_number = pd.to_numeric(row.get("G"), errors="coerce")
-        opponent = row.get("Opponent")
-        if pd.isna(game_number) or not isinstance(opponent, str) or not opponent.strip():
-            continue
-        is_away = row.get("Unnamed: 5") == "@"
-        opponent_abbr = next((abbr for name, abbr in TEAM_NAME_TO_ABBR.items() if name == opponent), opponent)
-        rows.append({
-            "event_id": f"bbr-{team_abbr}-{int(game_number)}",
-            "game_date": row.get("Date"),
-            "season": f"{season - 1}-{str(season)[-2:]}",
-            "home_team": opponent_abbr if is_away else team_abbr,
-            "away_team": team_abbr if is_away else opponent_abbr,
-            "source_team": team_abbr,
-        })
-    return rows
-
-
 def _espn_injury_page() -> tuple[pd.DataFrame, bool]:
     try:
         page = _get_text("https://www.espn.com/nba/injuries", headers={"User-Agent": "Mozilla/5.0"})
@@ -435,7 +383,6 @@ def fetch_live_context(output_dir: str | Path, season: int = 2027) -> dict[str, 
     except requests.RequestException:
         nba_page_rosters = {}
     schedule_source_available = True
-    schedule_fallback_allowed = True
     schedule_provider = None
 
     for team in teams:
@@ -446,12 +393,9 @@ def fetch_live_context(output_dir: str | Path, season: int = 2027) -> dict[str, 
             raw_rosters[abbr] = roster_payload
             roster, injuries = _roster_rows(team, roster_payload)
         except requests.RequestException:
-            try:
-                roster = nba_page_rosters.get(abbr) or _bbr_roster(abbr, season)
-            except Exception:
-                roster = []
+            roster = nba_page_rosters.get(abbr, [])
             injuries = []
-            raw_rosters[abbr] = {"source": "basketball-reference", "rows": roster}
+            raw_rosters[abbr] = {"source": "NBA players page", "rows": roster}
         try:
             schedule_payload = _get_json(f"{ESPN_BASE}/teams/{team_code}/schedule?season={season}&seasontype=2")
             raw_schedules[abbr] = schedule_payload
@@ -459,15 +403,9 @@ def fetch_live_context(output_dir: str | Path, season: int = 2027) -> dict[str, 
             if schedule:
                 schedule_provider = "ESPN"
         except requests.RequestException:
-            try:
-                schedule = _bbr_schedule(abbr, season) if schedule_fallback_allowed else []
-                if schedule:
-                    schedule_provider = "Basketball-Reference"
-            except Exception:
-                schedule = []
-                schedule_fallback_allowed = False
-                schedule_source_available = False
-            raw_schedules[abbr] = {"source": "basketball-reference", "rows": schedule}
+            schedule = []
+            schedule_source_available = False
+            raw_schedules[abbr] = {"source": "ESPN unavailable", "rows": schedule}
         roster_rows.extend(roster)
         injury_rows.extend(injuries)
         schedule_rows.extend(schedule)

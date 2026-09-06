@@ -92,7 +92,7 @@ def build_data_quality_report(
         "fetched_at_utc": (manifest or {}).get("fetched_at_utc"),
         "source_manifest": (manifest or {}).get("sources", {}),
         "artifact_paths": {
-            "processed_dir": str(Path("data/processed")),
-            "live_dir": str(Path("data/raw/live")),
+            "processed_dir": "data/processed",
+            "live_dir": "data/raw/live",
         },
     }

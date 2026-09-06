@@ -45,3 +45,15 @@ def test_duplicate_and_missing_team_are_rejected():
         attach_market_priors(forecast, pd.concat([market, market]), now=NOW)
     with pytest.raises(ValueError):
         attach_market_priors(forecast.assign(team_abbr='BOS'), market, now=NOW)
+
+
+def test_expired_market_can_publish_only_as_explicit_benchmark():
+    forecast, market = frames()
+    market['source_date'] = '2026-08-01'
+    result = attach_market_priors(forecast, market, now=NOW, allow_stale=True)
+    assert result.market_status.iloc[0] == 'Stale benchmark'
+    assert result.market_source_date.iloc[0] == '2026-08-01'
+    assert result.market_win_total.iloc[0] == 40
+    market['source_date'] = '2026-09-07'
+    with pytest.raises(ValueError):
+        attach_market_priors(forecast, market, now=NOW, allow_stale=True)
