@@ -143,7 +143,31 @@ html, body, [class*="css"] { font-family: 'DM Sans', sans-serif; }
 .stButton > button[kind="primary"] p { color:var(--ink) !important; }
 .stSelectbox label, .stRadio label, .stTextInput label { color:var(--muted) !important; }
 .stApp input, .stApp textarea, .stApp [data-baseweb="select"] * { color:var(--text) !important; background-color:var(--surface-2) !important; }
-.stApp [data-baseweb="popover"] { background:var(--surface) !important; }
+/* Streamlit mounts popover panels outside .stApp; theme them explicitly. */
+[data-testid="stPopoverButton"] {
+  background:var(--surface-2) !important; color:var(--text) !important;
+  border:1px solid var(--line) !important;
+}
+[data-testid="stPopoverButton"]:hover,
+[data-testid="stPopoverButton"][aria-expanded="true"] {
+  background:var(--surface-3) !important; border-color:var(--team-display) !important;
+}
+[data-testid="stPopoverButton"]:focus-visible {
+  outline:2px solid var(--team-display); outline-offset:3px;
+}
+[data-testid="stPopoverButton"] p, [data-testid="stPopoverButton"] span {
+  color:var(--text) !important;
+}
+[data-testid="stPopoverBody"] {
+  background:var(--surface) !important; color:var(--text) !important;
+  border:1px solid var(--line) !important;
+}
+[data-testid="stPopoverBody"] :is(h1,h2,h3,p,label,span) { color:var(--text) !important; }
+[data-testid="stPopoverBody"] input {
+  background:var(--surface-2) !important; color:var(--text) !important;
+  caret-color:var(--text);
+}
+[data-testid="stPopoverBody"] input::placeholder { color:var(--muted) !important; opacity:1; }
 .stApp [data-testid="stCaptionContainer"] { color:var(--muted) !important; }
 .stApp [data-testid="stMetricValue"], .stApp [data-testid="stMetricValue"] *, .stApp [data-testid="stMetricLabel"], .stApp [data-testid="stMetricLabel"] * { color:var(--text) !important; }
 .stApp [data-testid="stAlert"] { background:var(--surface-2); border:1px solid var(--line); }
