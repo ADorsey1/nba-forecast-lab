@@ -468,8 +468,9 @@ st.session_state["site_search_mobile"] = st.session_state.get("site_search_query
 st.session_state["dark_mode_desktop"] = bool(st.session_state.get("dark_mode", True))
 st.session_state["dark_mode_mobile"] = bool(st.session_state.get("dark_mode", True))
 
-live_badge_class = "" if current_live_status == "Current" else " is-degraded"
-live_badge_label = "Live" if current_live_status == "Current" else current_live_status
+snapshot_is_recent = current_live_status in {"Current", "Partial / unverified"}
+live_badge_class = "" if snapshot_is_recent else " is-degraded"
+live_badge_label = "Updated" if snapshot_is_recent else current_live_status
 
 st.html(
     f"""
@@ -534,8 +535,20 @@ with st.container(key="topbar-row"):
 
 st.html('<div id="main-content" tabindex="-1"></div>')
 
-if current_live_status != "Current":
-    st.warning(f"Live context: {current_live_status.lower()}. Updates older than 24 hours are marked stale; forecasts remain the last published snapshot.")
+if not snapshot_is_recent:
+    st.warning("Showing the last published forecast. A newer data update has not been verified yet.")
+
+if current_live_status == "Partial / unverified":
+    with st.expander("About this forecast’s data"):
+        st.write("The published forecast combines historical performance, roster features, and a dated market benchmark. Each data feed has its own coverage.")
+        coverage = manifest.get("availability", {})
+        available = [label for key, label in [("rosters", "rosters"), ("transactions", "transactions")] if coverage.get(key) is True]
+        if available:
+            st.write("This update includes " + " and ".join(available) + ".")
+        if coverage.get("injuries") is not True:
+            st.write("The latest injury feed could not be verified. Current injury coverage may be incomplete.")
+        if coverage.get("schedule") is not True:
+            st.write("A complete schedule was not available for this update, so season simulations use the published fallback rather than a full game-by-game schedule.")
 
 if pd.notna(refreshed_at):
     st.markdown(f'<div class="last-updated">Live context last updated <strong>{refreshed_at.strftime("%b %d, %Y at %I:%M %p UTC")}</strong></div>', unsafe_allow_html=True)
@@ -590,7 +603,7 @@ def league_metric_strip() -> None:
     with c3:
         metric_card("Current projection leader", str(top_team.team_abbr))
     with c4:
-        metric_card("Live data status", current_live_status)
+        metric_card("Snapshot status", live_badge_label)
 
 
 def team_metric_strip() -> None:
@@ -711,7 +724,7 @@ if page == "Home":
               <h3>League outlook</h3>
               <div class="panel-value">{escape(str(top_team.team_abbr))} <span style="font-size:1rem;letter-spacing:0;color:var(--muted)">leads the board</span></div>
               <p>The current leader sits at <strong>{float(top_team.holistic_predicted_wins):.1f} projected wins</strong> across the blended model.</p>
-              <div class="panel-meta"><span>{escape(live_badge_label)} context</span><span>{escape(refresh_label)}</span></div>
+              <div class="panel-meta"><span>Forecast snapshot</span><span>{escape(refresh_label)}</span></div>
             </div>
             ''', unsafe_allow_html=True)
     with st.container(key="hero-actions"):
