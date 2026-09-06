@@ -94,3 +94,10 @@ def test_live_json_response_size_is_bounded(monkeypatch):
     monkeypatch.setattr(live.requests, "get", lambda *args, **kwargs: OversizedResponse())
     with pytest.raises(live.requests.RequestException, match="exceeded"):
         live._get_json("https://example.test/data.json")
+
+
+def test_empty_injury_page_is_not_verified(monkeypatch):
+    monkeypatch.setattr(live, '_get_text', lambda *args, **kwargs: '<html><body>No data</body></html>')
+    injuries, available = live._espn_injury_page()
+    assert injuries.empty
+    assert available is False

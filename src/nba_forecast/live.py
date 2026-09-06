@@ -245,7 +245,7 @@ def _espn_injury_page() -> tuple[pd.DataFrame, bool]:
                     "comment": cells[4],
                     "status_weight": INJURY_WEIGHTS.get(cells[3].lower(), 0.25),
                 })
-        return pd.DataFrame(rows), True
+        return pd.DataFrame(rows), bool(rows)
     except requests.RequestException:
         return pd.DataFrame(), False
 
