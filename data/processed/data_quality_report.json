@@ -1,7 +1,7 @@
 {
   "status": "pass",
   "error_count": 0,
-  "warning_count": 0,
+  "warning_count": 1,
   "checks": [
     {
       "name": "feature_team_season_grain",
@@ -61,8 +61,8 @@
     },
     {
       "name": "injury_snapshot_available",
-      "status": "pass",
-      "observed": 75,
+      "status": "warning",
+      "observed": 0,
       "expected": "> 0",
       "detail": ""
     },
@@ -74,7 +74,7 @@
       "detail": ""
     }
   ],
-  "fetched_at_utc": "2026-09-06T20:31:44.370643+00:00",
+  "fetched_at_utc": "2026-09-06T20:34:36.497280+00:00",
   "source_manifest": {
     "nba_players": "https://www.nba.com/players",
     "espn": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba",
