@@ -1,5 +1,7 @@
 # NBA Forecast
 
+[Open the live Forecast Lab](https://nba-forecast.streamlit.app/)
+
 League-wide NBA forecasting pipeline and analytical app.
 
 This repository turns the supplied workbook and an optional public historical dump into a reproducible team-season modeling dataset, creates transparent baselines, estimates scenario ranges, and exposes the results through a small Streamlit app. It is deliberately structured so new seasons and data providers can be added without changing the core data contract.
