@@ -29,15 +29,9 @@ streamlit run app/streamlit_app.py
 
 The pipeline automatically uses `data/raw/llimllib_nba_data` when the public historical dump is present. Pass `--public-source` to use a different local copy.
 
-## Login setup
+## Public access
 
-The app requires a configured username and password before showing forecasts or live context. Generate a local secrets file interactively so the password never appears in shell history:
-
-```powershell
-& ".venv\Scripts\python.exe" scripts\setup_auth.py
-```
-
-The setup script writes `.streamlit/secrets.toml`, which is ignored by Git. For a hosted deployment, add the same `[auth]` values through the host's secrets manager. See `.streamlit/secrets.toml.example` for the expected shape. This is a lightweight app gate for a private portfolio deployment, not a replacement for an identity provider in a multi-user production system.
+The dashboard is public and read-only. Visitors do not need credentials, and existing local authentication secrets are not read by the app. Data refresh runs separately through a command-line job; the website exposes no refresh, upload, or administrative actions. The legacy authentication helpers and setup script are retained for reference only and do not protect this public dashboard.
 
 The interface includes a dark/light theme toggle, responsive navigation, site search, session-only privacy notice, scroll progress and top controls, print-friendly styles, expandable FAQs, and copy-ready team summaries. UTM query parameters are captured only for the current session and displayed on Diagnostics for transparent campaign-context inspection.
 
@@ -56,8 +50,8 @@ The interface includes a dark/light theme toggle, responsive navigation, site se
 - `data_quality_report.json`: machine-readable data contract checks for team grain, roster keys, schedule duplicates, and artifact completeness
 - `data/raw/live/current_rosters.csv`: current NBA.com roster snapshot
 - `data/raw/live/current_injuries.csv`: current ESPN injury snapshot
-- `data/raw/live/current_transactions.csv`: recent NBA player movement snapshot
-- `data/raw/live/transaction_ledger.csv`: deduplicated cumulative movement ledger
+- `data/raw/live/current_transactions.csv`: current NBA player movements plus dated signings reconciled from official team roster pages
+- `data/raw/live/transaction_ledger.csv`: deduplicated cumulative movement ledger with source metadata
 - `data/raw/live/live_team_context.csv`: team-level live context merged into the forecast
 
 ## Refresh live context
@@ -83,7 +77,7 @@ git -C data/raw/llimllib_nba_data sparse-checkout set data/team_summary.json dat
 git -C data/raw/llimllib_nba_data checkout
 ```
 
-The Recent Moves page reads the cumulative, deduplicated transaction ledger. It updates automatically when the scheduled refresh script runs, but the Streamlit page itself does not poll live providers on every page load. A manual `--refresh-live` run is available when an immediate update is needed. The app keeps the navy/orange league-wide theme by default and applies an accessibility-checked full-site team theme when a team is focused, including the page background, cards, navigation, controls, charts, and tables.
+The Recent Moves page reads the cumulative, deduplicated transaction ledger. The scheduled refresh job updates the published snapshot every six hours, and an open dashboard reloads itself every 15 minutes to pick up the latest validated snapshot. A manual `python scripts/refresh_forecast.py --data-root data` run is available when an immediate update is needed. The app keeps the navy/orange league-wide theme by default and applies an accessibility-checked full-site team theme when a team is focused, including the page background, cards, navigation, controls, charts, and tables.
 
 The next-season forecast now exposes separate `independent_predicted_wins` and `roster_aware_predicted_wins` columns. The independent model uses prior team, player, and game-log features. The roster-aware model adds a player-ID-based season-roster transition proxy. Because the public historical dump does not include a complete historical transaction ledger, that proxy is explicitly labeled as retrospective season-roster evidence rather than a perfect preseason snapshot. A separate `live_roster_projection_wins` field is a minutes- and availability-weighted current-rotation diagnostic.
 
@@ -96,3 +90,29 @@ For automatic Windows refreshes, schedule `scripts/refresh_forecast.ps1` in Task
 ## Next data milestone
 
 Replace the retrospective season-roster proxy with historical opening-night roster snapshots and a complete offseason transaction ledger. Then calibrate player aging, projected minutes, lineup fit, and game-level probabilities against those snapshots.
+
+## Publication and freshness policies
+
+Use `python scripts/refresh_forecast.py` for portable refreshes. See [hosting and refresh](deploy/README.md) for the persistent volume and timer setup. Failed updates preserve the last validated snapshot.
+
+The dashboard labels context older than 24 hours as stale and distinguishes unavailable or unverified provider coverage. Market input rows require `team_abbr`, `season`, `market_win_total`, `source`, and `source_date`. A refresh rejects duplicate, wrong-season, future-dated, missing, or more than 30-day-old market inputs rather than silently reusing them. Refresh that dated input when the market moves. Bundled forecasts created before these checks are explicitly labeled as lacking validated market provenance.
+
+## Forward evaluation
+
+Historical component metrics do not validate the final 25/25/50 ensemble. Retrospective roster backtests and uncalibrated simulation ranges are labeled as such in the interface. Each new published generation records the actual forecast file hash, recording time, first scheduled game, feature observation time, and preseason eligibility. Existing reconstructed snapshots are not backdated.
+
+After the season completes, provide a CSV with all 30 `team_abbr,season,actual_wins,season_completed_at_utc` rows. For an 82-game season, wins must total 1,230. Evaluate the immutable generation with:
+
+```sh
+.venv/bin/python scripts/evaluate_forecast.py --snapshot data/releases/GENERATION --outcomes completed_season.csv --report evaluation.json
+```
+
+The evaluator rejects late/unverified preseason records, changed forecasts, incomplete outcomes and season mismatches. It reports the ensemble and each available component's MAE/RMSE, plus empirical coverage of the simulation range. Synthetic test outcomes verify the arithmetic only; actual forecast skill remains unmeasured until eligible real outcomes exist. Protect archived generations and records with read-only storage/backups: hashes detect accidental forecast changes but are not a signature against an operator rewriting both files.
+
+## Creative Lab
+
+The Creative Lab is a browser-session sandbox. Visitors can move or trade current players, release players into a free-agent pool, create fantasy signings, edit rotation minutes, availability and net-rating assumptions, save up to ten comparisons, and export JSON or CSV. Published datasets remain read-only. Experiments pin their initial snapshot and require an explicit reset to use newer data.
+
+Scenario wins equal published wins plus 2.7 (adjustable) times the change in minutes-weighted on-court net rating. Team minutes above 240 are normalized; missing or unavailable minutes use a neutral replacement. Player history uses the latest available season, with neutral assumptions explicitly labeled for unmatched players. This is an illustrative roster diagnostic, not a retrained model, causal player valuation, salary-cap validator or calibrated season simulation. Export before closing the session.
+
+UI audit: branding/status overlap fixed with two-row navigation; mobile navigation wraps; dark team accents are lightened for readability; floating overlays removed; obsolete MENU copy corrected; reduced-motion preference respected. Published snapshot checks run every minute without reloading the browser or discarding lab state.

@@ -17,6 +17,7 @@ from bs4 import BeautifulSoup
 
 ESPN_BASE = "https://site.api.espn.com/apis/site/v2/sports/basketball/nba"
 NBA_MOVEMENT_URL = "https://stats.nba.com/js/data/playermovement/NBA_Player_Movement.json"
+NBA_TEAM_ROSTER_URL = "https://www.nba.com/team/{team_id}"
 INJURY_WEIGHTS = {
     "out": 1.0,
     "inactive": 1.0,
@@ -61,6 +62,17 @@ TEAM_NAME_TO_ABBR = {
 }
 MAX_JSON_RESPONSE_BYTES = 20_000_000
 MAX_HTML_RESPONSE_BYTES = 10_000_000
+TRANSACTION_COLUMNS = [
+    "transaction_type",
+    "transaction_date",
+    "description",
+    "team_abbr",
+    "player_id",
+    "player_slug",
+    "group_sort",
+    "source",
+    "source_url",
+]
 
 
 def _get_json(url: str) -> dict[str, Any]:
@@ -305,18 +317,73 @@ def _transaction_rows(payload: dict[str, Any], team_by_id: dict[int, str]) -> pd
             "player_id": item.get("PLAYER_ID"),
             "player_slug": item.get("PLAYER_SLUG"),
             "group_sort": item.get("GroupSort"),
+            "source": "NBA player movement feed",
+            "source_url": NBA_MOVEMENT_URL,
         })
     return pd.DataFrame(rows)
 
 
-def _update_transaction_ledger(output: Path, transactions: pd.DataFrame) -> None:
+def _nba_team_signings(team_abbr: str, season_start_year: int = 2026) -> list[dict[str, Any]]:
+    """Read dated roster signings from the official NBA team roster page.
+
+    The player-movement feed is not complete for every current roster addition.
+    Team roster pages expose a dated ``Signed on`` field, which gives the live
+    ledger a second, independent source for signings such as Tacko Fall's.
+    """
+    team_id = NBA_TEAM_IDS[team_abbr]
+    url = NBA_TEAM_ROSTER_URL.format(team_id=team_id)
+    soup = BeautifulSoup(_get_text(url, headers={"User-Agent": "Mozilla/5.0"}), "html.parser")
+    rows: list[dict[str, Any]] = []
+    seen: set[tuple[str, str]] = set()
+    for row in soup.select("tr"):
+        player_link = row.select_one("a[href^='/player/']")
+        if not player_link:
+            continue
+        signed_match = re.search(r"Signed on\s+(\d{2}/\d{2}/\d{2})", row.get_text(" ", strip=True), flags=re.IGNORECASE)
+        if not signed_match:
+            continue
+        month, day, year = (int(value) for value in signed_match.group(1).split("/"))
+        try:
+            signed_date = pd.Timestamp(year=2000 + year, month=month, day=day)
+        except ValueError:
+            continue
+        if signed_date.year < season_start_year:
+            continue
+        href = player_link.get("href", "")
+        player_match = re.search(r"/player/(\d+)/", href)
+        if not player_match:
+            continue
+        player_id = player_match.group(1)
+        player_name = player_link.get_text(" ", strip=True)
+        key = (player_id, signed_date.strftime("%Y-%m-%d"))
+        if key in seen:
+            continue
+        seen.add(key)
+        rows.append({
+            "transaction_type": "Signing",
+            "transaction_date": signed_date.strftime("%Y-%m-%d"),
+            "description": f"Signed {player_name} (NBA.com roster signing date)",
+            "team_abbr": team_abbr,
+            "player_id": player_id,
+            "player_slug": href.rstrip("/").rsplit("/", 1)[-1],
+            "group_sort": f"NBA roster signing {player_id}",
+            "source": "NBA.com team roster",
+            "source_url": url,
+        })
+    return rows
+
+
+def _update_transaction_ledger(output: Path, transactions: pd.DataFrame) -> pd.DataFrame:
     """Append new movements without losing prior snapshots."""
     ledger_path = output / "transaction_ledger.csv"
     if ledger_path.exists():
         prior = pd.read_csv(ledger_path)
         transactions = pd.concat([prior, transactions], ignore_index=True)
     if transactions.empty:
-        transactions = pd.DataFrame(columns=["transaction_type", "transaction_date", "description", "team_abbr", "player_id", "player_slug", "group_sort"])
+        transactions = pd.DataFrame(columns=TRANSACTION_COLUMNS)
+    for column in TRANSACTION_COLUMNS:
+        if column not in transactions.columns:
+            transactions[column] = np.nan
     transactions["transaction_date"] = pd.to_datetime(transactions["transaction_date"], errors="coerce").dt.strftime("%Y-%m-%d")
     transactions["dedupe_key"] = (
         transactions["transaction_date"].fillna("").astype(str) + "|" +
@@ -325,7 +392,26 @@ def _update_transaction_ledger(output: Path, transactions: pd.DataFrame) -> None
         transactions["transaction_type"].fillna("").astype(str) + "|" +
         transactions["description"].fillna("").astype(str)
     )
-    transactions.drop_duplicates("dedupe_key", keep="last").sort_values(["transaction_date", "team_abbr"], na_position="last").to_csv(ledger_path, index=False)
+    transactions["canonical_key"] = np.where(
+        transactions["transaction_type"].fillna("").astype(str).str.lower().eq("signing") & transactions["player_id"].fillna("").astype(str).ne(""),
+        transactions["transaction_date"].fillna("").astype(str) + "|" +
+        transactions["team_abbr"].fillna("").astype(str) + "|" +
+        transactions["player_id"].fillna("").astype(str) + "|signing",
+        "",
+    )
+    transactions["source_priority"] = transactions["source"].map({"NBA.com team roster": 2, "NBA player movement feed": 1}).fillna(0)
+    transactions = transactions.sort_values(["source_priority"], kind="stable")
+    transactions = transactions.drop_duplicates("dedupe_key", keep="last")
+    transactions = transactions.sort_values(["source_priority"], kind="stable")
+    canonical = transactions["canonical_key"].ne("")
+    transactions = pd.concat([
+        transactions.loc[~canonical],
+        transactions.loc[canonical].drop_duplicates("canonical_key", keep="last"),
+    ], ignore_index=True)
+    transactions = transactions.drop(columns=["canonical_key", "source_priority"])
+    transactions = transactions.sort_values(["transaction_date", "team_abbr"], na_position="last")
+    transactions.to_csv(ledger_path, index=False)
+    return transactions
 
 
 def fetch_live_context(output_dir: str | Path, season: int = 2027) -> dict[str, str]:
@@ -341,6 +427,9 @@ def fetch_live_context(output_dir: str | Path, season: int = 2027) -> dict[str, 
     schedule_rows: list[dict[str, Any]] = []
     raw_rosters: dict[str, Any] = {}
     raw_schedules: dict[str, Any] = {}
+    official_signings: list[dict[str, Any]] = []
+    raw_official_signings: dict[str, Any] = {}
+    official_signings_available = True
     try:
         nba_page_rosters = _nba_players_page()
     except requests.RequestException:
@@ -384,6 +473,14 @@ def fetch_live_context(output_dir: str | Path, season: int = 2027) -> dict[str, 
         schedule_rows.extend(schedule)
 
     movement_payload = _get_json(NBA_MOVEMENT_URL)
+    for abbr in sorted(NBA_TEAM_IDS):
+        try:
+            signing_rows = _nba_team_signings(abbr, season_start_year=season - 1)
+            official_signings.extend(signing_rows)
+            raw_official_signings[abbr] = signing_rows
+        except requests.RequestException:
+            official_signings_available = False
+            raw_official_signings[abbr] = {"error": "provider unavailable"}
     roster = pd.DataFrame(roster_rows)
     injuries = pd.DataFrame(injury_rows)
     if injuries.empty:
@@ -401,9 +498,8 @@ def fetch_live_context(output_dir: str | Path, season: int = 2027) -> dict[str, 
         )
         schedule = schedule.drop_duplicates("game_key")
     transactions = _transaction_rows(movement_payload, team_by_id)
-    if transactions.empty:
-        transactions = pd.DataFrame(columns=["transaction_type", "transaction_date", "description", "team_abbr", "player_id", "player_slug", "group_sort"])
-    _update_transaction_ledger(output, transactions)
+    transactions = pd.concat([transactions, pd.DataFrame(official_signings)], ignore_index=True)
+    transactions = _update_transaction_ledger(output, transactions)
 
     roster_summary = roster.groupby("team_abbr", as_index=False).agg(
         live_roster_count=("player_id", "nunique"),
@@ -416,6 +512,8 @@ def fetch_live_context(output_dir: str | Path, season: int = 2027) -> dict[str, 
     roster_summary = roster_summary.merge(top3.rename("live_salary_top3"), on="team_abbr", how="left")
     roster_summary["live_salary_top3_share"] = roster_summary["live_salary_top3"] / roster_summary["live_salary_total"].replace(0, np.nan)
 
+    if injuries.empty:
+        injuries = pd.DataFrame(columns=["team_abbr", "player_id", "player_name", "injury_status", "estimated_return_date", "comment", "status_weight"])
     if injuries.empty:
         injury_summary = pd.DataFrame({"team_abbr": [team["abbreviation"] for team in teams], "live_injury_count": 0, "live_injury_burden": 0.0})
     else:
@@ -441,6 +539,8 @@ def fetch_live_context(output_dir: str | Path, season: int = 2027) -> dict[str, 
     context = all_teams.merge(roster_summary, on="team_abbr", how="left").merge(injury_summary, on="team_abbr", how="left").merge(schedule_summary, on="team_abbr", how="left").merge(transaction_summary, on="team_abbr", how="left")
     context[["live_roster_count", "live_active_roster_count", "live_injury_count", "live_injury_burden", "scheduled_regular_season_games", "scheduled_home_games"]] = context[["live_roster_count", "live_active_roster_count", "live_injury_count", "live_injury_burden", "scheduled_regular_season_games", "scheduled_home_games"]].fillna(0)
     context["live_transactions_since_july"] = context["live_transactions_since_july"].fillna(0).astype(int)
+    if not injury_source_available:
+        context[["live_injury_count", "live_injury_burden"]] = np.nan
     context["live_injury_source_available"] = injury_source_available
     context["live_schedule_source_available"] = schedule_source_available and not schedule.empty
     context["live_schedule_provider"] = schedule_provider or "unavailable"
@@ -449,12 +549,20 @@ def fetch_live_context(output_dir: str | Path, season: int = 2027) -> dict[str, 
 
     (output / "source_manifest.json").write_text(json.dumps({
         "fetched_at_utc": fetched_at,
+        "availability": {
+            "rosters": roster["team_abbr"].nunique() == 30,
+            "injuries": bool(injury_source_available),
+            "schedule": bool(schedule_source_available and not schedule.empty),
+            "transactions": True,
+            "official_roster_signings": bool(official_signings_available),
+        },
         "season": f"{season - 1}-{str(season)[-2:]}",
         "sources": {
             "nba_players": "https://www.nba.com/players",
             "espn": ESPN_BASE,
             "espn_injuries": "https://www.espn.com/nba/injuries",
             "nba_player_movement": NBA_MOVEMENT_URL,
+            "nba_team_rosters": NBA_TEAM_ROSTER_URL,
             "schedule": "https://www.nba.com/schedule",
             "schedule_provider": schedule_provider or "unavailable",
             "market_prior": "data/raw/external_market_wintotals.csv",
@@ -463,6 +571,7 @@ def fetch_live_context(output_dir: str | Path, season: int = 2027) -> dict[str, 
     (output / "espn_rosters.json").write_text(json.dumps(raw_rosters), encoding="utf-8")
     (output / "espn_schedules.json").write_text(json.dumps(raw_schedules), encoding="utf-8")
     (output / "nba_player_movement.json").write_text(json.dumps(movement_payload), encoding="utf-8")
+    (output / "nba_team_roster_signings.json").write_text(json.dumps(raw_official_signings), encoding="utf-8")
     roster.to_csv(output / "current_rosters.csv", index=False)
     injuries.to_csv(output / "current_injuries.csv", index=False)
     schedule.to_csv(output / "current_schedule.csv", index=False)

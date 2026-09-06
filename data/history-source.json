@@ -1,0 +1,5 @@
+{
+  "repository": "https://github.com/llimllib/nba_data.git",
+  "revision": "2eba4af57758d598dea6e24913f006b4181fe2a3",
+  "files": ["data/team_summary.json", "data/playerstats.parquet", "data/gamelogs.parquet", "data/metadata.json"]
+}

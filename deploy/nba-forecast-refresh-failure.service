@@ -1,0 +1,6 @@
+[Unit]
+Description=Record NBA forecast refresh failure in system journal
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/logger -p daemon.err NBA forecast refresh failed; inspect nba-forecast-refresh.service and refresh_status.json

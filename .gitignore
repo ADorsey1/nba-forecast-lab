@@ -22,3 +22,6 @@ reports/*.png
 *.p12
 secrets/
 data/raw/llimllib_nba_data/
+data/releases/
+data/current.json
+data/refresh_status.json

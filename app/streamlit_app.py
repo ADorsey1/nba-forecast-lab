@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import os
 import re
 import sys
 import time
@@ -16,20 +17,16 @@ import streamlit as st
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from nba_forecast.auth import (
-    clear_auth_state,
-    load_auth_config,
-    login_is_allowed,
-    mark_authenticated,
-    record_failed_login,
-    session_is_valid,
-    verify_password,
-)
+from nba_forecast.freshness import live_status, MARKET_MAX_AGE_DAYS
+from nba_forecast.snapshots import SnapshotError, read_snapshot, resolve_snapshot
+from nba_forecast.teams import EAST, WEST
 from nba_forecast.team_colors import get_team_theme
+from nba_forecast.lab_ui import render_lab
 
 PAGES = [
     "Home",
     "Forecast",
+    "Creative Lab",
     "Standings",
     "Rosters",
     "Recent Moves",
@@ -37,8 +34,9 @@ PAGES = [
     "Diagnostics",
 ]
 SEARCH_INDEX = {
+    "Creative Lab": "Fantasy trades, signings, rotations, player development and scenario comparisons.",
     "Home": "League overview, current system snapshot, and league leaders.",
-    "Forecast": "Projected wins, live context, uncertainty ranges, and team AI overview.",
+    "Forecast": "Projected wins, live context, uncertainty ranges, and team Model summary.",
     "Standings": "League-wide, East, and West projected seeds.",
     "Rosters": "Current player roster rows joined to injury context.",
     "Recent Moves": "Trades, signings, waives, releases, and transaction history.",
@@ -46,36 +44,19 @@ SEARCH_INDEX = {
     "Diagnostics": "Backtesting metrics, data provenance, contract checks, and limitations.",
 }
 NAV_LABELS = {"Recent Moves": "Moves", "Methodology": "Methods"}
-EAST = {"ATL", "BOS", "BRK", "CHO", "CLE", "DET", "IND", "MIA", "MIL", "NYK", "ORL", "PHI", "TOR", "WAS"}
 UTM_KEYS = ("utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content")
 CONTACT_URL = "https://github.com/ADorsey1/nba-forecast-lab/issues"
+AUTO_RELOAD_MINUTES = 15
 
 
-def load_outputs() -> dict[str, pd.DataFrame | dict]:
-    processed = ROOT / "data" / "processed"
-    live = ROOT / "data" / "raw" / "live"
-    manifest_path = live / "source_manifest.json"
-    manifest = json.loads(manifest_path.read_text(encoding="utf-8")) if manifest_path.exists() else {}
-
-    def read_csv(path: Path) -> pd.DataFrame:
-        return pd.read_csv(path) if path.exists() else pd.DataFrame()
-
-    return {
-        "features": read_csv(processed / "team_model_features.csv"),
-        "forecasts": read_csv(processed / "baseline_forecasts.csv"),
-        "simulations": read_csv(processed / "simulation_summary.csv"),
-        "next_forecast": read_csv(processed / "next_season_forecast.csv"),
-        "next_simulation": read_csv(processed / "next_season_simulation.csv"),
-        "rosters": read_csv(live / "current_rosters.csv"),
-        "injuries": read_csv(live / "current_injuries.csv"),
-        "moves": read_csv(live / "transaction_ledger.csv"),
-        "manifest": manifest,
-    }
+def load_outputs() -> dict:
+    data_root = Path(os.environ.get("NBA_FORECAST_DATA_ROOT", ROOT / "data"))
+    return read_snapshot(resolve_snapshot(data_root))
 
 
 st.set_page_config(
     page_title="NBA Forecast Lab",
-    page_icon="N",
+    page_icon="🏀",
     layout="wide",
     initial_sidebar_state="collapsed",
 )
@@ -98,11 +79,18 @@ html, body, [class*="css"] { font-family: 'DM Sans', sans-serif; }
 .stApp { background: radial-gradient(circle at 82% 4%, #1d4b68 0, transparent 32%), var(--ink); color: var(--text); }
 .stApp, .stApp p, .stApp label, .stApp small, .stApp [data-testid="stMarkdownContainer"] { color: var(--text) !important; }
 .stApp h1, .stApp h2, .stApp h3, .stApp h4 { font-family: 'Space Grotesk', sans-serif; color: var(--text) !important; letter-spacing: -.04em; }
-.block-container { max-width: 1440px; padding: 1.2rem 3rem 4rem; }
+.block-container { max-width: 1480px; padding: 1.2rem 3rem 5rem; }
 [data-testid="stSidebar"] { display: none; }
-.topbar { display:flex; align-items:center; gap:1rem; background:rgba(16,34,53,.94); border:1px solid var(--line); border-radius:16px; padding:.7rem .9rem; box-shadow:0 14px 35px rgba(0,0,0,.18); }
-.brand { font-family:'Space Grotesk', sans-serif; font-size:1.05rem; font-weight:700; letter-spacing:-.03em; white-space:nowrap; }
-.brand-mark { color:var(--orange); }
+.topbar { display:flex; align-items:center; gap:1rem; background:rgba(16,34,53,.94); border:1px solid var(--line); border-radius:18px; padding:.55rem .7rem; box-shadow:0 14px 35px rgba(0,0,0,.18); }
+.brand-lockup { display:flex; align-items:center; gap:.7rem; min-width:0; padding:.1rem .15rem; }
+.brand-mark-wrap { display:grid; place-items:center; width:2.5rem; height:2.5rem; flex:0 0 2.5rem; color:var(--team-display, var(--orange)); background:linear-gradient(145deg, var(--team-primary, #ff7345), var(--team-secondary, #153149)); border:1px solid rgba(255,255,255,.2); border-radius:13px; box-shadow:0 7px 16px rgba(0,0,0,.22); }
+.brand-mark-wrap svg { width:1.8rem; height:1.8rem; }
+.brand-copy { display:flex; flex-direction:column; gap:.04rem; min-width:0; }
+.brand-name { font-family:'Space Grotesk', sans-serif; font-size:1.02rem; font-weight:700; letter-spacing:-.035em; white-space:nowrap; }
+.brand-subtitle { color:var(--muted); font-size:.62rem; font-weight:700; letter-spacing:.13em; text-transform:uppercase; white-space:nowrap; }
+.brand-status { display:inline-flex; align-items:center; gap:.35rem; margin-left:.15rem; padding:.3rem .5rem; border:1px solid var(--line); border-radius:999px; color:var(--muted); font-size:.63rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; white-space:nowrap; }
+.brand-status-dot { width:.4rem; height:.4rem; border-radius:50%; background:#53d18a; box-shadow:0 0 0 .2rem rgba(83,209,138,.14); }
+.brand-status.is-degraded .brand-status-dot { background:#f2bf62; box-shadow:0 0 0 .2rem rgba(242,191,98,.14); }
 .st-key-desktop-navigation { display:block; }
 .st-key-mobile-navigation { display:none; }
 .st-key-desktop-tools { display:block; }
@@ -110,7 +98,7 @@ html, body, [class*="css"] { font-family: 'DM Sans', sans-serif; }
 .st-key-mobile-navigation .stButton > button { min-height:2.65rem; padding:.25rem .5rem; font-size:.9rem; }
 .st-key-desktop-tools .stButton > button { min-height:2.65rem; padding:.25rem .5rem; font-size:.76rem; white-space:nowrap; }
 .st-key-account-actions .stButton > button { min-height:2.65rem; padding:.25rem .5rem; font-size:.74rem; }
-.st-key-topbar-row { position:sticky; top:.45rem; z-index:100; padding:.45rem .55rem; background:var(--surface); border:1px solid var(--line); border-radius:18px; box-shadow:0 12px 28px rgba(0,0,0,.16); }
+.st-key-topbar-row { position:sticky; top:3.4rem; z-index:100; padding:.45rem .55rem; background:var(--surface); border:1px solid var(--line); border-radius:18px; box-shadow:0 12px 28px rgba(0,0,0,.16); }
 .auth-shell { max-width: 540px; margin: 8vh auto 1.25rem; padding: 2.2rem 2.3rem 1.4rem; background: linear-gradient(145deg, rgba(27,60,87,.98), rgba(16,34,53,.98)); border: 1px solid var(--line); border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,.24); }
 .auth-shell h1 { margin: .45rem 0 .8rem; color: var(--text) !important; }
 .auth-shell p { color: var(--muted) !important; line-height: 1.55; }
@@ -118,9 +106,9 @@ html, body, [class*="css"] { font-family: 'DM Sans', sans-serif; }
 .stApp [data-testid="stForm"] { max-width: 540px; margin: 0 auto; padding: 1.3rem 2.3rem 1.5rem; background: var(--surface); border: 1px solid var(--line); border-radius: 0 0 20px 20px; }
 .last-updated { margin:.35rem 0 1rem; color:var(--muted); font-size:.78rem; letter-spacing:.02em; }
 .last-updated strong { color:var(--text); }
-.cookie-banner { position:fixed; left:1.5rem; right:1.5rem; bottom:1.25rem; z-index:120; display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:.8rem 1rem; background:var(--surface); border:1px solid var(--line); border-radius:14px; box-shadow:0 14px 35px rgba(0,0,0,.3); }
-.cookie-banner p { margin:0; color:var(--text) !important; font-size:.82rem; line-height:1.4; }
-.st-key-cookie-banner-container { position:fixed; left:1.5rem; right:1.5rem; bottom:1.25rem; z-index:120; display:grid; grid-template-columns:1fr auto; align-items:center; gap:1rem; padding:.8rem 1rem; background:var(--surface); border:1px solid var(--line); border-radius:14px; box-shadow:0 14px 35px rgba(0,0,0,.3); }
+.cookie-banner { position:fixed; left:auto; right:1.25rem; bottom:1.25rem; z-index:120; display:flex; align-items:center; justify-content:space-between; gap:.8rem; padding:.65rem .8rem; background:var(--surface); border:1px solid var(--line); border-radius:13px; box-shadow:0 14px 35px rgba(0,0,0,.3); }
+.cookie-banner p { margin:0; color:var(--text) !important; font-size:.72rem; line-height:1.35; }
+.st-key-cookie-banner-container { position:fixed; left:auto; right:1.25rem; bottom:1.25rem; z-index:120; width:min(420px, calc(100vw - 2.5rem)); display:grid; grid-template-columns:1fr auto; align-items:center; gap:.7rem; padding:.65rem .8rem; background:var(--surface); border:1px solid var(--line); border-radius:13px; box-shadow:0 14px 35px rgba(0,0,0,.3); }
 .st-key-cookie-banner-container .cookie-banner { position:static; padding:0; background:transparent; border:0; box-shadow:none; }
 .st-key-cookie-banner-container .stButton { margin:0; }
 .skip-link { position:fixed; left:1rem; top:-4rem; z-index:150; padding:.7rem 1rem; background:var(--team-button); color:var(--team-button-text) !important; border-radius:0 0 10px 10px; font-weight:700; text-decoration:none; }
@@ -139,11 +127,29 @@ html, body, [class*="css"] { font-family: 'DM Sans', sans-serif; }
 .eyebrow, .section-label { color: var(--orange) !important; font-size: .74rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
 .hero h1 { font-size: clamp(2.8rem, 6vw, 5.3rem); line-height: .94; margin: .45rem 0 1.1rem; color: var(--text) !important; }
 .hero p { max-width: 760px; color: var(--muted) !important; font-size: 1.08rem; line-height: 1.65; }
+.hero-shell { display:grid; grid-template-columns:minmax(0, 1.35fr) minmax(280px, .65fr); gap:2rem; align-items:end; padding:1.4rem 0 1.4rem; }
+.st-key-hero-shell { padding:1.4rem 0 1.4rem; }
+.hero-shell .hero, .st-key-hero-shell .hero { padding:1.8rem 0 1.2rem; }
+.hero-shell .hero h1, .st-key-hero-shell .hero h1 { font-size:clamp(2.6rem, 4.2vw, 4.15rem); }
+.hero-panel { position:relative; overflow:hidden; min-height:245px; padding:1.35rem; background:linear-gradient(145deg, color-mix(in srgb, var(--team-primary) 30%, var(--surface-2)), var(--surface)); border:1px solid var(--line); border-radius:22px; box-shadow:0 18px 38px rgba(0,0,0,.2); }
+.hero-panel::after { content:""; position:absolute; right:-3.2rem; bottom:-4rem; width:13rem; height:13rem; border:1px solid color-mix(in srgb, var(--team-display) 55%, transparent); border-radius:50%; opacity:.6; }
+.hero-panel .panel-kicker { color:var(--team-display); font-size:.68rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; }
+.hero-panel h3 { margin:.9rem 0 .35rem; font-size:1.35rem; }
+.hero-panel p { position:relative; z-index:1; color:var(--muted) !important; font-size:.83rem; line-height:1.5; }
+.hero-panel .panel-value { position:relative; z-index:1; margin:.4rem 0 .85rem; font-family:'Space Grotesk', sans-serif; font-size:2.45rem; font-weight:700; letter-spacing:-.06em; }
+.hero-panel .panel-meta { position:relative; z-index:1; display:flex; justify-content:space-between; gap:.5rem; padding-top:.75rem; border-top:1px solid var(--line); color:var(--muted); font-size:.72rem; }
+.hero-actions, .st-key-hero-actions { display:flex; flex-wrap:wrap; gap:.65rem; margin:.2rem 0 1.1rem; }
+.hero-actions .stButton, .st-key-hero-actions .stButton { margin:0; }
+.hero-actions .stButton > button, .st-key-hero-actions .stButton > button { min-height:2.8rem; padding:.45rem .9rem; border-radius:999px; }
+.section-heading { display:flex; align-items:end; justify-content:space-between; gap:1rem; margin:2.3rem 0 .8rem; }
+.section-heading .section-label { margin:0; }
+.section-heading .helper { max-width:520px; margin:0; text-align:right; }
 .card { background: linear-gradient(145deg, rgba(27,60,87,.98), rgba(16,34,53,.98)); border: 1px solid var(--line); border-radius: 18px; padding: 1.25rem; min-height: 175px; box-shadow: 0 14px 30px rgba(0,0,0,.18); }
 .card h3 { margin-top: .8rem; color: var(--text) !important; }
 .card p { color: var(--muted) !important; line-height: 1.5; }
 .tag { display:inline-block; background:var(--orange-soft); color:#6f2410 !important; border-radius:999px; padding:.25rem .6rem; font-size:.72rem; font-weight:700; }
-.stat-card { background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:1rem 1.05rem; }
+.stat-card { position:relative; overflow:hidden; background:linear-gradient(145deg, var(--surface), color-mix(in srgb, var(--surface-2) 62%, var(--surface))); border:1px solid var(--line); border-radius:16px; padding:1rem 1.05rem; }
+.stat-card::before { content:""; position:absolute; left:0; top:0; bottom:0; width:3px; background:var(--team-display, var(--orange)); }
 .stat-label { color:var(--muted) !important; font-size:.76rem; text-transform:uppercase; letter-spacing:.08em; }
 .stat-value { color:var(--text) !important; font-family:'Space Grotesk', sans-serif; font-size:1.65rem; font-weight:700; margin-top:.35rem; }
 .helper { color:var(--muted) !important; font-size:.86rem; line-height:1.5; }
@@ -172,22 +178,53 @@ div[data-testid="stPopover"] button { min-width: 88px; }
   .st-key-account-actions { display:none; }
   div[data-testid="column"]:has(.st-key-account-actions) { display:none; }
   .cookie-banner { left:.7rem; right:.7rem; bottom:.7rem; align-items:flex-start; flex-direction:column; }
-  .st-key-cookie-banner-container { left:.7rem; right:.7rem; bottom:.7rem; grid-template-columns:1fr; gap:.4rem; }
+  .st-key-cookie-banner-container { left:auto; right:.7rem; bottom:.7rem; width:min(390px, calc(100vw - 1.4rem)); grid-template-columns:1fr auto; gap:.5rem; }
   .scroll-top { right:.7rem; bottom:.7rem; }
   .floating-contact { right:.7rem; bottom:4rem; }
   .hero { padding-top:2.4rem; }
+}
+@media (max-width: 1080px) {
+  .hero-shell { grid-template-columns:1fr; gap:.3rem; }
+  .st-key-hero-shell { padding-top:1rem; }
+  .hero-panel { min-height:0; }
+  .brand-status { display:none; }
 }
 @media (max-width: 600px) {
   .block-container { padding-left:.75rem; padding-right:.75rem; }
   .topbar { justify-content:center; }
   .hero h1 { font-size:clamp(2.55rem, 13vw, 4rem); }
   .hero p { font-size:1rem; }
+  .hero-shell { padding-top:.6rem; }
+  .st-key-hero-shell { padding-top:.6rem; }
+  .hero-panel { padding:1.1rem; border-radius:17px; }
+  .section-heading { display:block; }
+  .section-heading .helper { margin-top:.35rem; text-align:left; }
+  .st-key-cookie-banner-container { grid-template-columns:1fr; }
   .card { min-height:0; margin-bottom:.8rem; }
   .st-key-mobile-navigation .stButton > button { min-width:3.2rem; }
   .st-key-account-actions { display:none; }
   div[data-testid="column"]:has(.st-key-account-actions) { display:none; }
   .auth-shell { margin-top: 3vh; padding: 1.4rem 1.2rem 1rem; }
   .stApp [data-testid="stForm"] { padding: 1.1rem 1.2rem 1.25rem; }
+}
+
+/* Two-row navigation reserves space for branding at every viewport. */
+.brand-copy { flex:0 0 auto; }
+.brand-lockup { flex-wrap:wrap; }
+.brand-mark-wrap { color:white; }
+.st-key-topbar-row { position:relative; top:0; }
+.st-key-desktop-navigation, .st-key-desktop-tools { display:block !important; }
+.st-key-desktop-navigation [data-testid="stHorizontalBlock"] { flex-wrap:wrap; gap:.3rem; }
+.st-key-desktop-navigation [data-testid="stColumn"] { min-width:85px; flex:1 1 85px; }
+.st-key-desktop-navigation button { width:100%; }
+.floating-contact, .scroll-top { display:none; }
+.stApp a:focus-visible, .stApp button:focus-visible { outline:3px solid var(--team-display); outline-offset:3px; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation:none !important; transition:none !important; } }
+@media (max-width: 700px) { .st-key-topbar-row [data-testid="stColumn"] { min-width:0; } .brand-status { display:none; } }
+@media (max-width: 700px) {
+ .st-key-topbar-row > div:first-child > [data-testid="stHorizontalBlock"] { flex-wrap:wrap; }
+ .st-key-topbar-row > div:first-child > [data-testid="stHorizontalBlock"] > [data-testid="stColumn"] { flex:1 1 140px; min-width:140px; }
+ .st-key-topbar-row > div:first-child > [data-testid="stHorizontalBlock"] > [data-testid="stColumn"]:first-child { flex-basis:100%; }
 }
 @media print {
   @page { margin: .65in; }
@@ -204,57 +241,25 @@ div[data-testid="stPopover"] button { min-width: 88px; }
 )
 
 
-def render_auth_gate() -> None:
-    config = load_auth_config()
-    if config is None:
-        st.markdown(
-            '<div class="auth-shell"><div class="auth-kicker">Private workspace</div><h1>Sign in to NBA Forecast Lab</h1><p>This app requires an administrator-configured account. Credentials stay outside the repository and are never hardcoded into the forecast code.</p></div>',
-            unsafe_allow_html=True,
-        )
-        st.error("Authentication is not configured for this environment.")
-        st.markdown("Run the one-time setup command below, then reload the app:")
-        st.code('& ".venv\\Scripts\\python.exe" scripts\\setup_auth.py', language="powershell")
-        st.stop()
-
-    now = time.time()
-    if session_is_valid(st.session_state, config, now=now):
-        return
-
-    st.markdown(
-        '<div class="auth-shell"><div class="auth-kicker">Private workspace</div><h1>Sign in to NBA Forecast Lab</h1><p>Use the workspace credentials configured by the administrator to access forecasts, live context, rosters, and diagnostics.</p></div>',
-        unsafe_allow_html=True,
-    )
-    allowed, seconds_remaining = login_is_allowed(st.session_state, now=now)
-    if not allowed:
-        st.warning(f"Too many failed attempts. Try again in {seconds_remaining} seconds.")
-        st.stop()
-
-    with st.form("login_form", clear_on_submit=False):
-        username = st.text_input("Username", autocomplete="username")
-        password = st.text_input("Password", type="password", autocomplete="current-password")
-        submitted = st.form_submit_button("Sign in", type="primary", use_container_width=True)
-
-    if submitted:
-        normalized_username = username.strip()
-        if normalized_username == config.username and verify_password(password, config.password_hash):
-            mark_authenticated(st.session_state, normalized_username, config, now=now)
-            st.session_state["auth_flash"] = "Signed in successfully."
-            st.rerun()
-        remaining_attempts = record_failed_login(st.session_state, config, now=now)
-        if remaining_attempts:
-            st.error(f"Sign-in failed. {remaining_attempts} attempt(s) remain before a temporary lockout.")
-        else:
-            st.warning(f"Too many failed attempts. Try again in {config.lockout_seconds} seconds.")
-    st.stop()
-
-
-render_auth_gate()
-
+# Public read-only dashboard: data refresh is a separate command, never a UI action.
 try:
     data = load_outputs()
-except FileNotFoundError:
-    st.error("Run the pipeline first: python -m nba_forecast.cli --input <workbook> --output data/processed")
+except SnapshotError:
+    st.error("Forecast data is temporarily unavailable. Please try again later.")
     st.stop()
+
+@st.fragment(run_every=60)
+def check_new_snapshot():
+    if st.session_state.get("page") == "Creative Lab":
+        return
+    data_root = Path(os.environ.get("NBA_FORECAST_DATA_ROOT", ROOT / "data"))
+    try:
+        if str(resolve_snapshot(data_root)) != data["snapshot_root"]:
+            st.rerun(scope="app")
+    except SnapshotError:
+        pass
+
+check_new_snapshot()
 
 features = data["features"]
 forecasts = data["forecasts"]
@@ -265,6 +270,9 @@ rosters = data["rosters"]
 injuries = data["injuries"]
 moves = data["moves"]
 manifest = data["manifest"]
+current_live_status = live_status(manifest, rosters)
+refreshed_at = pd.to_datetime(manifest.get("fetched_at_utc"), errors="coerce", utc=True)
+refresh_label = refreshed_at.strftime("%b %d, %Y") if pd.notna(refreshed_at) else "Awaiting snapshot"
 
 if next_forecast.empty:
     st.error("No next-season forecast is available. Refresh the pipeline before opening the app.")
@@ -378,6 +386,7 @@ def dark_theme(theme: dict[str, str]) -> dict[str, str]:
         "text": "#f7f3ec",
         "muted": "#b9c8d3",
         "line": "rgba(233, 242, 248, .18)",
+        "display": "#" + "".join(f"{round(int(theme["primary"][i:i+2], 16) * .45 + 255 * .55):02x}" for i in (1, 3, 5)),
         "app_background": "radial-gradient(circle at 82% 4%, #1d4b68 0, transparent 32%), #08131f",
         "topbar_background": "rgba(16,34,53,.94)",
         "card_background": "linear-gradient(145deg, rgba(27,60,87,.98), rgba(16,34,53,.98))",
@@ -390,7 +399,7 @@ capture_utm_parameters()
 page = st.session_state["page"]
 selected_team = None if st.session_state["focus_team"] == "ALL" else st.session_state["focus_team"]
 east = EAST & set(teams)
-west = set(teams) - east
+west = WEST & set(teams)
 dark_mode = bool(st.session_state["dark_mode"])
 theme = get_team_theme(selected_team)
 if dark_mode:
@@ -458,23 +467,13 @@ st.markdown(
 )
 
 
-@st.dialog("Confirm sign out")
-def confirm_sign_out() -> None:
-    st.write("Sign out of NBA Forecast Lab on this browser session?")
-    cancel_col, confirm_col = st.columns(2)
-    with cancel_col:
-        if st.button("Cancel", key="cancel_sign_out", use_container_width=True):
-            st.rerun()
-    with confirm_col:
-        if st.button("Sign out", key="confirm_sign_out", type="primary", use_container_width=True):
-            clear_auth_state(st.session_state)
-            st.rerun()
-
-
 st.session_state["site_search_desktop"] = st.session_state.get("site_search_query", "")
 st.session_state["site_search_mobile"] = st.session_state.get("site_search_query", "")
 st.session_state["dark_mode_desktop"] = bool(st.session_state.get("dark_mode", True))
 st.session_state["dark_mode_mobile"] = bool(st.session_state.get("dark_mode", True))
+
+live_badge_class = "" if current_live_status == "Current" else " is-degraded"
+live_badge_label = "Live" if current_live_status == "Current" else current_live_status
 
 st.html(
     f"""
@@ -495,6 +494,7 @@ st.html(
       window.addEventListener("scroll", update, {{ passive: true }});
       window.addEventListener("resize", update);
       update();
+
     }})();
     </script>
     """,
@@ -503,18 +503,25 @@ st.html(
 
 
 with st.container(key="topbar-row"):
-    brand_col, nav_col, focus_col, tools_col, mobile_col, account_col = st.columns([1.8, 7.7, 2.35, 1.0, .7, 1.0], gap="small", vertical_alignment="center")
+    brand_col, focus_col, tools_col = st.columns([3, 2, 1], gap="medium", vertical_alignment="center")
     with brand_col:
-        st.markdown('<div class="topbar"><span class="brand"><span class="brand-mark">N</span>BA Forecast Lab</span></div>', unsafe_allow_html=True)
-    with nav_col:
-        with st.container(key="desktop-navigation-slot"):
-            with st.container(key="desktop-navigation"):
-                nav_buttons = st.columns(len(PAGES), gap="small")
-                for button_col, nav_page in zip(nav_buttons, PAGES):
-                    with button_col:
-                        if st.button(NAV_LABELS.get(nav_page, nav_page), key=f"top_nav_{nav_page}", type="primary" if st.session_state["page"] == nav_page else "secondary", use_container_width=True):
-                            go_to(nav_page)
-                            st.rerun()
+        st.markdown(f'''
+        <div class="brand-lockup" aria-label="NBA Forecast Lab">
+          <span class="brand-mark-wrap" aria-hidden="true">
+            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="5" y="5" width="54" height="54" rx="15" stroke="currentColor" stroke-width="3"/>
+              <path d="M16 43L27 31L37 37L49 20" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M16 48H49" stroke="currentColor" stroke-width="3" stroke-linecap="round" opacity=".62"/>
+              <circle cx="49" cy="20" r="4" fill="currentColor"/>
+            </svg>
+          </span>
+          <span class="brand-copy">
+            <span class="brand-name">NBA Forecast</span>
+            <span class="brand-subtitle">Lab · 2026–27</span>
+          </span>
+          <span class="brand-status{live_badge_class}"><span class="brand-status-dot"></span>{escape(live_badge_label)}</span>
+        </div>
+        ''', unsafe_allow_html=True)
     with focus_col:
         st.selectbox("Focus team", team_options, format_func=team_label, key="focus_team_widget", on_change=persist_focus_team)
     with tools_col:
@@ -523,43 +530,21 @@ with st.container(key="topbar-row"):
                 st.markdown("### Workspace tools")
                 st.text_input("Search pages, topics, or teams", key="site_search_desktop", on_change=sync_search, args=("site_search_desktop",), placeholder="Try methodology or PHI")
                 st.toggle("Dark mode", key="dark_mode_desktop", on_change=sync_dark_mode, args=("dark_mode_desktop",))
-    with mobile_col:
-        with st.container(key="mobile-navigation"):
-            with st.popover("☰", use_container_width=True):
-                st.markdown("### Navigate")
-                st.caption("Choose a workspace page. A team focus is optional.")
-                for nav_page in PAGES:
-                    if st.button(nav_page, key=f"menu_nav_{nav_page}", use_container_width=True):
-                        go_to(nav_page)
-                        st.rerun()
-                st.markdown("### Tools")
-                st.text_input("Search pages, topics, or teams", key="site_search_mobile", on_change=sync_search, args=("site_search_mobile",), placeholder="Try methodology or PHI")
-                st.toggle("Dark mode", key="dark_mode_mobile", on_change=sync_dark_mode, args=("dark_mode_mobile",))
-                st.caption("The team focus is available in the header on every screen.")
-                if st.button("Sign out", key="mobile_sign_out", use_container_width=True):
-                    confirm_sign_out()
-    with account_col:
-        with st.container(key="account-actions"):
-            if st.button("Sign out", key="desktop_sign_out", use_container_width=True):
-                confirm_sign_out()
+    with st.container(key="desktop-navigation"):
+        nav_buttons = st.columns(len(PAGES), gap="small")
+        for button_col, nav_page in zip(nav_buttons, PAGES):
+            with button_col:
+                if st.button(NAV_LABELS.get(nav_page, nav_page), key=f"top_nav_{nav_page}", type="primary" if st.session_state["page"] == nav_page else "secondary", use_container_width=True):
+                    go_to(nav_page)
+                    st.rerun()
 
 st.html('<div id="main-content" tabindex="-1"></div>')
 
-auth_flash = st.session_state.pop("auth_flash", None)
-if auth_flash:
-    st.success(auth_flash)
+if current_live_status != "Current":
+    st.warning(f"Live context: {current_live_status.lower()}. Updates older than 24 hours are marked stale; forecasts remain the last published snapshot.")
 
-if manifest.get("fetched_at_utc"):
-    refreshed_at = pd.to_datetime(manifest.get("fetched_at_utc"), errors="coerce", utc=True)
-    if pd.notna(refreshed_at):
-        st.markdown(f'<div class="last-updated">Live context last updated <strong>{refreshed_at.strftime("%b %d, %Y at %I:%M %p UTC")}</strong></div>', unsafe_allow_html=True)
-
-if not st.session_state.get("cookie_notice_dismissed", False):
-    with st.container(key="cookie-banner-container"):
-        st.markdown('<div class="cookie-banner"><p>This app uses session-only preferences for login, theme, and search. No advertising cookies are used.</p></div>', unsafe_allow_html=True)
-        if st.button("Got it", key="dismiss_cookie_notice", type="primary"):
-            st.session_state["cookie_notice_dismissed"] = True
-            st.rerun()
+if pd.notna(refreshed_at):
+    st.markdown(f'<div class="last-updated">Live context last updated <strong>{refreshed_at.strftime("%b %d, %Y at %I:%M %p UTC")}</strong></div>', unsafe_allow_html=True)
 
 render_search_results()
 
@@ -611,7 +596,7 @@ def league_metric_strip() -> None:
     with c3:
         metric_card("Current projection leader", str(top_team.team_abbr))
     with c4:
-        metric_card("Live data status", "Attached")
+        metric_card("Live data status", current_live_status)
 
 
 def team_metric_strip() -> None:
@@ -627,20 +612,22 @@ def team_metric_strip() -> None:
     with c3:
         metric_card("2025-26 wins", f"{safe_float(forecast, 'target_wins'):.0f}")
     with c4:
-        metric_card("Live injury burden", f"{safe_float(next_team, 'live_injury_burden'):.1f}")
+        metric_card("Live injury burden", "Unavailable" if pd.isna(next_team.get("live_injury_burden")) else f"{safe_float(next_team, 'live_injury_burden'):.1f}")
 
 
 def team_overview() -> str:
     if next_team is None:
-        return "Select a team from MENU when you want a team-specific explanation. The league views remain fully usable without a selection."
+        return "Select a team with the Focus team selector when you want a team-specific explanation. The league views remain fully usable without a selection."
     conference_name, rank = rank_for_team(selected_team)
     form = safe_float(next_team, "predicted_wins")
     roster = safe_float(next_team, "roster_aware_predicted_wins")
     rotation = safe_float(next_team, "live_roster_projection_wins")
     ensemble = safe_float(next_team, "holistic_predicted_wins")
-    market = safe_float(next_team, "market_win_total")
+    market = safe_float(next_team, "market_win_total", float("nan"))
     overview = f"{selected_team} projects to {ensemble:.1f} wins, ranking {rank}th in the {conference_name}. The independent historical model is {form:.1f} wins, while the roster-aware model is {roster:.1f}; the ensemble also incorporates a {market:.1f}-win market benchmark."
-    if form < market - 3:
+    if pd.isna(market):
+        overview = f"{selected_team} projects to {ensemble:.1f} wins, ranking {rank} in the {conference_name}. Historical form is {form:.1f} wins. No market benchmark is available for this snapshot."
+    elif form < market - 3:
         overview += f" The main discount versus the market is the historical form signal, which is {market - form:.1f} wins lower and reflects the team’s prior performance rather than the full offseason reset."
     elif form > market + 3:
         overview += f" The model is more optimistic than the market by {form - market:.1f} wins because recent team performance is stronger than the external benchmark."
@@ -718,22 +705,50 @@ def roster_view() -> pd.DataFrame:
 
 
 if page == "Home":
-    st.markdown('<div class="hero"><div class="eyebrow">NBA 2026-27 / MODEL CONTROL ROOM</div><h1>Forecast the league.<br>Interrogate the assumptions.</h1><p>NBA Forecast Lab combines historical team performance, player-level production, game-log trends, and live roster context. Browse the league first, then focus on a team only when you need a deeper read.</p></div>', unsafe_allow_html=True)
+    top_team = next_forecast.sort_values("holistic_predicted_wins", ascending=False).iloc[0]
+    with st.container(key="hero-shell"):
+        hero_copy, hero_status = st.columns([1.4, .6], gap="large", vertical_alignment="bottom")
+        with hero_copy:
+            st.markdown('<div class="hero"><div class="eyebrow">NBA 2026-27 / MODEL CONTROL ROOM</div><h1>Forecast the league.<br>Interrogate the assumptions.</h1><p>NBA Forecast Lab combines historical team performance, player-level production, game-log trends, and live roster context. Browse the league first, then focus on a team only when you need a deeper read.</p></div>', unsafe_allow_html=True)
+        with hero_status:
+            st.markdown(f'''
+            <div class="hero-panel">
+              <div class="panel-kicker">Published snapshot</div>
+              <h3>League outlook</h3>
+              <div class="panel-value">{escape(str(top_team.team_abbr))} <span style="font-size:1rem;letter-spacing:0;color:var(--muted)">leads the board</span></div>
+              <p>The current leader sits at <strong>{float(top_team.holistic_predicted_wins):.1f} projected wins</strong> across the blended model.</p>
+              <div class="panel-meta"><span>{escape(live_badge_label)} context</span><span>{escape(refresh_label)}</span></div>
+            </div>
+            ''', unsafe_allow_html=True)
+    with st.container(key="hero-actions"):
+        cta_forecast, cta_standings, cta_moves = st.columns([1, 1, 1], gap="small")
+        with cta_forecast:
+            if st.button("Open forecast →", key="home_cta_forecast", type="primary", use_container_width=True):
+                go_to("Forecast")
+                st.rerun()
+        with cta_standings:
+            if st.button("Compare standings", key="home_cta_standings", use_container_width=True):
+                go_to("Standings")
+                st.rerun()
+        with cta_moves:
+            if st.button("Track roster moves", key="home_cta_moves", use_container_width=True):
+                go_to("Recent Moves")
+                st.rerun()
     a, b, c = st.columns(3)
     with a:
-        st.markdown('<div class="card"><span class="tag">Explore</span><h3>Forecast</h3><p>Compare projected wins and live context across every team. Use MENU to set an optional team focus and highlight it in charts.</p></div>', unsafe_allow_html=True)
+        st.markdown('<div class="card"><span class="tag">Explore</span><h3>Forecast</h3><p>Compare projected wins and live context across every team. Use Focus team to set an optional team focus and highlight it in charts.</p></div>', unsafe_allow_html=True)
     with b:
         st.markdown('<div class="card"><span class="tag">Track</span><h3>Rosters & moves</h3><p>Inspect the current 30-team roster snapshot and the transaction ledger behind the live offseason context.</p></div>', unsafe_allow_html=True)
     with c:
         st.markdown('<div class="card"><span class=\"tag\">Understand</span><h3>Methodology & diagnostics</h3><p>Follow the feature construction, validation, uncertainty logic, and data limitations behind each output.</p></div>', unsafe_allow_html=True)
-    st.markdown('<div class="section-label">Current system snapshot</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-heading"><div class="section-label">Current system snapshot</div><p class="helper">A quick read of the published model and live context.</p></div>', unsafe_allow_html=True)
     if selected_team is None:
         league_metric_strip()
-        st.markdown('<p class="helper">No team selected. Open MENU any time to focus the workspace on a team.</p>', unsafe_allow_html=True)
+        st.markdown('<p class="helper">No team selected. Use Focus team to focus the workspace on a team.</p>', unsafe_allow_html=True)
     else:
         team_metric_strip()
-        st.markdown(f'<p class="helper">Focused on {escape(selected_team)}. Change or clear the focus from MENU.</p>', unsafe_allow_html=True)
-    st.markdown('<div class="section-label">League leaders</div>', unsafe_allow_html=True)
+        st.markdown(f'<p class="helper">Focused on {escape(selected_team)}. Change or clear the focus with the Focus team selector.</p>', unsafe_allow_html=True)
+    st.markdown('<div class="section-heading"><div class="section-label">League leaders</div><p class="helper">The five highest blended projections in the current snapshot.</p></div>', unsafe_allow_html=True)
     leaders = next_forecast.sort_values("holistic_predicted_wins", ascending=False).head(5)[["team_abbr", "holistic_predicted_wins", "market_win_total"]].rename(columns={"team_abbr": "team", "holistic_predicted_wins": "projected wins", "market_win_total": "market prior"}).round(1)
     st.dataframe(leaders, hide_index=True, width="stretch")
     st.markdown('<div class="section-label">FAQ</div>', unsafe_allow_html=True)
@@ -746,16 +761,25 @@ if page == "Home":
     with st.expander("Can I use this as a betting recommendation?"):
         st.write("No. This is an analytical portfolio project. Forecast ranges and diagnostics communicate uncertainty rather than guarantee outcomes.")
 
+elif page == "Creative Lab":
+    render_lab(data, ROOT, selected_team)
+
 elif page == "Forecast":
     st.markdown('<div class="eyebrow">FORECAST</div>', unsafe_allow_html=True)
     st.title(f"{selected_team + ' / ' if selected_team else ''}2026-27 outlook")
-    st.caption("The headline forecast uses the corrected latest-season feature frame. Live roster, injury, transaction, and schedule data are shown alongside it.")
+    st.caption("Forecasts are a published snapshot. Live context is timestamped separately.")
+    if "market_source_date" in next_forecast.columns:
+        dates = ", ".join(sorted(next_forecast.market_source_date.dropna().astype(str).unique()))
+        sources = ", ".join(sorted(next_forecast.market_source.dropna().astype(str).unique())) if "market_source" in next_forecast else "Unknown source"
+        st.caption(f"Market prior: {sources}; dated {dates}. Publication requires a matching season and a source date within {MARKET_MAX_AGE_DAYS} days.")
+    else:
+        st.warning("This bundled forecast predates market provenance tracking. Its market date and season were not validated by the new publication checks.")
     team_metric_strip()
     view = st.radio("Output", ["Predicted wins", "Live context"], horizontal=True, label_visibility="collapsed")
     if view == "Predicted wins":
         forecast_chart()
     else:
-        live_chart_data = next_forecast[["team_abbr", "live_injury_burden"]].fillna(0).sort_values("live_injury_burden")
+        live_chart_data = next_forecast[["team_abbr", "live_injury_burden"]].dropna(subset=["live_injury_burden"]).sort_values("live_injury_burden")
         highlight = selected_team if selected_team is not None else "__none__"
         live_chart = alt.Chart(live_chart_data).mark_bar().encode(
             y=alt.Y("team_abbr:N", sort="-x", title=None),
@@ -770,21 +794,25 @@ elif page == "Forecast":
         st.markdown('<div class="section-label">Selected team context</div>', unsafe_allow_html=True)
         left, right = st.columns(2)
         with left:
-            st.dataframe(pd.DataFrame([{"independent model": safe_float(next_team, "independent_predicted_wins"), "roster-aware model": safe_float(next_team, "roster_aware_predicted_wins"), "live rotation": safe_float(next_team, "live_roster_projection_wins"), "market prior": safe_float(next_team, "market_win_total"), "ensemble": safe_float(next_team, "holistic_predicted_wins")}]).round(1), hide_index=True, width="stretch")
+            st.dataframe(pd.DataFrame([{"independent model": safe_float(next_team, "independent_predicted_wins"), "roster-aware model": safe_float(next_team, "roster_aware_predicted_wins"), "live rotation": safe_float(next_team, "live_roster_projection_wins"), "market prior": next_team.get("market_win_total"), "ensemble": safe_float(next_team, "holistic_predicted_wins")}]).round(1), hide_index=True, width="stretch")
         with right:
-            st.dataframe(pd.DataFrame([{"roster players": safe_int(next_team, "live_roster_count"), "injuries listed": safe_int(next_team, "live_injury_count"), "transactions since July": safe_int(next_team, "live_transactions_since_july"), "schedule provider": next_team.get("live_schedule_provider", "n/a")}]), hide_index=True, width="stretch")
+            st.dataframe(pd.DataFrame([{"roster players": safe_int(next_team, "live_roster_count"), "injuries listed": next_team.get("live_injury_count"), "transactions since July": safe_int(next_team, "live_transactions_since_july"), "schedule provider": next_team.get("live_schedule_provider", "n/a")}]), hide_index=True, width="stretch")
         if future_simulation is not None:
             st.markdown('<div class="section-label">Future uncertainty</div>', unsafe_allow_html=True)
-            st.write(f"The game-level simulation centers {selected_team} at {safe_float(future_simulation, 'expected_wins'):.1f} wins, with a 10th-90th percentile range of {safe_int(future_simulation, 'wins_p10')}-{safe_int(future_simulation, 'wins_p90')}. It places the team in the simulated top-10 of its conference in {safe_float(future_simulation, 'playoff_probability'):.1%} of runs.")
+            st.write(f"The simulation centers {selected_team} at {safe_float(future_simulation, 'expected_wins'):.1f} wins, with a 10th-90th percentile scenario range of {safe_int(future_simulation, 'wins_p10')}-{safe_int(future_simulation, 'wins_p90')}. These ranges are not yet empirically calibrated.")
+            if pd.notna(future_simulation.get("playoff_probability")):
+                st.write(f"Simulated conference top-10 frequency: {safe_float(future_simulation, 'playoff_probability'):.1%}. This includes play-in positions and is not the probability of reaching the final playoff bracket.")
+            elif pd.notna(future_simulation.get("playoff_proxy_probability")):
+                st.write(f"Independent-win proxy: {safe_float(future_simulation, 'playoff_proxy_probability'):.1%} of runs reach 45 wins. This is not a conference qualification probability.")
             st.caption(str(future_simulation.get("simulation_note", "")))
-        st.markdown('<div class="section-label">AI overview</div>', unsafe_allow_html=True)
+        st.markdown('<div class="section-label">Model summary</div>', unsafe_allow_html=True)
         overview = team_overview()
         st.info(overview)
         st.caption("Copy-ready summary")
         st.code(overview, language="text")
     else:
         st.markdown('<div class="section-label">League view</div>', unsafe_allow_html=True)
-        st.info("This is a league-wide view. Set a team focus from MENU to see a team-specific component breakdown, uncertainty range, and AI overview.")
+        st.info("This is a league-wide view. Set a team focus with the Focus team selector to see a team-specific component breakdown, uncertainty range, and Model summary.")
 
 elif page == "Standings":
     st.markdown('<div class="eyebrow">STANDINGS / LEAGUE TABLE</div>', unsafe_allow_html=True)
@@ -880,27 +908,36 @@ elif page == "Methodology":
     st.latex(r"\\hat{W}_{t} = \\beta_0 + \\sum_j \\beta_j X_{t-1,j}")
     st.write("The production model is standardized Ridge regression. Regularization reduces coefficient instability when team, player, and game features overlap. Predictions are clipped to the valid 0-82 range.")
     st.markdown("### Live information and ensemble")
+    st.info("The 25/25/50 blend is a chosen benchmark-informed weighting, not a demonstrated optimal weighting. Component backtests do not measure this final ensemble. Roster backtests use retrospective evidence.")
     st.latex(r"\\hat{W}_{holistic} = 0.25\\hat{W}_{form} + 0.25\\hat{W}_{roster} + 0.50\\hat{W}_{market}")
     st.write("The independent model uses prior team, player, and game-log features. The roster-aware model adds a transparent season-roster transition proxy built from player IDs, prior production, returning-player shares, incoming-player shares, and prior expected rotation strength. A separate live top-rotation calculation adjusts expected minutes for current injuries and is displayed as a diagnostic. The holistic forecast blends independent form, roster-aware model output, and a dated market prior with explicit weights. Current rosters, injury reports, transaction records, and the published schedule are timestamped alongside the forecast. The simulation uses game-level log5 probabilities, home court, and neutral fills for unresolved games.")
 
 else:
     st.markdown('<div class="eyebrow">VALIDATION / FAILURE MODES</div>', unsafe_allow_html=True)
     st.title("Diagnostics before confidence")
-    metrics_path = ROOT / "data" / "processed" / "backtest_metrics.json"
-    if metrics_path.exists():
-        metrics = json.loads(metrics_path.read_text(encoding="utf-8"))
+    st.warning("The final market-weighted ensemble has no measured forward accuracy yet. The historical metrics below evaluate components, not the headline ensemble.")
+    st.caption("Roster-aware results use retrospective season rosters. They are diagnostic comparisons, not a verified preseason backtest. Simulation ranges describe model scenarios and have not been calibrated against held-out seasons.")
+    record = data.get("forecast_record", {})
+    if record:
+        st.caption(f"Forecast archived at {record.get('recorded_at_utc')}. Preseason evaluation eligible: {record.get('preseason_eligible', False)}.")
+        if record.get("ineligibility_reasons"):
+            st.info("; ".join(record["ineligibility_reasons"]))
+    else:
+        st.caption("This bundled snapshot has no forward publication record and cannot establish preseason ensemble accuracy.")
+    metrics = data["metrics"]
+    if metrics:
         a, b, c = st.columns(3)
         with a:
             metric_card("Backtest rows", f"{metrics.get('test_rows', 0):,}")
         with b:
-            metric_card("MAE", f"{metrics.get('mae', 0):.2f} wins")
+            metric_card("Historical form MAE", f"{metrics.get('mae', 0):.2f} wins")
         with c:
-            metric_card("RMSE", f"{metrics.get('rmse', 0):.2f} wins")
+            metric_card("Historical form RMSE", f"{metrics.get('rmse', 0):.2f} wins")
         d, e = st.columns(2)
         with d:
-            metric_card("Roster-aware MAE", f"{metrics.get('roster_aware_mae', 0):.2f} wins")
+            metric_card("Retrospective roster MAE", f"{metrics.get('roster_aware_mae', 0):.2f} wins")
         with e:
-            metric_card("Roster-aware RMSE", f"{metrics.get('roster_aware_rmse', 0):.2f} wins")
+            metric_card("Retrospective roster RMSE", f"{metrics.get('roster_aware_rmse', 0):.2f} wins")
     st.markdown("### Current limitations")
     st.warning("The live system now attaches current roster rows, injury context, transaction history, a roster-aware diagnostic, and a schedule-aware simulation. The remaining uncertainty is provider-dependent: the historical roster transition table is a season-level proxy rather than a complete historical transaction ledger, market priors are dated snapshots, player aging and lineup fit are not fully modeled, and Cup-dependent schedule games use neutral-opponent fills until official opponents are resolvable.")
     if manifest:
@@ -914,7 +951,7 @@ else:
         st.json(utm_params)
     else:
         st.caption("No UTM campaign parameters were present in the current URL.")
-    quality_path = ROOT / "data" / "processed" / "data_quality_report.json"
+    quality_path = Path(data["snapshot_root"]) / "processed" / "data_quality_report.json"
     if quality_path.exists():
         quality = json.loads(quality_path.read_text(encoding="utf-8"))
         st.markdown("### Data contract")

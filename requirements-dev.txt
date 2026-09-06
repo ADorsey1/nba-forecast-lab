@@ -1,2 +1,6 @@
--r requirements.txt
-pip-audit>=2.10,<3
+-r requirements.lock
+pytest==9.1.1
+iniconfig==2.3.0
+pluggy==1.6.0
+pygments==2.21.0
+pip-audit==2.10.0

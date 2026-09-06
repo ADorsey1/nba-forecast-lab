@@ -1,0 +1,15 @@
+[Unit]
+Description=Refresh NBA forecast artifacts
+OnFailure=nba-forecast-refresh-failure.service
+
+[Service]
+Type=oneshot
+User=nba-forecast
+WorkingDirectory=/opt/nba-forecast-lab
+Environment=NBA_FORECAST_DATA_ROOT=/var/lib/nba-forecast
+ExecStart=/opt/nba-forecast-lab/.venv/bin/python /opt/nba-forecast-lab/scripts/refresh_forecast.py
+TimeoutStartSec=1800
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ReadWritePaths=/var/lib/nba-forecast

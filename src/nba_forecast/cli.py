@@ -4,12 +4,15 @@ from __future__ import annotations
 
 import argparse
 import json
+import shutil
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
 
 from .audit import profile_workbook
+from .evaluation import archive_forecast
+from .freshness import attach_market_priors
 from .features import build_team_model_features
 from .historical import build_historical_training_table, build_live_roster_features, build_next_season_frame
 from .io import load_workbook, require_sheets
@@ -17,10 +20,12 @@ from .live import fetch_live_context
 from .models import baseline_metrics, build_baseline_forecasts
 from .quality import build_data_quality_report
 from .simulation import simulate_outcomes, simulate_schedule_outcomes
+from .snapshots import publish_snapshot, resolve_snapshot
+from .teams import conference_for
 from .training import expanding_backtest, fit_next_season_forecast
 
 
-def run(input_path: str | Path, output_dir: str | Path, public_source: str | Path | None = None, refresh_live: bool = False) -> dict[str, str]:
+def _run_into(input_path: str | Path, output_dir: str | Path, public_source: str | Path | None = None, refresh_live: bool = False, live_dir: str | Path = "data/raw/live", market_path: str | Path = "data/raw/external_market_wintotals.csv") -> dict[str, str]:
     sheets = load_workbook(input_path)
     require_sheets(sheets)
     output = Path(output_dir)
@@ -42,7 +47,7 @@ def run(input_path: str | Path, output_dir: str | Path, public_source: str | Pat
     outputs = {"features": str(output / "team_model_features.csv"), "forecasts": str(output / "baseline_forecasts.csv"), "simulations": str(output / "simulation_summary.csv")}
 
     source = Path(public_source) if public_source else Path("data/raw/llimllib_nba_data")
-    live_dir = Path("data/raw/live")
+    live_dir = Path(live_dir)
     if refresh_live or not (live_dir / "live_team_context.csv").exists():
         fetch_live_context(live_dir)
     if source.exists():
@@ -84,10 +89,10 @@ def run(input_path: str | Path, output_dir: str | Path, public_source: str | Pat
         next_forecast["independent_predicted_wins"] = next_forecast["predicted_wins"]
         if "roster_aware_predicted_wins" not in next_forecast.columns:
             next_forecast["roster_aware_predicted_wins"] = next_forecast["predicted_wins"]
-        market_path = Path("data/raw/external_market_wintotals.csv")
+        market_path = Path(market_path)
         if market_path.exists():
             market = pd.read_csv(market_path)
-            next_forecast = next_forecast.merge(market[["team_abbr", "market_win_total"]], on="team_abbr", how="left")
+            next_forecast = attach_market_priors(next_forecast, market)
         if "market_win_total" not in next_forecast.columns:
             next_forecast["market_win_total"] = np.nan
         live_context_path = live_dir / "live_team_context.csv"
@@ -107,7 +112,7 @@ def run(input_path: str | Path, output_dir: str | Path, public_source: str | Pat
                 next_forecast["predicted_wins"],
             ).clip(0, 82)
             next_forecast["model_name"] = "holistic ensemble: form + roster + market prior"
-            next_forecast["conference"] = np.where(next_forecast["team_abbr"].isin({"ATL", "BOS", "BRK", "CHO", "CHI", "CLE", "DET", "IND", "MIA", "MIL", "NYK", "ORL", "PHI", "TOR", "WAS"}), "East", "West")
+            next_forecast["conference"] = next_forecast["team_abbr"].map(conference_for)
             schedule_path = live_dir / "current_schedule.csv"
             schedule = pd.read_csv(schedule_path) if schedule_path.exists() and schedule_path.stat().st_size > 10 else pd.DataFrame()
             if not schedule.empty:
@@ -163,14 +168,37 @@ def run(input_path: str | Path, output_dir: str | Path, public_source: str | Pat
     return outputs
 
 
+def run(input_path: str | Path, output_dir: str | Path, public_source: str | Path | None = None, refresh_live: bool = False, live_dir: str | Path = "data/raw/live", market_path: str | Path = "data/raw/external_market_wintotals.csv") -> dict[str, str]:
+    """Publish one complete validated generation; output_dir is the logical processed directory."""
+    output = Path(output_dir).resolve()
+    if output.name != "processed":
+        raise ValueError("Output must end in 'processed'; its parent is the persistent data root")
+    data_root = output.parent
+    source = Path(public_source or "data/raw/llimllib_nba_data").resolve()
+    if not source.is_dir():
+        raise FileNotFoundError("Historical source is required to publish a complete forecast")
+    current = resolve_snapshot(data_root)
+    seed_live = current / "raw/live" if (current / "raw/live").exists() else Path(live_dir)
+    def build(stage: Path) -> None:
+        staged_live = stage / "raw/live"
+        if seed_live.exists():
+            shutil.copytree(seed_live, staged_live)
+        _run_into(input_path, stage / "processed", source, refresh_live, staged_live, market_path)
+        archive_forecast(stage)
+    target = publish_snapshot(data_root, build)
+    return {"snapshot": str(target), "pointer": str(data_root / "current.json")}
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--input", required=True, help="Path to source .xlsx workbook")
     parser.add_argument("--output", default="data/processed", help="Output directory")
     parser.add_argument("--public-source", default=None, help="Path to cloned llimllib/nba_data repository")
     parser.add_argument("--refresh-live", action="store_true", help="Refresh current rosters, injuries, schedules, and transactions")
+    parser.add_argument("--live-dir", default="data/raw/live")
+    parser.add_argument("--market-path", default="data/raw/external_market_wintotals.csv")
     args = parser.parse_args()
-    for label, path in run(args.input, args.output, args.public_source, args.refresh_live).items():
+    for label, path in run(args.input, args.output, args.public_source, args.refresh_live, args.live_dir, args.market_path).items():
         print(f"{label}: {path}")
 
 

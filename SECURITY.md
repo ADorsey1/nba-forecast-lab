@@ -2,14 +2,12 @@
 
 ## Current Scope
 
-NBA Forecast Lab is a local Streamlit application that reads public basketball data and writes local forecast artifacts. It has a lightweight single-account login gate backed by Streamlit secrets, but no user database, payment flow, file upload, or private-user-data surface.
+NBA Forecast Lab is a local Streamlit application that reads public basketball data and writes local forecast artifacts. It is a public read-only dashboard with no user database, payment flow, file upload, or private-user-data surface. The app does not read legacy local login secrets.
 
 ## Controls Implemented
 
 - Secret-bearing files are ignored by default, including `.env`, key files, certificate files, `secrets/`, and generated logs.
 - `scripts/security_audit.py` scans project text files for common API keys, tokens, passwords, bearer credentials, and private-key blocks without printing matched secret values.
-- Passwords are stored as salted PBKDF2-SHA256 hashes, not plaintext values.
-- Login sessions use a sliding expiration window and per-session failure throttling.
 - The cookie notice records dismissal only in the current Streamlit session; it does not set an advertising or analytics cookie.
 - UTM parameters are retained only in the current session for diagnostics and are not sent to an analytics provider.
 - Raw HTML rendering is limited to static layout plus escaped values from data files.
@@ -34,4 +32,4 @@ Database row-level security, parameterized SQL, bot protection, encrypted sensit
 
 ## Hosted Deployment Requirements
 
-The development server is not an internet-facing security boundary. The built-in gate protects the Streamlit session but is not a full identity provider or organization-wide access-control system. A public deployment must add server-side authentication or an OIDC provider, HTTPS termination, security headers at a reverse proxy, origin allowlisting, distributed rate limiting, dependency scanning in CI, secret management through the host, and restricted access to raw live-provider payloads and logs. Do not expose the local Streamlit process directly to the public internet.
+Host the public read-only dashboard behind managed HTTPS. Keep secrets and refresh credentials in the host secret store, restrict raw provider payloads and logs to operators, and run dependency scanning in CI. Refresh jobs must run separately from web requests. The local loopback server is for development. If private user features are added later, use managed identity and server-side authorization before exposing those features; the legacy single-account helpers are not a production identity system.

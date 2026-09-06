@@ -40,6 +40,7 @@ def test_baseline_and_simulation_outputs_have_expected_shape():
     assert simulations["wins_p90"].between(0, 82).all()
 
 
+@pytest.mark.integration
 def test_roster_transition_features_have_team_season_grain():
     transitions = build_historical_roster_features(PUBLIC_SOURCE)
     assert len(transitions) == len(transitions[["season_end_year", "team_abbr"]].drop_duplicates())
@@ -49,6 +50,7 @@ def test_roster_transition_features_have_team_season_grain():
     assert continuity.between(0, 1).all()
 
 
+@pytest.mark.integration
 def test_roster_aware_backtest_is_available():
     training = build_historical_training_table(PUBLIC_SOURCE)
     predictions, metrics = expanding_backtest(training)
