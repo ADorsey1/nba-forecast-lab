@@ -280,15 +280,15 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1642383,Walter Clayton Jr.,MEM,20.44253623188406,-9.6,100.0,Latest historical season; on-court net rating
 1642907,Cedric Coward,MEM,25.773333333333333,0.3,100.0,Latest historical season; on-court net rating
 1641744,Zach Edey,MEM,25.804696969696973,18.3,100.0,Latest historical season; on-court net rating
-201959,Taj Gibson,MEM,9.687333333333333,-4.7,100.0,Latest historical season; on-court net rating
 203924,Jerami Grant,MEM,29.73862573099415,-0.3,100.0,Latest historical season; on-court net rating
+1641722,Jordan Hawkins,MEM,13.568137254901961,-9.8,100.0,Latest historical season; on-court net rating
 1641707,Taylor Hendricks,MEM,18.957033898305085,-10.7,100.0,Latest historical season; on-court net rating
 1641713,GG Jackson,MEM,21.413909090909094,-3.5,100.0,Latest historical season; on-court net rating
 1629660,Ty Jerome,MEM,22.57922222222222,-5.0,100.0,Latest historical season; on-court net rating
-1642358,AJ Johnson,MEM,9.446527777777778,-6.4,100.0,Latest historical season; on-court net rating
 1643510,Karim Lopez,MEM,12.0,0.0,100.0,Neutral assumption — no matched history
 1642942,Jahmai Mashack,MEM,21.71456989247312,-14.5,100.0,Latest historical season; on-court net rating
 1631200,Kris Murray,MEM,23.38964912280702,1.5,100.0,Latest historical season; on-court net rating
+1642877,Micah Peavy,MEM,14.966147540983606,-4.1,100.0,Latest historical season; on-court net rating
 1630590,Scotty Pippen Jr.,MEM,21.186666666666667,-11.5,100.0,Latest historical season; on-court net rating
 1642366,Quinten Post,MEM,17.301467661691543,2.3,100.0,Latest historical season; on-court net rating
 1641765,Olivier-Maxence Prosper,MEM,18.558333333333334,-9.7,100.0,Latest historical season; on-court net rating
@@ -361,8 +361,9 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1641723,Kobe Bufkin,NOP,7.467708333333333,-20.0,100.0,Latest historical season; on-court net rating
 1643738,Malik Dia,NOP,12.0,0.0,100.0,Neutral assumption — no matched history
 1642847,Jeremiah Fears,NOP,25.75491869918699,-6.4,100.0,Latest historical season; on-court net rating
-1641722,Jordan Hawkins,NOP,13.568137254901961,-9.8,100.0,Latest historical season; on-court net rating
+201959,Taj Gibson,NOP,9.687333333333333,-4.7,100.0,Latest historical season; on-court net rating
 1631216,Caleb Houstan,NOP,4.192592592592593,-0.6,100.0,Latest historical season; on-court net rating
+1642358,AJ Johnson,NOP,9.446527777777778,-6.4,100.0,Latest historical season; on-court net rating
 1630529,Herbert Jones,NOP,28.363958333333333,-0.9,100.0,Latest historical season; on-court net rating
 201599,DeAndre Jordan,NOP,16.566666666666666,-2.4,100.0,Latest historical season; on-court net rating
 1631132,Christian Koloko,NOP,13.209938271604939,-1.3,100.0,Latest historical season; on-court net rating
@@ -371,7 +372,6 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1642274,Yves Missi,NOP,19.652070707070706,-1.3,100.0,Latest historical season; on-court net rating
 1630530,Trey Murphy III,NOP,35.46421717171717,-3.6,100.0,Latest historical season; on-court net rating
 1627749,Dejounte Murray,NOP,27.815476190476193,1.3,100.0,Latest historical season; on-court net rating
-1642877,Micah Peavy,NOP,14.966147540983606,-4.1,100.0,Latest historical season; on-court net rating
 1643555,Jaron Pierre Jr.,NOP,12.0,0.0,100.0,Neutral assumption — no matched history
 1629673,Jordan Poole,NOP,23.9291452991453,-7.9,100.0,Latest historical season; on-court net rating
 1642852,Derik Queen,NOP,24.98,-6.7,100.0,Latest historical season; on-court net rating

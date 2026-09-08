@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "recorded_at_utc": "2026-09-08T16:38:10.009150+00:00",
+  "recorded_at_utc": "2026-09-08T21:09:29.252380+00:00",
   "season": "2026-27",
   "first_game_utc": null,
-  "features_observed_at_utc": "2026-09-08T16:37:41.796966+00:00",
-  "forecast_sha256": "74e6d4b5e8c4e6c8db4da6410b32d1544f1cce7c5479c900ad6802de88bb9e5d",
+  "features_observed_at_utc": "2026-09-08T21:09:01.530455+00:00",
+  "forecast_sha256": "ef3d54a8a38bf0e33ec14d01f20e5269b0aa93eb36cbd48e85afb3bce716247f",
   "preseason_eligible": false,
   "ineligibility_reasons": [
     "Publication is not verified before the first scheduled game"
