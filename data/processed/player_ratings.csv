@@ -10,6 +10,7 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1642933,Keshon Gilbert,ATL,18.445833333333333,-20.0,100.0,Latest historical season; on-court net rating
 1631243,Mouhamed Gueye,ATL,15.309567099567099,2.3,100.0,Latest historical season; on-court net rating
 1627741,Buddy Hield,ATL,16.064150326797385,-4.9,100.0,Latest historical season; on-court net rating
+1642045,Devon Higgs,ATL,12.0,0.0,100.0,Neutral assumption — no matched history
 1630552,Jalen Johnson,ATL,35.16108796296297,3.2,100.0,Latest historical season; on-court net rating
 1630557,Corey Kispert,ATL,18.61390804597701,-7.0,100.0,Latest historical season; on-court net rating
 1629111,Jock Landale,ATL,22.148186274509804,-2.2,100.0,Latest historical season; on-court net rating
@@ -139,6 +140,7 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1631128,Christian Braun,DEN,31.798598484848483,10.1,100.0,Latest historical season; on-court net rating
 1642350,Trevon Brazile,DEN,12.0,0.0,100.0,Neutral assumption — no matched history
 1628971,Bruce Brown,DEN,24.363272357723577,-1.0,100.0,Latest historical season; on-court net rating
+201942,DeMar DeRozan,DEN,31.240454545454543,-11.7,100.0,Latest historical season; on-court net rating
 1643813,Alpha Diallo,DEN,12.0,0.0,100.0,Neutral assumption — no matched history
 203932,Aaron Gordon,DEN,27.91550925925926,12.7,100.0,Latest historical season; on-court net rating
 1641747,DaRon Holmes II,DEN,8.3804,-3.0,100.0,Latest historical season; on-court net rating
