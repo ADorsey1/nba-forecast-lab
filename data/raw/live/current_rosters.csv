@@ -1,6 +1,7 @@
 team_abbr,team_id,season,player_id,player_name,age,position,roster_status,experience_years,salary,years_remaining,roster_injury_count
 ATL,1610612737,2026-27,1629638,Nickeil Alexander-Walker,,G,Active,,,,0
 ATL,1610612737,2026-27,1628396,Tony Bradley,,C-F,Active,,,,0
+ATL,1610612737,2026-27,1641990,Keyshawn Bryant,,F,Active,,,,0
 ATL,1610612737,2026-27,1642269,Devin Carter,,G,Active,,,,0
 ATL,1610612737,2026-27,1630700,Dyson Daniels,,G,Active,,,,0
 ATL,1610612737,2026-27,1642484,RayJ Dennis,,G,Active,,,,0
@@ -10,7 +11,6 @@ ATL,1610612737,2026-27,1643412,Kingston Flemings,,G,Active,,,,0
 ATL,1610612737,2026-27,1642933,Keshon Gilbert,,G,Active,,,,0
 ATL,1610612737,2026-27,1631243,Mouhamed Gueye,,F,Active,,,,0
 ATL,1610612737,2026-27,1627741,Buddy Hield,,G,Active,,,,0
-ATL,1610612737,2026-27,1642045,Devon Higgs,,G,Active,,,,0
 ATL,1610612737,2026-27,1630552,Jalen Johnson,,F,Active,,,,0
 ATL,1610612737,2026-27,1630557,Corey Kispert,,F,Active,,,,0
 ATL,1610612737,2026-27,1629111,Jock Landale,,C,Active,,,,0
@@ -155,6 +155,7 @@ DEN,1610612743,2026-27,1630192,Zeke Nnaji,,F-C,Active,,,,0
 DEN,1610612743,2026-27,1631223,David Roddy,,F,Active,,,,0
 DEN,1610612743,2026-27,1642354,KJ Simpson,,G,Active,,,,0
 DEN,1610612743,2026-27,1631124,Julian Strawther,,G,Active,,,,0
+DEN,1610612743,2026-27,1629022,Lonnie Walker IV,,G-F,Active,,,,0
 DET,1610612765,2026-27,1628381,John Collins,,F-C,Active,,,,0
 DET,1610612765,2026-27,1630595,Cade Cunningham,,G,Active,,,,0
 DET,1610612765,2026-27,1631105,Jalen Duren,,C,Active,,,,0
@@ -363,7 +364,6 @@ NOP,1610612740,2026-27,1630180,Saddiq Bey,,G-F,Active,,,,0
 NOP,1610612740,2026-27,1641723,Kobe Bufkin,,G,Active,,,,0
 NOP,1610612740,2026-27,1643738,Malik Dia,,F,Active,,,,0
 NOP,1610612740,2026-27,1642847,Jeremiah Fears,,G,Active,,,,0
-NOP,1610612740,2026-27,201959,Taj Gibson,,F,Active,,,,0
 NOP,1610612740,2026-27,1631216,Caleb Houstan,,G,Active,,,,0
 NOP,1610612740,2026-27,1642358,AJ Johnson,,G,Active,,,,0
 NOP,1610612740,2026-27,1630529,Herbert Jones,,F,Active,,,,0
