@@ -1,7 +1,7 @@
 team_abbr,team_id,season,player_id,player_name,age,position,roster_status,experience_years,salary,years_remaining,roster_injury_count
 ATL,1610612737,2026-27,1629638,Nickeil Alexander-Walker,,G,Active,,,,0
 ATL,1610612737,2026-27,1628396,Tony Bradley,,C-F,Active,,,,0
-ATL,1610612737,2026-27,1641990,Keyshawn Bryant,,F,Active,,,,0
+ATL,1610612737,2026-27,1642966,Lamont Butler,,G,Active,,,,0
 ATL,1610612737,2026-27,1642269,Devin Carter,,G,Active,,,,0
 ATL,1610612737,2026-27,1630700,Dyson Daniels,,G,Active,,,,0
 ATL,1610612737,2026-27,1642484,RayJ Dennis,,G,Active,,,,0
@@ -249,7 +249,6 @@ LAC,1610612746,2026-27,1642530,Yuki Kawamura,,G,Active,,,,0
 LAC,1610612746,2026-27,202695,Kawhi Leonard,,F,Active,,,,0
 LAC,1610612746,2026-27,201572,Brook Lopez,,C,Active,,,,0
 LAC,1610612746,2026-27,1643568,Nick Martinelli,,F,Active,,,,0
-LAC,1610612746,2026-27,1631097,Bennedict Mathurin,,G-F,Active,,,,0
 LAC,1610612746,2026-27,1642394,Baba Miller,,F,Active,,,,0
 LAC,1610612746,2026-27,1641757,Jordan Miller,,G,Active,,,,0
 LAC,1610612746,2026-27,1643712,Narcisse Ngoy,,C,Active,,,,0
@@ -370,6 +369,7 @@ NOP,1610612740,2026-27,1642358,AJ Johnson,,G,Active,,,,0
 NOP,1610612740,2026-27,1630529,Herbert Jones,,F,Active,,,,0
 NOP,1610612740,2026-27,201599,DeAndre Jordan,,C,Active,,,,0
 NOP,1610612740,2026-27,1631132,Christian Koloko,,C,Active,,,,0
+NOP,1610612740,2026-27,1631097,Bennedict Mathurin,,G-F,Active,,,,0
 NOP,1610612740,2026-27,1631255,Karlo Matković,,F-C,Active,,,,0
 NOP,1610612740,2026-27,1631121,Bryce McGowens,,G,Active,,,,0
 NOP,1610612740,2026-27,1642274,Yves Missi,,C,Active,,,,0
