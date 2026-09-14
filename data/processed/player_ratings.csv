@@ -21,12 +21,14 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1630811,Keaton Wallace,ATL,10.113018867924529,-8.6,100.0,Latest historical season; on-court net rating
 1630598,Aaron Wiggins,ATL,21.75353846153846,6.2,100.0,Latest historical season; on-court net rating
 1630592,Jalen Wilson,ATL,15.911512345679013,-10.9,100.0,Latest historical season; on-court net rating
+1642269,Devin Carter,BOS,18.417587719298247,-7.3,100.0,Latest historical season; on-court net rating
 1643416,Chris Cenac Jr.,BOS,12.0,0.0,100.0,Neutral assumption — no matched history
 201144,Mike Conley,BOS,18.357376543209877,0.2,100.0,Latest historical season; on-court net rating
 1643620,Tucker DeVries,BOS,12.0,0.0,100.0,Neutral assumption — no matched history
 1630568,Luka Garza,BOS,16.20157004830918,5.8,100.0,Latest historical season; on-court net rating
 202331,Paul George,BOS,30.676531531531534,3.6,100.0,Latest historical season; on-court net rating
 1642864,Hugo González,BOS,14.647702702702704,11.9,100.0,Latest historical season; on-court net rating
+1642934,Caleb Grill,BOS,12.0,0.0,100.0,Neutral assumption — no matched history
 1631199,Ron Harper Jr.,BOS,10.94919540229885,2.7,100.0,Latest historical season; on-court net rating
 1630573,Sam Hauser,BOS,24.796794871794873,8.8,100.0,Latest historical season; on-court net rating
 1641759,Dillon Mitchell,BOS,12.0,0.0,100.0,Neutral assumption — no matched history
@@ -217,10 +219,13 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1643570,Bruce Thornton,HOU,12.0,0.0,100.0,Neutral assumption — no matched history
 1631131,Oscar Tshiebwe,HOU,16.60814814814815,-8.0,100.0,Latest historical season; on-court net rating
 1627832,Fred VanVleet,HOU,12.0,0.0,100.0,Neutral assumption — no matched history
+1631232,Keion Brooks Jr.,IND,12.0,0.0,100.0,Neutral assumption — no matched history
 1641738,Kobe Brown,IND,15.776666666666667,-10.5,100.0,Latest historical season; on-court net rating
 1642277,Johnny Furphy,IND,18.37295238095238,-4.6,100.0,Latest historical season; on-court net rating
 1630169,Tyrese Haliburton,IND,12.0,0.0,100.0,Neutral assumption — no matched history
+1643160,Cameron Hildreth,IND,12.0,0.0,100.0,Neutral assumption — no matched history
 1630643,Jay Huff,IND,20.966382113821137,-6.3,100.0,Latest historical season; on-court net rating
+1643161,M.J. Iraldi,IND,12.0,0.0,100.0,Neutral assumption — no matched history
 1631245,Quenton Jackson,IND,18.314795918367345,-3.8,100.0,Latest historical season; on-court net rating
 204456,T.J. McConnell,IND,17.187589285714285,-7.6,100.0,Latest historical season; on-court net rating
 1626204,Larry Nance Jr.,IND,12.822,-2.9,100.0,Latest historical season; on-court net rating
@@ -231,6 +236,7 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1627783,Pascal Siakam,IND,33.17180107526882,-5.6,100.0,Latest historical season; on-court net rating
 1641771,Jalen Slawson,IND,23.888461538461538,-4.3,100.0,Latest historical season; on-court net rating
 1643552,Braden Smith,IND,12.0,0.0,100.0,Neutral assumption — no matched history
+1642965,Wade Taylor IV,IND,12.0,0.0,100.0,Neutral assumption — no matched history
 1630167,Obi Toppin,IND,17.655208333333334,-3.6,100.0,Latest historical season; on-court net rating
 1641716,Jarace Walker,IND,25.702412280701754,-11.1,100.0,Latest historical season; on-court net rating
 1627826,Ivica Zubac,IND,30.13954861111111,-2.4,100.0,Latest historical season; on-court net rating
