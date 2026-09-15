@@ -1,11 +1,11 @@
 {
-  "fetched_at_utc": "2026-09-15T04:53:04.985462+00:00",
+  "fetched_at_utc": "2026-09-15T11:43:10.887637+00:00",
   "availability": {
     "rosters": true,
     "injuries": false,
     "schedule": false,
     "transactions": true,
-    "official_roster_signings": true
+    "official_roster_signings": false
   },
   "season": "2026-27",
   "sources": {
