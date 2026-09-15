@@ -1,5 +1,6 @@
 player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1629638,Nickeil Alexander-Walker,ATL,33.37405982905983,4.0,100.0,Latest historical season; on-court net rating
+1642475,William Baker,ATL,12.0,0.0,100.0,Neutral assumption — no matched history
 1628396,Tony Bradley,ATL,10.992357723577236,-14.2,100.0,Latest historical season; on-court net rating
 1630700,Dyson Daniels,ATL,33.15184210526316,6.2,100.0,Latest historical season; on-court net rating
 1642484,RayJ Dennis,ATL,12.131372549019607,-14.2,100.0,Latest historical season; on-court net rating
@@ -244,13 +245,14 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 203078,Bradley Beal,LAC,20.15277777777778,-9.3,100.0,Latest historical season; on-court net rating
 1641780,Johni Broome,LAC,4.978333333333333,-13.6,100.0,Latest historical season; on-court net rating
 1642353,Cam Christie,LAC,8.722727272727273,-0.6,100.0,Latest historical season; on-court net rating
+1641711,Gradey Dick,LAC,14.035372807017543,4.1,100.0,Latest historical season; on-court net rating
 1627739,Kris Dunn,LAC,27.195121951219512,0.5,100.0,Latest historical season; on-court net rating
 1629636,Darius Garland,LAC,29.872814814814813,2.6,100.0,Latest historical season; on-court net rating
 1629060,Rui Hachimura,LAC,28.331838235294118,2.0,100.0,Latest historical season; on-court net rating
+1627742,Brandon Ingram,LAC,33.81640692640693,1.0,100.0,Latest historical season; on-court net rating
 1630543,Isaiah Jackson,LAC,16.514757575757574,-2.9,100.0,Latest historical season; on-court net rating
 1627884,Derrick Jones Jr.,LAC,26.990166666666667,4.0,100.0,Latest historical season; on-court net rating
 1642530,Yuki Kawamura,LAC,11.612222222222222,-2.3,100.0,Latest historical season; on-court net rating
-202695,Kawhi Leonard,LAC,32.072743589743595,7.5,100.0,Latest historical season; on-court net rating
 201572,Brook Lopez,LAC,21.803644444444444,1.2,100.0,Latest historical season; on-court net rating
 1643568,Nick Martinelli,LAC,12.0,0.0,100.0,Neutral assumption — no matched history
 1642394,Baba Miller,LAC,12.0,0.0,100.0,Neutral assumption — no matched history
@@ -413,6 +415,7 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1642923,Otega Oweh,OKC,12.0,0.0,100.0,Neutral assumption — no matched history
 1642850,Thomas Sorber,OKC,12.0,0.0,100.0,Neutral assumption — no matched history
 1642892,Bennett Stirtz,OKC,12.0,0.0,100.0,Neutral assumption — no matched history
+1643754,Cristoph Tilly,OKC,12.0,0.0,100.0,Neutral assumption — no matched history
 1642260,Nikola Topić,OKC,16.008333333333333,-13.7,100.0,Latest historical season; on-court net rating
 1641717,Cason Wallace,OKC,26.572337662337663,12.4,100.0,Latest historical season; on-court net rating
 1631114,Jalen Williams,OKC,28.362525252525252,11.7,100.0,Latest historical season; on-court net rating
@@ -540,14 +543,13 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1642419,Jamison Battle,TOR,8.471775956284153,6.7,100.0,Latest historical season; on-court net rating
 1642927,Nate Bittle,TOR,12.0,0.0,100.0,Neutral assumption — no matched history
 1643558,Jaden Bradley,TOR,12.0,0.0,100.0,Neutral assumption — no matched history
-1641711,Gradey Dick,TOR,14.035372807017543,4.1,100.0,Latest historical season; on-court net rating
 1643512,Allen Graves,TOR,12.0,0.0,100.0,Neutral assumption — no matched history
 1642935,Chucky Hepburn,TOR,6.616666666666666,-20.0,100.0,Latest historical season; on-court net rating
-1627742,Brandon Ingram,TOR,33.81640692640693,1.0,100.0,Latest historical season; on-court net rating
 1641748,Andre Jackson Jr.,TOR,8.502256944444445,-7.5,100.0,Latest historical season; on-court net rating
 1631218,Trayce Jackson-Davis,TOR,9.359182389937107,-7.6,100.0,Latest historical season; on-court net rating
 1641998,Trey Jemison III,TOR,6.276025641025641,-16.8,100.0,Latest historical season; on-court net rating
 1630639,A.J. Lawson,TOR,9.421458333333334,-3.1,100.0,Latest historical season; on-court net rating
+202695,Kawhi Leonard,TOR,32.072743589743595,7.5,100.0,Latest historical season; on-court net rating
 1642918,Alijah Martin,TOR,6.331086956521739,-5.8,100.0,Latest historical season; on-court net rating
 1642867,Collin Murray-Boyles,TOR,21.852631578947367,2.6,100.0,Latest historical season; on-court net rating
 1627751,Jakob Poeltl,TOR,24.979565217391304,2.0,100.0,Latest historical season; on-court net rating

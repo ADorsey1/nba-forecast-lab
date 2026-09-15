@@ -1,5 +1,6 @@
 team_abbr,team_id,season,player_id,player_name,age,position,roster_status,experience_years,salary,years_remaining,roster_injury_count
 ATL,1610612737,2026-27,1629638,Nickeil Alexander-Walker,,G,Active,,,,0
+ATL,1610612737,2026-27,1642475,William Baker,,C,Active,,,,0
 ATL,1610612737,2026-27,1628396,Tony Bradley,,C-F,Active,,,,0
 ATL,1610612737,2026-27,1630700,Dyson Daniels,,G,Active,,,,0
 ATL,1610612737,2026-27,1642484,RayJ Dennis,,G,Active,,,,0
@@ -244,13 +245,14 @@ LAC,1610612746,2026-27,201587,Nicolas Batum,,G-F,Active,,,,0
 LAC,1610612746,2026-27,203078,Bradley Beal,,G,Active,,,,0
 LAC,1610612746,2026-27,1641780,Johni Broome,,F,Active,,,,0
 LAC,1610612746,2026-27,1642353,Cam Christie,,G,Active,,,,0
+LAC,1610612746,2026-27,1641711,Gradey Dick,,G-F,Active,,,,0
 LAC,1610612746,2026-27,1627739,Kris Dunn,,G,Active,,,,0
 LAC,1610612746,2026-27,1629636,Darius Garland,,G,Active,,,,0
 LAC,1610612746,2026-27,1629060,Rui Hachimura,,F,Active,,,,0
+LAC,1610612746,2026-27,1627742,Brandon Ingram,,F,Active,,,,0
 LAC,1610612746,2026-27,1630543,Isaiah Jackson,,F,Active,,,,0
 LAC,1610612746,2026-27,1627884,Derrick Jones Jr.,,F,Active,,,,0
 LAC,1610612746,2026-27,1642530,Yuki Kawamura,,G,Active,,,,0
-LAC,1610612746,2026-27,202695,Kawhi Leonard,,F,Active,,,,0
 LAC,1610612746,2026-27,201572,Brook Lopez,,C,Active,,,,0
 LAC,1610612746,2026-27,1643568,Nick Martinelli,,F,Active,,,,0
 LAC,1610612746,2026-27,1642394,Baba Miller,,F,Active,,,,0
@@ -413,6 +415,7 @@ OKC,1610612760,2026-27,1642349,Ajay Mitchell,,G,Active,,,,0
 OKC,1610612760,2026-27,1642923,Otega Oweh,,G,Active,,,,0
 OKC,1610612760,2026-27,1642850,Thomas Sorber,,C,Active,,,,0
 OKC,1610612760,2026-27,1642892,Bennett Stirtz,,G,Active,,,,0
+OKC,1610612760,2026-27,1643754,Cristoph Tilly,,,Active,,,,0
 OKC,1610612760,2026-27,1642260,Nikola Topić,,G,Active,,,,0
 OKC,1610612760,2026-27,1641717,Cason Wallace,,G,Active,,,,0
 OKC,1610612760,2026-27,1631114,Jalen Williams,,G-F,Active,,,,0
@@ -540,14 +543,13 @@ TOR,1610612761,2026-27,1629628,RJ Barrett,,F-G,Active,,,,0
 TOR,1610612761,2026-27,1642419,Jamison Battle,,F,Active,,,,0
 TOR,1610612761,2026-27,1642927,Nate Bittle,,C,Active,,,,0
 TOR,1610612761,2026-27,1643558,Jaden Bradley,,G,Active,,,,0
-TOR,1610612761,2026-27,1641711,Gradey Dick,,G-F,Active,,,,0
 TOR,1610612761,2026-27,1643512,Allen Graves,,F,Active,,,,0
 TOR,1610612761,2026-27,1642935,Chucky Hepburn,,G,Active,,,,0
-TOR,1610612761,2026-27,1627742,Brandon Ingram,,F,Active,,,,0
 TOR,1610612761,2026-27,1641748,Andre Jackson Jr.,,G,Active,,,,0
 TOR,1610612761,2026-27,1631218,Trayce Jackson-Davis,,F,Active,,,,0
 TOR,1610612761,2026-27,1641998,Trey Jemison III,,C,Active,,,,0
 TOR,1610612761,2026-27,1630639,A.J. Lawson,,G,Active,,,,0
+TOR,1610612761,2026-27,202695,Kawhi Leonard,,F,Active,,,,0
 TOR,1610612761,2026-27,1642918,Alijah Martin,,G,Active,,,,0
 TOR,1610612761,2026-27,1642867,Collin Murray-Boyles,,F,Active,,,,0
 TOR,1610612761,2026-27,1627751,Jakob Poeltl,,C,Active,,,,0
