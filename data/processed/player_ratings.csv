@@ -29,7 +29,6 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1630568,Luka Garza,BOS,16.20157004830918,5.8,100.0,Latest historical season; on-court net rating
 202331,Paul George,BOS,30.676531531531534,3.6,100.0,Latest historical season; on-court net rating
 1642864,Hugo González,BOS,14.647702702702704,11.9,100.0,Latest historical season; on-court net rating
-1642934,Caleb Grill,BOS,12.0,0.0,100.0,Neutral assumption — no matched history
 1631199,Ron Harper Jr.,BOS,10.94919540229885,2.7,100.0,Latest historical season; on-court net rating
 1630573,Sam Hauser,BOS,24.796794871794873,8.8,100.0,Latest historical season; on-court net rating
 1641759,Dillon Mitchell,BOS,12.0,0.0,100.0,Neutral assumption — no matched history
@@ -52,6 +51,7 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1643052,Chaney Johnson,BRK,20.44607843137255,-9.0,100.0,Latest historical season; on-court net rating
 1629611,Terance Mann,BRK,24.27010582010582,-8.2,100.0,Latest historical season; on-court net rating
 1631169,Josh Minott,BRK,17.014931972789118,-0.1,100.0,Latest historical season; on-court net rating
+1642605,"Dwight Murray, Jr.",BRK,12.0,0.0,100.0,Neutral assumption — no matched history
 1641761,Grant Nelson,BRK,8.7525,-9.9,100.0,Latest historical season; on-court net rating
 1629008,Michael Porter Jr.,BRK,32.47314102564103,-6.6,100.0,Latest historical season; on-court net rating
 1642962,Drake Powell,BRK,20.944656084656085,-16.1,100.0,Latest historical season; on-court net rating
@@ -61,6 +61,7 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1642849,Nolan Traore,BRK,22.20342261904762,-10.5,100.0,Latest historical season; on-court net rating
 1629021,Moritz Wagner,BRK,11.849861111111112,-10.0,100.0,Latest historical season; on-court net rating
 1642874,Danny Wolf,BRK,20.82739766081871,-9.0,100.0,Latest historical season; on-court net rating
+1631209,Isaiah Wong,BRK,12.0,0.0,100.0,Neutral assumption — no matched history
 1642369,Michael Ajayi,CHO,12.0,0.0,100.0,Neutral assumption — no matched history
 1628960,Grayson Allen,CHO,28.770163398692812,0.1,100.0,Latest historical season; on-court net rating
 1643515,Christian Anderson,CHO,12.0,0.0,100.0,Neutral assumption — no matched history
@@ -106,6 +107,7 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1642400,Tristan Enaruna,CLE,9.45925925925926,20.0,100.0,Latest historical season; on-court net rating
 201935,James Harden,CLE,34.83564285714286,1.8,100.0,Latest historical season; on-court net rating
 1626209,Mario Hezonja,CLE,12.0,0.0,100.0,Neutral assumption — no matched history
+1642619,Sean McNeil,CLE,12.0,0.0,100.0,Neutral assumption — no matched history
 1630241,Sam Merrill,CLE,26.482179487179486,7.7,100.0,Latest historical season; on-court net rating
 1642434,Riley Minix,CLE,6.453703703703704,20.0,100.0,Latest historical season; on-court net rating
 1628378,Donovan Mitchell,CLE,33.45804761904762,7.2,100.0,Latest historical season; on-court net rating
@@ -189,6 +191,7 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1643650,Lajae Jones,GSW,12.0,0.0,100.0,Neutral assumption — no matched history
 1642865,Yaxel Lendeborg,GSW,12.0,0.0,100.0,Neutral assumption — no matched history
 1642502,Malevy Leons,GSW,11.058866666666667,-10.6,100.0,Latest historical season; on-court net rating
+1642943,Chance McMillian,GSW,12.0,0.0,100.0,Neutral assumption — no matched history
 1629001,De'Anthony Melton,GSW,22.96442176870748,3.9,100.0,Latest historical season; on-court net rating
 1630541,Moses Moody,GSW,25.66497222222222,2.2,100.0,Latest historical season; on-court net rating
 1627777,Georges Niang,GSW,12.0,0.0,100.0,Neutral assumption — no matched history
@@ -197,6 +200,7 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 204001,Kristaps Porziņģis,GSW,24.027864583333333,3.0,100.0,Latest historical season; on-court net rating
 1642954,Will Richard,GSW,19.953695652173913,-3.3,100.0,Latest historical season; on-court net rating
 1630611,Gui Santos,GSW,20.520049019607843,1.0,100.0,Latest historical season; on-court net rating
+1643090,Deivon Smith,GSW,12.0,0.0,100.0,Neutral assumption — no matched history
 1631207,Dalen Terry,GSW,11.479722222222222,-2.9,100.0,Latest historical season; on-court net rating
 1642893,Alex Toohey,GSW,12.0,0.0,100.0,Neutral assumption — no matched history
 1630314,Brandon Williams,GSW,22.161287878787878,-4.4,100.0,Latest historical season; on-court net rating
@@ -383,10 +387,10 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1642274,Yves Missi,NOP,19.652070707070706,-1.3,100.0,Latest historical season; on-court net rating
 1630530,Trey Murphy III,NOP,35.46421717171717,-3.6,100.0,Latest historical season; on-court net rating
 1627749,Dejounte Murray,NOP,27.815476190476193,1.3,100.0,Latest historical season; on-court net rating
+1643159,Johnny O'Neil,NOP,12.0,0.0,100.0,Neutral assumption — no matched history
 1643555,Jaron Pierre Jr.,NOP,12.0,0.0,100.0,Neutral assumption — no matched history
 1629673,Jordan Poole,NOP,23.9291452991453,-7.9,100.0,Latest historical season; on-court net rating
 1642852,Derik Queen,NOP,24.98,-6.7,100.0,Latest historical season; on-court net rating
-1643104,Christian Shumate,NOP,12.0,0.0,100.0,Neutral assumption — no matched history
 1630570,Trendon Watford,NOP,16.296540880503144,-9.1,100.0,Latest historical season; on-court net rating
 1629627,Zion Williamson,NOP,29.69456989247312,-1.9,100.0,Latest historical season; on-court net rating
 1630631,Jose Alvarado,NYK,19.858502415458936,1.3,100.0,Latest historical season; on-court net rating
