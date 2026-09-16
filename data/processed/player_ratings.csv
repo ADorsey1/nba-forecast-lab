@@ -51,7 +51,6 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1643052,Chaney Johnson,BRK,20.44607843137255,-9.0,100.0,Latest historical season; on-court net rating
 1629611,Terance Mann,BRK,24.27010582010582,-8.2,100.0,Latest historical season; on-court net rating
 1631169,Josh Minott,BRK,17.014931972789118,-0.1,100.0,Latest historical season; on-court net rating
-1642605,"Dwight Murray, Jr.",BRK,12.0,0.0,100.0,Neutral assumption — no matched history
 1641761,Grant Nelson,BRK,8.7525,-9.9,100.0,Latest historical season; on-court net rating
 1629008,Michael Porter Jr.,BRK,32.47314102564103,-6.6,100.0,Latest historical season; on-court net rating
 1642962,Drake Powell,BRK,20.944656084656085,-16.1,100.0,Latest historical season; on-court net rating
@@ -61,7 +60,6 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1642849,Nolan Traore,BRK,22.20342261904762,-10.5,100.0,Latest historical season; on-court net rating
 1629021,Moritz Wagner,BRK,11.849861111111112,-10.0,100.0,Latest historical season; on-court net rating
 1642874,Danny Wolf,BRK,20.82739766081871,-9.0,100.0,Latest historical season; on-court net rating
-1631209,Isaiah Wong,BRK,12.0,0.0,100.0,Neutral assumption — no matched history
 1642369,Michael Ajayi,CHO,12.0,0.0,100.0,Neutral assumption — no matched history
 1628960,Grayson Allen,CHO,28.770163398692812,0.1,100.0,Latest historical season; on-court net rating
 1643515,Christian Anderson,CHO,12.0,0.0,100.0,Neutral assumption — no matched history
@@ -162,14 +160,12 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1628381,John Collins,DET,27.122874396135263,-1.2,100.0,Latest historical season; on-court net rating
 1630595,Cade Cunningham,DET,33.932369791666666,11.4,100.0,Latest historical season; on-court net rating
 1631105,Jalen Duren,DET,28.226476190476188,11.8,100.0,Latest historical season; on-court net rating
-1630615,Dawson Garcia,DET,12.0,0.0,100.0,Neutral assumption — no matched history
 1629750,Javonte Green,DET,17.633678861788617,7.6,100.0,Latest historical season; on-court net rating
 1641989,Elijah Harkless,DET,20.954358974358975,-2.5,100.0,Latest historical season; on-court net rating
 203914,Gary Harris,DET,13.766006944444444,-9.6,100.0,Latest historical season; on-court net rating
 1641842,Ronald Holland II,DET,19.877542735042734,5.7,100.0,Latest historical season; on-court net rating
 1628989,Kevin Huerter,DET,22.45038647342995,2.3,100.0,Latest historical season; on-court net rating
 1642450,Daniss Jenkins,DET,20.2125,6.6,100.0,Latest historical season; on-court net rating
-1643218,Basheer Jihad,DET,12.0,0.0,100.0,Neutral assumption — no matched history
 1630198,Isaiah Joe,DET,21.231619718309858,11.7,100.0,Latest historical season; on-court net rating
 1642403,Isaac Jones,DET,5.097619047619047,-20.0,100.0,Latest historical season; on-court net rating
 1642404,Chaz Lanier,DET,7.706029411764706,2.0,100.0,Latest historical season; on-court net rating
@@ -226,13 +222,10 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1643570,Bruce Thornton,HOU,12.0,0.0,100.0,Neutral assumption — no matched history
 1631131,Oscar Tshiebwe,HOU,16.60814814814815,-8.0,100.0,Latest historical season; on-court net rating
 1627832,Fred VanVleet,HOU,12.0,0.0,100.0,Neutral assumption — no matched history
-1631232,Keion Brooks Jr.,IND,12.0,0.0,100.0,Neutral assumption — no matched history
 1641738,Kobe Brown,IND,15.776666666666667,-10.5,100.0,Latest historical season; on-court net rating
 1642277,Johnny Furphy,IND,18.37295238095238,-4.6,100.0,Latest historical season; on-court net rating
 1630169,Tyrese Haliburton,IND,12.0,0.0,100.0,Neutral assumption — no matched history
-1643160,Cameron Hildreth,IND,12.0,0.0,100.0,Neutral assumption — no matched history
 1630643,Jay Huff,IND,20.966382113821137,-6.3,100.0,Latest historical season; on-court net rating
-1643161,M.J. Iraldi,IND,12.0,0.0,100.0,Neutral assumption — no matched history
 1631245,Quenton Jackson,IND,18.314795918367345,-3.8,100.0,Latest historical season; on-court net rating
 204456,T.J. McConnell,IND,17.187589285714285,-7.6,100.0,Latest historical season; on-court net rating
 1626204,Larry Nance Jr.,IND,12.822,-2.9,100.0,Latest historical season; on-court net rating
@@ -243,7 +236,6 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1627783,Pascal Siakam,IND,33.17180107526882,-5.6,100.0,Latest historical season; on-court net rating
 1641771,Jalen Slawson,IND,23.888461538461538,-4.3,100.0,Latest historical season; on-court net rating
 1643552,Braden Smith,IND,12.0,0.0,100.0,Neutral assumption — no matched history
-1642965,Wade Taylor IV,IND,12.0,0.0,100.0,Neutral assumption — no matched history
 1630167,Obi Toppin,IND,17.655208333333334,-3.6,100.0,Latest historical season; on-court net rating
 1641716,Jarace Walker,IND,25.702412280701754,-11.1,100.0,Latest historical season; on-court net rating
 1627826,Ivica Zubac,IND,30.13954861111111,-2.4,100.0,Latest historical season; on-court net rating
@@ -387,7 +379,6 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1642274,Yves Missi,NOP,19.652070707070706,-1.3,100.0,Latest historical season; on-court net rating
 1630530,Trey Murphy III,NOP,35.46421717171717,-3.6,100.0,Latest historical season; on-court net rating
 1627749,Dejounte Murray,NOP,27.815476190476193,1.3,100.0,Latest historical season; on-court net rating
-1643159,Johnny O'Neil,NOP,12.0,0.0,100.0,Neutral assumption — no matched history
 1643555,Jaron Pierre Jr.,NOP,12.0,0.0,100.0,Neutral assumption — no matched history
 1629673,Jordan Poole,NOP,23.9291452991453,-7.9,100.0,Latest historical season; on-court net rating
 1642852,Derik Queen,NOP,24.98,-6.7,100.0,Latest historical season; on-court net rating
