@@ -74,7 +74,7 @@
       "detail": ""
     }
   ],
-  "fetched_at_utc": "2026-09-18T04:41:54.517585+00:00",
+  "fetched_at_utc": "2026-09-18T11:12:45.235216+00:00",
   "source_manifest": {
     "nba_players": "https://www.nba.com/players",
     "espn": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba",
