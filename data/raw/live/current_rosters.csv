@@ -1,6 +1,5 @@
 team_abbr,team_id,season,player_id,player_name,age,position,roster_status,experience_years,salary,years_remaining,roster_injury_count
 ATL,1610612737,2026-27,1629638,Nickeil Alexander-Walker,,G,Active,,,,0
-ATL,1610612737,2026-27,1642475,William Baker,,C,Active,,,,0
 ATL,1610612737,2026-27,1628396,Tony Bradley,,C-F,Active,,,,0
 ATL,1610612737,2026-27,1630700,Dyson Daniels,,G,Active,,,,0
 ATL,1610612737,2026-27,1642484,RayJ Dennis,,G,Active,,,,0
@@ -188,7 +187,6 @@ GSW,1610612744,2026-27,1643650,Lajae Jones,,G-F,Active,,,,0
 GSW,1610612744,2026-27,1642865,Yaxel Lendeborg,,F,Active,,,,0
 GSW,1610612744,2026-27,1642502,Malevy Leons,,F,Active,,,,0
 GSW,1610612744,2026-27,1629001,De'Anthony Melton,,G,Active,,,,0
-GSW,1610612744,2026-27,1642946,Jacksen Moni,,C,Active,,,,0
 GSW,1610612744,2026-27,1630541,Moses Moody,,G,Active,,,,0
 GSW,1610612744,2026-27,1627777,Georges Niang,,F,Active,,,,0
 GSW,1610612744,2026-27,1627780,Gary Payton II,,G,Active,,,,0
@@ -282,7 +280,6 @@ LAL,1610612747,2026-27,1629012,Collin Sexton,,G,Active,,,,0
 LAL,1610612747,2026-27,1642876,Adou Thiero,,G,Active,,,,0
 LAL,1610612747,2026-27,1629680,Matisse Thybulle,,G-F,Active,,,,0
 LAL,1610612747,2026-27,1629020,Jarred Vanderbilt,,F,Active,,,,0
-LAL,1610612747,2026-27,1641817,Anton Watson,,F,Active,,,,0
 LAL,1610612747,2026-27,1630533,Ziaire Williams,,F,Active,,,,0
 MEM,1610612763,2026-27,1643409,Cameron Boozer,,F,Active,,,,0
 MEM,1610612763,2026-27,1642383,Walter Clayton Jr.,,G,Active,,,,0
@@ -350,7 +347,6 @@ MIL,1610612749,2026-27,1626167,Myles Turner,,C-F,Active,,,,0
 MIL,1610612749,2026-27,1642276,Kel'el Ware,,C,Active,,,,0
 MIN,1610612750,2026-27,1630163,LaMelo Ball,,G,Active,,,,0
 MIN,1610612750,2026-27,1642866,Joan Beringer,,F,Active,,,,0
-MIN,1610612750,2026-27,1631262,Jules Bernard,,G,Active,,,,0
 MIN,1610612750,2026-27,1641740,Jaylen Clark,,G,Active,,,,0
 MIN,1610612750,2026-27,1628978,Donte DiVincenzo,,G,Active,,,,0
 MIN,1610612750,2026-27,1630245,Ayo Dosunmu,,G,Active,,,,0
@@ -364,6 +360,7 @@ MIN,1610612750,2026-27,1626168,Trey Lyles,,F,Active,,,,0
 MIN,1610612750,2026-27,1630183,Jaden McDaniels,,F,Active,,,,0
 MIN,1610612750,2026-27,1642389,Zyon Pullin,,G,Active,,,,0
 MIN,1610612750,2026-27,1630545,Terrence Shannon Jr,,G-F,Active,,,,0
+MIN,1610612750,2026-27,1629808,Stephen Thompson,,G,Active,,,,0
 MIN,1610612750,2026-27,1642262,Cody Williams,,F,Active,,,,0
 MIN,1610612750,2026-27,1642911,Rocco Zikarsky,,C,Active,,,,0
 NOP,1610612740,2026-27,1630180,Saddiq Bey,,G-F,Active,,,,0
@@ -488,7 +485,6 @@ PHO,1610612756,2026-27,1630587,Isaiah Livers,,F,Active,,,,0
 PHO,1610612756,2026-27,1642863,Khaman Maluach,,C,Active,,,,0
 PHO,1610612756,2026-27,1643520,Koa Peat,,F,Active,,,,0
 PHO,1610612756,2026-27,1630311,Pat Spencer,,G,Active,,,,0
-PHO,1610612756,2026-27,204065,David Stockton,,G,Active,,,,0
 PHO,1610612756,2026-27,1631109,Mark Williams,,C,Active,,,,0
 POR,1610612757,2026-27,1630166,Deni Avdija,,F,Active,,,,0
 POR,1610612757,2026-27,1641739,Toumani Camara,,F,Active,,,,0

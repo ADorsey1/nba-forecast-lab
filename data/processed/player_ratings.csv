@@ -1,6 +1,5 @@
 player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1629638,Nickeil Alexander-Walker,ATL,33.37405982905983,4.0,100.0,Latest historical season; on-court net rating
-1642475,William Baker,ATL,12.0,0.0,100.0,Neutral assumption — no matched history
 1628396,Tony Bradley,ATL,10.992357723577236,-14.2,100.0,Latest historical season; on-court net rating
 1630700,Dyson Daniels,ATL,33.15184210526316,6.2,100.0,Latest historical season; on-court net rating
 1642484,RayJ Dennis,ATL,12.131372549019607,-14.2,100.0,Latest historical season; on-court net rating
@@ -188,7 +187,6 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1642865,Yaxel Lendeborg,GSW,12.0,0.0,100.0,Neutral assumption — no matched history
 1642502,Malevy Leons,GSW,11.058866666666667,-10.6,100.0,Latest historical season; on-court net rating
 1629001,De'Anthony Melton,GSW,22.96442176870748,3.9,100.0,Latest historical season; on-court net rating
-1642946,Jacksen Moni,GSW,12.0,0.0,100.0,Neutral assumption — no matched history
 1630541,Moses Moody,GSW,25.66497222222222,2.2,100.0,Latest historical season; on-court net rating
 1627777,Georges Niang,GSW,12.0,0.0,100.0,Neutral assumption — no matched history
 1627780,Gary Payton II,GSW,15.647671232876712,-2.3,100.0,Latest historical season; on-court net rating
@@ -282,7 +280,6 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1642876,Adou Thiero,LAL,5.956133333333334,-13.2,100.0,Latest historical season; on-court net rating
 1629680,Matisse Thybulle,LAL,15.988333333333333,9.0,100.0,Latest historical season; on-court net rating
 1629020,Jarred Vanderbilt,LAL,17.34987179487179,0.2,100.0,Latest historical season; on-court net rating
-1641817,Anton Watson,LAL,12.0,0.0,100.0,Neutral assumption — no matched history
 1630533,Ziaire Williams,LAL,22.879761904761903,-10.1,100.0,Latest historical season; on-court net rating
 1643409,Cameron Boozer,MEM,12.0,0.0,100.0,Neutral assumption — no matched history
 1642383,Walter Clayton Jr.,MEM,20.44253623188406,-9.6,100.0,Latest historical season; on-court net rating
@@ -350,7 +347,6 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1642276,Kel'el Ware,MIL,22.12755411255411,-1.0,100.0,Latest historical season; on-court net rating
 1630163,LaMelo Ball,MIN,28.020092592592594,9.1,100.0,Latest historical season; on-court net rating
 1642866,Joan Beringer,MIN,7.853291666666666,2.3,100.0,Latest historical season; on-court net rating
-1631262,Jules Bernard,MIN,12.0,0.0,100.0,Neutral assumption — no matched history
 1641740,Jaylen Clark,MIN,13.054460784313726,4.1,100.0,Latest historical season; on-court net rating
 1628978,Donte DiVincenzo,MIN,30.41508130081301,6.2,100.0,Latest historical season; on-court net rating
 1630245,Ayo Dosunmu,MIN,27.26149758454106,-1.5,100.0,Latest historical season; on-court net rating
@@ -364,6 +360,7 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1630183,Jaden McDaniels,MIN,31.731689497716896,3.1,100.0,Latest historical season; on-court net rating
 1642389,Zyon Pullin,MIN,8.516666666666667,2.5,100.0,Latest historical season; on-court net rating
 1630545,Terrence Shannon Jr,MIN,12.504069767441859,-8.5,100.0,Latest historical season; on-court net rating
+1629808,Stephen Thompson,MIN,12.0,0.0,100.0,Neutral assumption — no matched history
 1642262,Cody Williams,MIN,24.336442786069654,-10.6,100.0,Latest historical season; on-court net rating
 1642911,Rocco Zikarsky,MIN,7.296666666666667,6.2,100.0,Latest historical season; on-court net rating
 1630180,Saddiq Bey,NOP,31.188541666666666,-3.6,100.0,Latest historical season; on-court net rating
@@ -488,7 +485,6 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1642863,Khaman Maluach,PHO,8.935326086956522,2.5,100.0,Latest historical season; on-court net rating
 1643520,Koa Peat,PHO,12.0,0.0,100.0,Neutral assumption — no matched history
 1630311,Pat Spencer,PHO,18.62010101010101,-3.4,100.0,Latest historical season; on-court net rating
-204065,David Stockton,PHO,12.0,0.0,100.0,Neutral assumption — no matched history
 1631109,Mark Williams,PHO,23.600833333333334,-2.0,100.0,Latest historical season; on-court net rating
 1630166,Deni Avdija,POR,33.324015151515155,0.3,100.0,Latest historical season; on-court net rating
 1641739,Toumani Camara,POR,33.307764227642274,1.3,100.0,Latest historical season; on-court net rating
