@@ -69,12 +69,12 @@
     {
       "name": "transaction_ledger_available",
       "status": "pass",
-      "observed": 855,
+      "observed": 861,
       "expected": "> 0",
       "detail": ""
     }
   ],
-  "fetched_at_utc": "2026-09-19T10:57:18.634517+00:00",
+  "fetched_at_utc": "2026-09-19T15:52:45.217555+00:00",
   "source_manifest": {
     "nba_players": "https://www.nba.com/players",
     "espn": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba",
