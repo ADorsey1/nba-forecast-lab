@@ -62,6 +62,7 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1643515,Christian Anderson,CHO,12.0,0.0,100.0,Neutral assumption — no matched history
 1643616,DJ Armstrong,CHO,12.0,0.0,100.0,Neutral assumption — no matched history
 1643573,Kylan Boswell,CHO,12.0,0.0,100.0,Neutral assumption — no matched history
+1643736,Tre Carroll,CHO,12.0,0.0,100.0,Neutral assumption — no matched history
 1626192,Pat Connaughton,CHO,7.059960317460317,-4.3,100.0,Latest historical season; on-court net rating
 1631217,Moussa Diabaté,CHO,26.013105022831052,10.5,100.0,Latest historical season; on-court net rating
 1627827,Dorian Finney-Smith,CHO,16.765180180180177,1.8,100.0,Latest historical season; on-court net rating
@@ -86,11 +87,13 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1642855,Noa Essengue,CHI,3.0166666666666666,-20.0,100.0,Latest historical season; on-court net rating
 1630581,Josh Giddey,CHI,32.06216049382716,-5.0,100.0,Latest historical season; on-court net rating
 1630200,Tre Jones,CHI,26.959589743589742,-3.8,100.0,Latest historical season; on-court net rating
+1643744,Houston Mallette,CHI,12.0,0.0,100.0,Neutral assumption — no matched history
 1631159,Leonard Miller,CHI,15.623079710144927,-2.5,100.0,Latest historical season; on-court net rating
 1630171,Isaac Okoro,CHI,26.903015873015875,-8.5,100.0,Latest historical season; on-court net rating
 1626181,Norman Powell,CHI,29.602356321839082,0.6,100.0,Latest historical season; on-court net rating
 1643637,Jaylin Sellers,CHI,12.0,0.0,100.0,Neutral assumption — no matched history
 1630188,Jalen Smith,CHI,20.667704402515724,3.4,100.0,Latest historical season; on-court net rating
+1643614,Peter Suder,CHI,12.0,0.0,100.0,Neutral assumption — no matched history
 1643517,Dailyn Swain,CHI,12.0,0.0,100.0,Neutral assumption — no matched history
 1630172,Patrick Williams,CHI,20.469166666666666,-11.0,100.0,Latest historical season; on-court net rating
 1643410,Caleb Wilson,CHI,12.0,0.0,100.0,Neutral assumption — no matched history
@@ -120,7 +123,7 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1629655,Daniel Gafford,DAL,21.717060606060606,-7.1,100.0,Latest historical season; on-court net rating
 1641724,Jett Howard,DAL,12.64218181818182,-5.5,100.0,Latest historical season; on-court net rating
 202681,Kyrie Irving,DAL,12.0,0.0,100.0,Neutral assumption — no matched history
-1643516,Morez Johnson,DAL,12.0,0.0,100.0,Neutral assumption — no matched history
+1643516,Morez Johnson Jr.,DAL,12.0,0.0,100.0,Neutral assumption — no matched history
 1643588,Tobi Lawal,DAL,12.0,0.0,100.0,Neutral assumption — no matched history
 1641726,Dereck Lively II,DAL,16.467619047619046,6.3,100.0,Latest historical season; on-court net rating
 1630230,Naji Marshall,DAL,29.509999999999998,-4.6,100.0,Latest historical season; on-court net rating
@@ -334,6 +337,7 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1630163,LaMelo Ball,MIN,28.020092592592594,9.1,100.0,Latest historical season; on-court net rating
 1642866,Joan Beringer,MIN,7.853291666666666,2.3,100.0,Latest historical season; on-court net rating
 1641740,Jaylen Clark,MIN,13.054460784313726,4.1,100.0,Latest historical season; on-court net rating
+1630622,Jalen Crutcher,MIN,12.0,0.0,100.0,Neutral assumption — no matched history
 1628978,Donte DiVincenzo,MIN,30.41508130081301,6.2,100.0,Latest historical season; on-court net rating
 1630245,Ayo Dosunmu,MIN,27.26149758454106,-1.5,100.0,Latest historical season; on-court net rating
 1630162,Anthony Edwards,MIN,35.02612021857924,3.5,100.0,Latest historical season; on-court net rating
@@ -499,6 +503,7 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1643567,Emanuel Sharp,SAC,12.0,0.0,100.0,Neutral assumption — no matched history
 1627732,Ben Simmons,SAC,12.0,0.0,100.0,Neutral assumption — no matched history
 203084,Harrison Barnes,SAS,25.798376623376623,7.8,100.0,Latest historical season; on-court net rating
+1643709,Miles Barnstable,SAS,12.0,0.0,100.0,Neutral assumption — no matched history
 1643576,Maliq Brown,SAS,12.0,0.0,100.0,Neutral assumption — no matched history
 1642868,Carter Bryant,SAS,11.519225352112676,0.8,100.0,Latest historical season; on-court net rating
 1642264,Stephon Castle,SAS,29.966813725490198,9.8,100.0,Latest historical season; on-court net rating
