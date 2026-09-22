@@ -2,7 +2,7 @@ team_abbr,season,expected_wins,wins_p10,wins_p25,wins_p50,wins_p75,wins_p90,play
 OKC,2026-27,62.1,57,60,62,65,67,0.9999,Independent-win fallback; schedule provider unavailable.
 SAS,2026-27,59.57,54,57,60,62,65,0.9996,Independent-win fallback; schedule provider unavailable.
 BOS,2026-27,54.53,49,52,55,58,60,0.99,Independent-win fallback; schedule provider unavailable.
-DET,2026-27,53.91,48,51,54,57,59,0.9841,Independent-win fallback; schedule provider unavailable.
+DET,2026-27,53.9,48,51,54,57,59,0.9837,Independent-win fallback; schedule provider unavailable.
 NYK,2026-27,53.09,48,50,53,56,59,0.9738,Independent-win fallback; schedule provider unavailable.
 HOU,2026-27,48.91,43,46,49,52,55,0.8412,Independent-win fallback; schedule provider unavailable.
 CLE,2026-27,47.53,42,45,48,51,53,0.755,Independent-win fallback; schedule provider unavailable.
@@ -19,7 +19,7 @@ POR,2026-27,42.38,37,39,42,45,48,0.3208,Independent-win fallback; schedule provi
 PHO,2026-27,41.87,36,39,42,45,48,0.2847,Independent-win fallback; schedule provider unavailable.
 GSW,2026-27,38.49,33,35,38,42,44,0.0917,Independent-win fallback; schedule provider unavailable.
 LAC,2026-27,35.95,30,33,36,39,42,0.0299,Independent-win fallback; schedule provider unavailable.
-IND,2026-27,34.31,29,31,34,37,40,0.0114,Independent-win fallback; schedule provider unavailable.
+IND,2026-27,34.3,29,31,34,37,40,0.0115,Independent-win fallback; schedule provider unavailable.
 UTA,2026-27,31.4,26,28,31,34,37,0.0014,Independent-win fallback; schedule provider unavailable.
 MEM,2026-27,31.28,26,28,31,34,37,0.0007,Independent-win fallback; schedule provider unavailable.
 DAL,2026-27,30.98,25,28,31,34,37,0.0014,Independent-win fallback; schedule provider unavailable.
