@@ -40,8 +40,10 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1643548,Tyler Bilodeau,BRK,12.0,0.0,100.0,Neutral assumption — no matched history
 1643414,Mikel Brown Jr.,BRK,12.0,0.0,100.0,Neutral assumption — no matched history
 1641730,Noah Clowney,BRK,26.970656565656565,-8.7,100.0,Latest historical season; on-court net rating
+1643120,Dain Dainja,BRK,12.0,0.0,100.0,Neutral assumption — no matched history
 1642856,Egor Dëmin,BRK,25.157852564102562,-5.9,100.0,Latest historical season; on-court net rating
 1631165,Keon Ellis,BRK,20.536643518518517,-4.8,100.0,Latest historical season; on-court net rating
+1643750,Ben Humrichous,BRK,12.0,0.0,100.0,Neutral assumption — no matched history
 1643538,Joshua Jefferson,BRK,12.0,0.0,100.0,Neutral assumption — no matched history
 1643052,Chaney Johnson,BRK,20.44607843137255,-9.0,100.0,Latest historical season; on-court net rating
 1629611,Terance Mann,BRK,24.27010582010582,-8.2,100.0,Latest historical season; on-court net rating
@@ -346,6 +348,7 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1626168,Trey Lyles,MIN,12.0,0.0,100.0,Neutral assumption — no matched history
 1630183,Jaden McDaniels,MIN,31.731689497716896,3.1,100.0,Latest historical season; on-court net rating
 1642389,Zyon Pullin,MIN,8.516666666666667,2.5,100.0,Latest historical season; on-court net rating
+1642957,Nate Santos,MIN,12.0,0.0,100.0,Neutral assumption — no matched history
 1630545,Terrence Shannon Jr,MIN,12.504069767441859,-8.5,100.0,Latest historical season; on-court net rating
 1642262,Cody Williams,MIN,24.336442786069654,-10.6,100.0,Latest historical season; on-court net rating
 1642911,Rocco Zikarsky,MIN,7.296666666666667,6.2,100.0,Latest historical season; on-court net rating
@@ -473,6 +476,7 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1642382,Branden Carlson,POR,11.623888888888889,-2.0,100.0,Latest historical season; on-court net rating
 1631321,Sidy Cissoko,POR,19.13406666666667,-1.7,100.0,Latest historical season; on-court net rating
 1642270,Donovan Clingan,POR,27.190086580086582,0.1,100.0,Latest historical season; on-court net rating
+1643764,Barry Dunning,POR,12.0,0.0,100.0,Neutral assumption — no matched history
 1642905,Yang Hansen,POR,6.974263565891473,-15.1,100.0,Latest historical season; on-court net rating
 1630703,Scoot Henderson,POR,24.927666666666667,3.2,100.0,Latest historical season; on-court net rating
 201950,Jrue Holiday,POR,29.441540880503144,6.1,100.0,Latest historical season; on-court net rating
