@@ -25,8 +25,10 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1630568,Luka Garza,BOS,16.20157004830918,5.8,100.0,Latest historical season; on-court net rating
 202331,Paul George,BOS,30.676531531531534,3.6,100.0,Latest historical season; on-court net rating
 1642864,Hugo González,BOS,14.647702702702704,11.9,100.0,Latest historical season; on-court net rating
+1643060,Hayden Gray,BOS,24.75,-20.0,100.0,Latest historical season; on-court net rating
 1631199,Ron Harper Jr.,BOS,10.94919540229885,2.7,100.0,Latest historical season; on-court net rating
 1630573,Sam Hauser,BOS,24.796794871794873,8.8,100.0,Latest historical season; on-court net rating
+1642440,Gabe McGlothan,BOS,12.0,0.0,100.0,Neutral assumption — no matched history
 1641759,Dillon Mitchell,BOS,12.0,0.0,100.0,Neutral assumption — no matched history
 1630202,Payton Pritchard,BOS,32.34839662447258,8.0,100.0,Latest historical season; on-court net rating
 1629674,Neemias Queta,BOS,25.34482456140351,13.2,100.0,Latest historical season; on-court net rating
@@ -97,18 +99,22 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1643517,Dailyn Swain,CHI,12.0,0.0,100.0,Neutral assumption — no matched history
 1630172,Patrick Williams,CHI,20.469166666666666,-11.0,100.0,Latest historical season; on-court net rating
 1643410,Caleb Wilson,CHI,12.0,0.0,100.0,Neutral assumption — no matched history
+1643772,Rashaun Agee,CLE,12.0,0.0,100.0,Neutral assumption — no matched history
 1628386,Jarrett Allen,CLE,27.127142857142854,6.4,100.0,Latest historical season; on-court net rating
+1643113,Zack Austin,CLE,12.0,0.0,100.0,Neutral assumption — no matched history
 1628418,Thomas Bryant,CLE,12.196944444444446,3.6,100.0,Latest historical season; on-court net rating
 1631215,Khalifa Diop,CLE,12.0,0.0,100.0,Neutral assumption — no matched history
 1642400,Tristan Enaruna,CLE,9.45925925925926,20.0,100.0,Latest historical season; on-court net rating
 201935,James Harden,CLE,34.83564285714286,1.8,100.0,Latest historical season; on-court net rating
 1626209,Mario Hezonja,CLE,12.0,0.0,100.0,Neutral assumption — no matched history
+1642938,Curtis Jones,CLE,8.771666666666667,13.6,100.0,Latest historical season; on-court net rating
 1630241,Sam Merrill,CLE,26.482179487179486,7.7,100.0,Latest historical season; on-court net rating
 1642434,Riley Minix,CLE,6.453703703703704,20.0,100.0,Latest historical season; on-court net rating
 1628378,Donovan Mitchell,CLE,33.45804761904762,7.2,100.0,Latest historical season; on-court net rating
 1630596,Evan Mobley,CLE,31.912128205128205,5.7,100.0,Latest historical season; on-court net rating
 1641854,Craig Porter Jr.,CLE,17.932213541666666,4.6,100.0,Latest historical season; on-court net rating
 1642878,Tyrese Proctor,CLE,10.901733333333334,-0.3,100.0,Latest historical season; on-court net rating
+1642955,Kadary Richmond,CLE,22.266666666666666,4.0,100.0,Latest historical season; on-court net rating
 1643509,Meleek Thomas,CLE,12.0,0.0,100.0,Neutral assumption — no matched history
 1641772,Nae'Qwan Tomlin,CLE,15.681848958333333,3.6,100.0,Latest historical season; on-court net rating
 1642281,Jaylon Tyson,CLE,26.931565656565656,3.6,100.0,Latest historical season; on-court net rating
@@ -552,6 +558,7 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1628964,Mo Bamba,UTA,10.95,-13.3,100.0,Latest historical season; on-court net rating
 1642926,Tamar Bates,UTA,12.0,0.0,100.0,Neutral assumption — no matched history
 1642268,Isaiah Collier,UTA,25.710508474576272,-13.2,100.0,Latest historical season; on-court net rating
+1642496,Ibrahima Diallo,UTA,12.0,0.0,100.0,Neutral assumption — no matched history
 1642271,Kyle Filipowski,UTA,23.388874458874458,-6.6,100.0,Latest historical season; on-court net rating
 1641718,Keyonte George,UTA,33.076080246913584,-8.6,100.0,Latest historical season; on-court net rating
 1630182,Josh Green,UTA,15.653936781609195,12.5,100.0,Latest historical season; on-court net rating
