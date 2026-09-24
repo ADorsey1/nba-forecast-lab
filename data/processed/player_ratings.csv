@@ -354,6 +354,7 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1626168,Trey Lyles,MIN,12.0,0.0,100.0,Neutral assumption — no matched history
 1630183,Jaden McDaniels,MIN,31.731689497716896,3.1,100.0,Latest historical season; on-court net rating
 1642389,Zyon Pullin,MIN,8.516666666666667,2.5,100.0,Latest historical season; on-court net rating
+1641810,Antonio Reeves,MIN,6.767666666666666,19.7,100.0,Latest historical season; on-court net rating
 1642362,Payton Sandfort,MIN,15.833333333333334,-14.0,100.0,Latest historical season; on-court net rating
 1642957,Nate Santos,MIN,12.0,0.0,100.0,Neutral assumption — no matched history
 1630545,Terrence Shannon Jr,MIN,12.504069767441859,-8.5,100.0,Latest historical season; on-court net rating
@@ -511,6 +512,8 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1629631,De'Andre Hunter,SAC,26.121925925925925,-0.9,100.0,Latest historical season; on-court net rating
 1642284,Alex Karaban,SAC,12.0,0.0,100.0,Neutral assumption — no matched history
 203897,Zach LaVine,SAC,31.39136752136752,-12.6,100.0,Latest historical season; on-court net rating
+1629792,Gabe Levin,SAC,12.0,0.0,100.0,Neutral assumption — no matched history
+1629225,Tyrone Marshall Jr.,SAC,12.0,0.0,100.0,Neutral assumption — no matched history
 1642367,Jonathan Mogbo,SAC,6.222416666666667,-10.2,100.0,Latest historical season; on-court net rating
 1628370,Malik Monk,SAC,21.99424731182796,-8.3,100.0,Latest historical season; on-court net rating
 1631099,Keegan Murray,SAC,34.48246376811594,-10.7,100.0,Latest historical season; on-court net rating
@@ -545,11 +548,14 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1642419,Jamison Battle,TOR,8.471775956284153,6.7,100.0,Latest historical season; on-court net rating
 1642927,Nate Bittle,TOR,12.0,0.0,100.0,Neutral assumption — no matched history
 1643558,Jaden Bradley,TOR,12.0,0.0,100.0,Neutral assumption — no matched history
+1643718,Nimari Burnett,TOR,12.0,0.0,100.0,Neutral assumption — no matched history
 1643512,Allen Graves,TOR,12.0,0.0,100.0,Neutral assumption — no matched history
 1642935,Chucky Hepburn,TOR,6.616666666666666,-20.0,100.0,Latest historical season; on-court net rating
+1643101,AJ Hoggard,TOR,12.0,0.0,100.0,Neutral assumption — no matched history
 1641748,Andre Jackson Jr.,TOR,8.502256944444445,-7.5,100.0,Latest historical season; on-court net rating
 1631218,Trayce Jackson-Davis,TOR,9.359182389937107,-7.6,100.0,Latest historical season; on-court net rating
 1641998,Trey Jemison III,TOR,6.276025641025641,-16.8,100.0,Latest historical season; on-court net rating
+1642615,Tyreke Key,TOR,12.0,0.0,100.0,Neutral assumption — no matched history
 202695,Kawhi Leonard,TOR,32.072743589743595,7.5,100.0,Latest historical season; on-court net rating
 1642918,Alijah Martin,TOR,6.331086956521739,-5.8,100.0,Latest historical season; on-court net rating
 1642867,Collin Murray-Boyles,TOR,21.852631578947367,2.6,100.0,Latest historical season; on-court net rating
