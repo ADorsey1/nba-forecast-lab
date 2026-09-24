@@ -377,6 +377,7 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1643555,Jaron Pierre Jr.,NOP,12.0,0.0,100.0,Neutral assumption — no matched history
 1629673,Jordan Poole,NOP,23.9291452991453,-7.9,100.0,Latest historical season; on-court net rating
 1642852,Derik Queen,NOP,24.98,-6.7,100.0,Latest historical season; on-court net rating
+1642882,Julian Reese,NOP,30.884615384615383,-11.8,100.0,Latest historical season; on-court net rating
 1630570,Trendon Watford,NOP,16.296540880503144,-9.1,100.0,Latest historical season; on-court net rating
 1629627,Zion Williamson,NOP,29.69456989247312,-1.9,100.0,Latest historical season; on-court net rating
 1630534,Ochai Agbaji,NYK,15.696827956989248,-2.7,100.0,Latest historical season; on-court net rating
@@ -430,6 +431,7 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1641783,Tristan da Silva,ORL,24.6682683982684,1.6,100.0,Latest historical season; on-court net rating
 1631120,JD Davison,ORL,7.800595238095238,2.6,100.0,Latest historical season; on-court net rating
 1628371,Jonathan Isaac,ORL,10.017179487179487,-1.3,100.0,Latest historical season; on-court net rating
+1628995,Kevin Knox II,ORL,12.0,0.0,100.0,Neutral assumption — no matched history
 1631457,Alex Morales,ORL,5.895833333333333,16.3,100.0,Latest historical season; on-court net rating
 1643593,Izaiyah Nelson,ORL,12.0,0.0,100.0,Neutral assumption — no matched history
 1642869,Noah Penda,ORL,12.835169491525424,-3.0,100.0,Latest historical season; on-court net rating
@@ -565,6 +567,7 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1642271,Kyle Filipowski,UTA,23.388874458874458,-6.6,100.0,Latest historical season; on-court net rating
 1641718,Keyonte George,UTA,33.076080246913584,-8.6,100.0,Latest historical season; on-court net rating
 1630182,Josh Green,UTA,15.653936781609195,12.5,100.0,Latest historical season; on-court net rating
+1642640,Justin Harmon,UTA,12.0,0.0,100.0,Neutral assumption — no matched history
 1629637,Jaxson Hayes,UTA,18.2814898989899,2.4,100.0,Latest historical season; on-court net rating
 1642396,Blake Hinson,UTA,20.38809523809524,6.7,100.0,Latest historical season; on-court net rating
 1631127,Harrison Ingram,UTA,3.730952380952381,-12.6,100.0,Latest historical season; on-court net rating
