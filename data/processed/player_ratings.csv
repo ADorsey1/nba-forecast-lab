@@ -350,6 +350,7 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1630228,Jonathan Kuminga,MIN,23.069351851851852,4.1,100.0,Latest historical season; on-court net rating
 1626168,Trey Lyles,MIN,12.0,0.0,100.0,Neutral assumption — no matched history
 1630183,Jaden McDaniels,MIN,31.731689497716896,3.1,100.0,Latest historical season; on-court net rating
+1641807,Norchad Omier,MIN,3.9444444444444446,-20.0,100.0,Latest historical season; on-court net rating
 1642389,Zyon Pullin,MIN,8.516666666666667,2.5,100.0,Latest historical season; on-court net rating
 1641810,Antonio Reeves,MIN,6.767666666666666,19.7,100.0,Latest historical season; on-court net rating
 1630545,Terrence Shannon Jr,MIN,12.504069767441859,-8.5,100.0,Latest historical season; on-court net rating
@@ -458,15 +459,12 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1642886,Koby Brea,PHO,6.988888888888888,-4.2,100.0,Latest historical season; on-court net rating
 1628970,Miles Bridges,PHO,31.003008658008657,3.5,100.0,Latest historical season; on-court net rating
 1628415,Dillon Brooks,PHO,30.385416666666664,-1.1,100.0,Latest historical season; on-court net rating
-1643655,John Camden,PHO,12.0,0.0,100.0,Neutral assumption — no matched history
-1643710,Corey Camper,PHO,12.0,0.0,100.0,Neutral assumption — no matched history
 1642346,Ryan Dunn,PHO,19.360642857142857,1.7,100.0,Latest historical season; on-court net rating
 1642853,Rasheer Fleming,PHO,12.243666666666666,6.1,100.0,Latest historical season; on-court net rating
 1631221,Collin Gillespie,PHO,28.522520833333335,3.7,100.0,Latest historical season; on-court net rating
 1630692,Jordan Goodwin,PHO,22.45395238095238,3.3,100.0,Latest historical season; on-court net rating
 1630224,Jalen Green,PHO,25.88515625,0.7,100.0,Latest historical season; on-court net rating
 1629312,Haywood Highsmith,PHO,12.97,1.7,100.0,Latest historical season; on-court net rating
-1643778,Samuel Hoiberg,PHO,12.0,0.0,100.0,Neutral assumption — no matched history
 1643047,CJ Huntley,PHO,10.1,17.6,100.0,Latest historical season; on-court net rating
 1642345,Oso Ighodaro,PHO,22.053292682926827,5.1,100.0,Latest historical season; on-court net rating
 1628379,Luke Kennard,PHO,21.54457264957265,0.5,100.0,Latest historical season; on-court net rating
@@ -502,6 +500,7 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 203897,Zach LaVine,SAC,31.39136752136752,-12.6,100.0,Latest historical season; on-court net rating
 1629792,Gabe Levin,SAC,12.0,0.0,100.0,Neutral assumption — no matched history
 1629225,Tyrone Marshall Jr.,SAC,12.0,0.0,100.0,Neutral assumption — no matched history
+1643865,Tyrone Marshall Jr.,SAC,12.0,0.0,100.0,Neutral assumption — no matched history
 1642367,Jonathan Mogbo,SAC,6.222416666666667,-10.2,100.0,Latest historical season; on-court net rating
 1628370,Malik Monk,SAC,21.99424731182796,-8.3,100.0,Latest historical season; on-court net rating
 1631099,Keegan Murray,SAC,34.48246376811594,-10.7,100.0,Latest historical season; on-court net rating
