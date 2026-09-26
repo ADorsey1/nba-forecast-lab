@@ -89,7 +89,6 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1642855,Noa Essengue,CHI,3.0166666666666666,-20.0,100.0,Latest historical season; on-court net rating
 1630581,Josh Giddey,CHI,32.06216049382716,-5.0,100.0,Latest historical season; on-court net rating
 1630200,Tre Jones,CHI,26.959589743589742,-3.8,100.0,Latest historical season; on-court net rating
-1643744,Houston Mallette,CHI,12.0,0.0,100.0,Neutral assumption — no matched history
 1631159,Leonard Miller,CHI,15.623079710144927,-2.5,100.0,Latest historical season; on-court net rating
 1630171,Isaac Okoro,CHI,26.903015873015875,-8.5,100.0,Latest historical season; on-court net rating
 1626181,Norman Powell,CHI,29.602356321839082,0.6,100.0,Latest historical season; on-court net rating
@@ -179,7 +178,6 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1629130,Duncan Robinson,DET,27.443614718614718,11.3,100.0,Latest historical season; on-court net rating
 1642449,Tolu Smith,DET,9.162777777777778,2.3,100.0,Latest historical season; on-court net rating
 1641709,Ausar Thompson,DET,25.967260273972602,11.6,100.0,Latest historical season; on-court net rating
-1630651,Romeo Weems,DET,12.0,0.0,100.0,Neutral assumption — no matched history
 1629646,Charles Bassey,GSW,11.746410256410257,-13.0,100.0,Latest historical season; on-court net rating
 1643592,Nick Boyd,GSW,12.0,0.0,100.0,Neutral assumption — no matched history
 202710,Jimmy Butler III,GSW,31.096754385964914,7.3,100.0,Latest historical season; on-court net rating
@@ -257,7 +255,6 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1642949,Yanic Konan Niederhäuser,LAC,10.333617886178862,4.5,100.0,Latest historical season; on-court net rating
 1629618,Jalen Pickett,LAC,16.1296,-0.4,100.0,Latest historical season; on-court net rating
 1642920,Kobe Sanders,LAC,19.873774509803923,0.2,100.0,Latest historical season; on-court net rating
-1642481,Jamarion Sharp,LAC,12.0,0.0,100.0,Neutral assumption — no matched history
 1629622,Max Strus,LAC,24.024583333333336,0.3,100.0,Latest historical season; on-court net rating
 1643413,Keaton Wagler,LAC,12.0,0.0,100.0,Neutral assumption — no matched history
 1643418,Cameron Carr,LAL,12.0,0.0,100.0,Neutral assumption — no matched history
@@ -298,7 +295,6 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1630590,Scotty Pippen Jr.,MEM,21.186666666666667,-11.5,100.0,Latest historical season; on-court net rating
 1642366,Quinten Post,MEM,17.301467661691543,2.3,100.0,Latest historical season; on-court net rating
 1641765,Olivier-Maxence Prosper,MEM,18.558333333333334,-9.7,100.0,Latest historical season; on-court net rating
-1626156,D'Angelo Russell,MEM,19.029807692307692,-3.4,100.0,Latest historical season; on-court net rating
 1642914,Javon Small,MEM,20.241666666666667,-5.7,100.0,Latest historical season; on-court net rating
 1642285,Cam Spencer,MEM,23.811828703703704,-3.6,100.0,Latest historical season; on-court net rating
 1630191,Isaiah Stewart,MEM,22.709224137931034,1.8,100.0,Latest historical season; on-court net rating
@@ -355,11 +351,13 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1630538,Bones Hyland,MIN,16.57631455399061,5.2,100.0,Latest historical season; on-court net rating
 1630228,Jonathan Kuminga,MIN,23.069351851851852,4.1,100.0,Latest historical season; on-court net rating
 1626168,Trey Lyles,MIN,12.0,0.0,100.0,Neutral assumption — no matched history
+1630231,KJ Martin,MIN,12.0,0.0,100.0,Neutral assumption — no matched history
 1630183,Jaden McDaniels,MIN,31.731689497716896,3.1,100.0,Latest historical season; on-court net rating
 1641807,Norchad Omier,MIN,3.9444444444444446,-20.0,100.0,Latest historical season; on-court net rating
 1642389,Zyon Pullin,MIN,8.516666666666667,2.5,100.0,Latest historical season; on-court net rating
 1641810,Antonio Reeves,MIN,6.767666666666666,19.7,100.0,Latest historical season; on-court net rating
 1630545,Terrence Shannon Jr,MIN,12.504069767441859,-8.5,100.0,Latest historical season; on-court net rating
+1631166,Drew Timme,MIN,8.70672839506173,-6.9,100.0,Latest historical season; on-court net rating
 1642262,Cody Williams,MIN,24.336442786069654,-10.6,100.0,Latest historical season; on-court net rating
 1642911,Rocco Zikarsky,MIN,7.296666666666667,6.2,100.0,Latest historical season; on-court net rating
 1630180,Saddiq Bey,NOP,31.188541666666666,-3.6,100.0,Latest historical season; on-court net rating
@@ -465,6 +463,7 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1642886,Koby Brea,PHO,6.988888888888888,-4.2,100.0,Latest historical season; on-court net rating
 1628970,Miles Bridges,PHO,31.003008658008657,3.5,100.0,Latest historical season; on-court net rating
 1628415,Dillon Brooks,PHO,30.385416666666664,-1.1,100.0,Latest historical season; on-court net rating
+1631113,Kennedy Chandler,PHO,32.29333333333334,-9.3,100.0,Latest historical season; on-court net rating
 1642346,Ryan Dunn,PHO,19.360642857142857,1.7,100.0,Latest historical season; on-court net rating
 1642853,Rasheer Fleming,PHO,12.243666666666666,6.1,100.0,Latest historical season; on-court net rating
 1631221,Collin Gillespie,PHO,28.522520833333335,3.7,100.0,Latest historical season; on-court net rating
@@ -476,6 +475,7 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1628379,Luke Kennard,PHO,21.54457264957265,0.5,100.0,Latest historical season; on-court net rating
 1642863,Khaman Maluach,PHO,8.935326086956522,2.5,100.0,Latest historical season; on-court net rating
 1643520,Koa Peat,PHO,12.0,0.0,100.0,Neutral assumption — no matched history
+1641871,Duop Reath,PHO,8.0678125,-6.4,100.0,Latest historical season; on-court net rating
 1630311,Pat Spencer,PHO,18.62010101010101,-3.4,100.0,Latest historical season; on-court net rating
 1630762,Phillip Wheeler,PHO,12.0,0.0,100.0,Neutral assumption — no matched history
 1631109,Mark Williams,PHO,23.600833333333334,-2.0,100.0,Latest historical season; on-court net rating
@@ -499,18 +499,18 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1642959,Chris Youngblood,POR,5.443872549019608,2.3,100.0,Latest historical season; on-court net rating
 1630173,Precious Achiuwa,SAC,23.90664383561644,-7.2,100.0,Latest historical season; on-court net rating
 1643411,Darius Acuff Jr.,SAC,12.0,0.0,100.0,Neutral assumption — no matched history
+1641778,Leaky Black,SAC,28.871777777777776,-9.9,100.0,Latest historical season; on-court net rating
 1642928,Dylan Cardwell,SAC,20.603143939393938,-2.5,100.0,Latest historical season; on-court net rating
 1642363,Nique Clifford,SAC,25.092333333333332,-4.5,100.0,Latest historical season; on-court net rating
 1641745,Adam Flagler,SAC,12.0,0.0,100.0,Neutral assumption — no matched history
 1629631,De'Andre Hunter,SAC,26.121925925925925,-0.9,100.0,Latest historical season; on-court net rating
 1642284,Alex Karaban,SAC,12.0,0.0,100.0,Neutral assumption — no matched history
 203897,Zach LaVine,SAC,31.39136752136752,-12.6,100.0,Latest historical season; on-court net rating
-1629792,Gabe Levin,SAC,12.0,0.0,100.0,Neutral assumption — no matched history
 1629225,Tyrone Marshall Jr.,SAC,12.0,0.0,100.0,Neutral assumption — no matched history
-1643865,Tyrone Marshall Jr.,SAC,12.0,0.0,100.0,Neutral assumption — no matched history
 1642367,Jonathan Mogbo,SAC,6.222416666666667,-10.2,100.0,Latest historical season; on-court net rating
 1628370,Malik Monk,SAC,21.99424731182796,-8.3,100.0,Latest historical season; on-court net rating
 1631099,Keegan Murray,SAC,34.48246376811594,-10.7,100.0,Latest historical season; on-court net rating
+1641803,Tristen Newton,SAC,12.0,8.0,100.0,Latest historical season; on-court net rating
 203901,Elfrid Payton,SAC,12.0,0.0,100.0,Neutral assumption — no matched history
 1631342,Daeqwon Plowden,SAC,26.386510416666667,-10.9,100.0,Latest historical season; on-court net rating
 1642875,Maxime Raynaud,SAC,26.53891891891892,-10.9,100.0,Latest historical season; on-court net rating
@@ -522,6 +522,7 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1642868,Carter Bryant,SAS,11.519225352112676,0.8,100.0,Latest historical season; on-court net rating
 1642264,Stephon Castle,SAS,29.966813725490198,9.8,100.0,Latest historical season; on-court net rating
 1630577,Julian Champagnie,SAS,27.63369918699187,12.4,100.0,Latest historical season; on-court net rating
+1642930,R.J. Davis,SAS,12.0,0.0,100.0,Neutral assumption — no matched history
 1631399,Jon Elmore,SAS,12.0,0.0,100.0,Neutral assumption — no matched history
 1628368,De'Aaron Fox,SAS,30.98701388888889,9.9,100.0,Latest historical season; on-court net rating
 1643551,Ja'Kobi Gillespie,SAS,12.0,0.0,100.0,Neutral assumption — no matched history
@@ -558,6 +559,7 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1642347,Jamal Shead,TOR,22.588272357723575,5.8,100.0,Latest historical season; on-court net rating
 1641869,Malachi Smith,TOR,23.921333333333333,-13.2,100.0,Latest historical season; on-court net rating
 1642266,Ja'Kobe Walter,TOR,20.466319444444444,0.9,100.0,Latest historical season; on-court net rating
+1643265,Jonas Aidoo,UTA,12.0,0.0,100.0,Neutral assumption — no matched history
 1641725,Trey Alexander,UTA,12.293703703703704,-7.0,100.0,Latest historical season; on-court net rating
 1642846,Ace Bailey,UTA,27.60615740740741,-10.7,100.0,Latest historical season; on-court net rating
 1628964,Mo Bamba,UTA,10.95,-13.3,100.0,Latest historical season; on-court net rating
@@ -568,6 +570,7 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1630182,Josh Green,UTA,15.653936781609195,12.5,100.0,Latest historical season; on-court net rating
 1629637,Jaxson Hayes,UTA,18.2814898989899,2.4,100.0,Latest historical season; on-court net rating
 1642396,Blake Hinson,UTA,20.38809523809524,6.7,100.0,Latest historical season; on-court net rating
+1642409,Jaelen House,UTA,12.0,0.0,100.0,Neutral assumption — no matched history
 1631127,Harrison Ingram,UTA,3.730952380952381,-12.6,100.0,Latest historical season; on-court net rating
 1628991,Jaren Jackson Jr.,UTA,30.305173611111112,-2.0,100.0,Latest historical season; on-court net rating
 1628374,Lauri Markkanen,UTA,34.34753968253968,-1.5,100.0,Latest historical season; on-court net rating
