@@ -254,6 +254,7 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1641757,Jordan Miller,LAC,22.079666666666665,-0.4,100.0,Latest historical season; on-court net rating
 1642949,Yanic Konan Niederhäuser,LAC,10.333617886178862,4.5,100.0,Latest historical season; on-court net rating
 1629618,Jalen Pickett,LAC,16.1296,-0.4,100.0,Latest historical season; on-court net rating
+1630554,Jason Preston,LAC,12.0,0.0,100.0,Neutral assumption — no matched history
 1642920,Kobe Sanders,LAC,19.873774509803923,0.2,100.0,Latest historical season; on-court net rating
 1629622,Max Strus,LAC,24.024583333333336,0.3,100.0,Latest historical season; on-court net rating
 1643413,Keaton Wagler,LAC,12.0,0.0,100.0,Neutral assumption — no matched history
@@ -315,6 +316,7 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1630558,Davion Mitchell,MIA,28.57507142857143,4.2,100.0,Latest historical season; on-court net rating
 1626171,Bobby Portis Jr.,MIA,24.168855721393033,-8.2,100.0,Latest historical season; on-court net rating
 1630208,Nick Richards,MIA,14.598125000000001,-8.4,100.0,Latest historical season; on-court net rating
+1643867,Ian Schieffelin,MIA,12.0,0.0,100.0,Neutral assumption — no matched history
 1630696,Dru Smith,MIA,16.304404761904763,-3.2,100.0,Latest historical season; on-court net rating
 202691,Klay Thompson,MIA,21.693188405797102,-4.7,100.0,Latest historical season; on-court net rating
 203952,Andrew Wiggins,MIA,30.33232843137255,-0.1,100.0,Latest historical season; on-court net rating
@@ -411,6 +413,7 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1643597,Robert McCray V,OKC,12.0,0.0,100.0,Neutral assumption — no matched history
 1642349,Ajay Mitchell,OKC,25.83856725146199,15.6,100.0,Latest historical season; on-court net rating
 1642923,Otega Oweh,OKC,12.0,0.0,100.0,Neutral assumption — no matched history
+1629015,Zhaire Smith,OKC,12.0,0.0,100.0,Neutral assumption — no matched history
 1642850,Thomas Sorber,OKC,12.0,0.0,100.0,Neutral assumption — no matched history
 1642892,Bennett Stirtz,OKC,12.0,0.0,100.0,Neutral assumption — no matched history
 1643754,Christoph Tilly,OKC,12.0,0.0,100.0,Neutral assumption — no matched history
