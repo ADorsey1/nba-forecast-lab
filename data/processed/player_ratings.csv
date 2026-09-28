@@ -184,6 +184,7 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1629130,Duncan Robinson,DET,27.443614718614718,11.3,100.0,Latest historical season; on-court net rating
 1642449,Tolu Smith,DET,9.162777777777778,2.3,100.0,Latest historical season; on-court net rating
 1641709,Ausar Thompson,DET,25.967260273972602,11.6,100.0,Latest historical season; on-court net rating
+1641985,Bryson Warren,DET,12.0,0.0,100.0,Neutral assumption — no matched history
 1642924,Brice Williams,DET,12.0,0.0,100.0,Neutral assumption — no matched history
 1629646,Charles Bassey,GSW,11.746410256410257,-13.0,100.0,Latest historical season; on-court net rating
 1643592,Nick Boyd,GSW,12.0,0.0,100.0,Neutral assumption — no matched history
@@ -595,6 +596,7 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1643408,Darryn Peterson,UTA,12.0,0.0,100.0,Neutral assumption — no matched history
 1641729,Brice Sensabaugh,UTA,23.491555555555554,-9.4,100.0,Latest historical season; on-court net rating
 1629028,Deandre Ayton,WAS,27.199791666666666,0.1,100.0,Latest historical season; on-court net rating
+1641736,Reece Beekman,WAS,12.0,0.0,100.0,Neutral assumption — no matched history
 1642267,Bub Carrington,WAS,27.690853658536586,-15.3,100.0,Latest historical season; on-court net rating
 1630551,Justin Champagnie,WAS,19.963091787439613,-9.4,100.0,Latest historical season; on-court net rating
 1641731,Bilal Coulibaly,WAS,26.207232142857144,-12.8,100.0,Latest historical season; on-court net rating
@@ -603,12 +605,15 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1642273,Kyshawn George,WAS,28.978402777777777,-11.5,100.0,Latest historical season; on-court net rating
 1630264,Anthony Gill,WAS,17.289939393939395,-14.4,100.0,Latest historical season; on-court net rating
 1642848,Tre Johnson,WAS,24.046944444444442,-11.2,100.0,Latest historical season; on-court net rating
+1631211,Trevor Keels,WAS,1.8683333333333334,17.7,100.0,Latest historical season; on-court net rating
+1641753,Chris Livingston,WAS,5.808888888888888,20.0,100.0,Latest historical season; on-court net rating
 1630544,Tre Mann,WAS,12.6124213836478,-10.1,100.0,Latest historical season; on-court net rating
 203114,Khris Middleton,WAS,22.842645502645503,-11.1,100.0,Latest historical season; on-court net rating
 1643564,KeShawn Murphy,WAS,12.0,0.0,100.0,Neutral assumption — no matched history
 1643590,Felix Okpara,WAS,12.0,0.0,100.0,Neutral assumption — no matched history
 1642860,Will Riley,WAS,22.060427927927925,-14.1,100.0,Latest historical season; on-court net rating
 1642259,Alex Sarr,WAS,27.180451388888887,-12.4,100.0,Latest historical season; on-court net rating
+1643121,Steve Settle III,WAS,12.0,0.0,100.0,Neutral assumption — no matched history
 1641774,Tristan Vukcevic,WAS,13.693469387755103,-15.1,100.0,Latest historical season; on-court net rating
 1642364,Jamir Watkins,WAS,20.643533333333334,-6.4,100.0,Latest historical season; on-court net rating
 1629027,Trae Young,WAS,25.583555555555556,-8.1,100.0,Latest historical season; on-court net rating
