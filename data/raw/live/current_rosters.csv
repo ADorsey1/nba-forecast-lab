@@ -1,6 +1,6 @@
 team_abbr,team_id,season,player_id,player_name,age,position,roster_status,experience_years,salary,years_remaining,roster_injury_count
 ATL,1610612737,2026-27,1629638,Nickeil Alexander-Walker,,G,Active,,,,0
-ATL,1610612737,2026-27,1643723,Cameron Corhen,,,Active,,,,0
+ATL,1610612737,2026-27,1643723,Cameron Corhen,,F,Active,,,,0
 ATL,1610612737,2026-27,1630700,Dyson Daniels,,G,Active,,,,0
 ATL,1610612737,2026-27,1642484,RayJ Dennis,,G,Active,,,,0
 ATL,1610612737,2026-27,1629652,Luguentz Dort,,G,Active,,,,0
@@ -14,7 +14,7 @@ ATL,1610612737,2026-27,1642937,Kobe Johnson,,G,Active,,,,0
 ATL,1610612737,2026-27,1630557,Corey Kispert,,F,Active,,,,0
 ATL,1610612737,2026-27,1629111,Jock Landale,,C,Active,,,,0
 ATL,1610612737,2026-27,203468,CJ McCollum,,G,Active,,,,0
-ATL,1610612737,2026-27,1643724,Isaac McKneely,,,Active,,,,0
+ATL,1610612737,2026-27,1643724,Isaac McKneely,,G,Active,,,,0
 ATL,1610612737,2026-27,1642854,Asa Newell,,F,Active,,,,0
 ATL,1610612737,2026-27,1630168,Onyeka Okongwu,,F-C,Active,,,,0
 ATL,1610612737,2026-27,1643539,Henri Veesaar,,C,Active,,,,0
@@ -55,7 +55,6 @@ BRK,1610612751,2026-27,1631169,Josh Minott,,F,Active,,,,0
 BRK,1610612751,2026-27,1641761,Grant Nelson,,F,Active,,,,0
 BRK,1610612751,2026-27,1629008,Michael Porter Jr.,,F,Active,,,,0
 BRK,1610612751,2026-27,1642962,Drake Powell,,G-F,Active,,,,0
-BRK,1610612751,2026-27,1643761,Nick Pringle,,F,Active,,,,0
 BRK,1610612751,2026-27,203944,Julius Randle,,F-C,Active,,,,0
 BRK,1610612751,2026-27,1642879,Ben Saraf,,G,Active,,,,0
 BRK,1610612751,2026-27,1630549,Day'Ron Sharpe,,C,Active,,,,0
@@ -68,7 +67,6 @@ CHO,1610612766,2026-27,1643515,Christian Anderson,,G,Active,,,,0
 CHO,1610612766,2026-27,1643573,Kylan Boswell,,G,Active,,,,0
 CHO,1610612766,2026-27,1626192,Pat Connaughton,,G,Active,,,,0
 CHO,1610612766,2026-27,1631217,Moussa Diabaté,,F,Active,,,,0
-CHO,1610612766,2026-27,1642265,Rob Dillingham,,G,Active,,,,0
 CHO,1610612766,2026-27,1641790,PJ Hall,,C,Active,,,,0
 CHO,1610612766,2026-27,1642883,Sion James,,G,Active,,,,0
 CHO,1610612766,2026-27,1641935,Jarkel Joiner,,G,Active,,,,0
@@ -76,7 +74,6 @@ CHO,1610612766,2026-27,1641750,Ryan Kalkbrenner,,C,Active,,,,0
 CHO,1610612766,2026-27,1642851,Kon Knueppel,,G-F,Active,,,,0
 CHO,1610612766,2026-27,1642862,Liam McNeeley,,F,Active,,,,0
 CHO,1610612766,2026-27,1641706,Brandon Miller,,F,Active,,,,0
-CHO,1610612766,2026-27,1642948,Ryan Nembhard,,G,Active,,,,0
 CHO,1610612766,2026-27,1626220,Royce O'Neale,,F,Active,,,,0
 CHO,1610612766,2026-27,1629675,Naz Reid,,C-F,Active,,,,0
 CHO,1610612766,2026-27,1642275,Tidjane Salaün,,F,Active,,,,0
@@ -172,7 +169,6 @@ DET,1610612765,2026-27,1630595,Cade Cunningham,,G,Active,,,,0
 DET,1610612765,2026-27,1631105,Jalen Duren,,C,Active,,,,0
 DET,1610612765,2026-27,1629750,Javonte Green,,G,Active,,,,0
 DET,1610612765,2026-27,1641989,Elijah Harkless,,G,Active,,,,0
-DET,1610612765,2026-27,203914,Gary Harris,,G,Active,,,,0
 DET,1610612765,2026-27,1641842,Ronald Holland II,,F,Active,,,,0
 DET,1610612765,2026-27,1628989,Kevin Huerter,,G-F,Active,,,,0
 DET,1610612765,2026-27,1642450,Daniss Jenkins,,G,Active,,,,0
@@ -187,10 +183,8 @@ DET,1610612765,2026-27,1629130,Duncan Robinson,,F,Active,,,,0
 DET,1610612765,2026-27,1642449,Tolu Smith,,F,Active,,,,0
 DET,1610612765,2026-27,1641709,Ausar Thompson,,G-F,Active,,,,0
 DET,1610612765,2026-27,1642578,John Ukomadu,,F,Active,,,,0
-DET,1610612765,2026-27,1641985,Bryson Warren,,G,Active,,,,0
 DET,1610612765,2026-27,1642924,Brice Williams,,G-F,Active,,,,0
 GSW,1610612744,2026-27,1629646,Charles Bassey,,F-C,Active,,,,0
-GSW,1610612744,2026-27,1643592,Nick Boyd,,G,Active,,,,0
 GSW,1610612744,2026-27,202710,Jimmy Butler III,,F,Active,,,,0
 GSW,1610612744,2026-27,1643018,LJ Cryer,,G,Active,,,,0
 GSW,1610612744,2026-27,201939,Stephen Curry,,G,Active,,,,0
@@ -276,7 +270,6 @@ LAL,1610612747,2026-27,1629029,Luka Dončić,,F-G,Active,,,,0
 LAL,1610612747,2026-27,1629656,Quentin Grimes,,G,Active,,,,0
 LAL,1610612747,2026-27,1630702,Jaden Hardy,,G,Active,,,,0
 LAL,1610612747,2026-27,1642355,Bronny James,,G,Active,,,,0
-LAL,1610612747,2026-27,1641800,Meechie Johnson,,G,Active,,,,0
 LAL,1610612747,2026-27,1641751,Arthur Kaluma,,F,Active,,,,0
 LAL,1610612747,2026-27,1631117,Walker Kessler,,C,Active,,,,0
 LAL,1610612747,2026-27,1642261,Dalton Knecht,,F,Active,,,,0
@@ -287,7 +280,6 @@ LAL,1610612747,2026-27,1630572,Sandro Mamukelashvili,,F-C,Active,,,,0
 LAL,1610612747,2026-27,1643024,Chris Mañon,,G,Active,,,,0
 LAL,1610612747,2026-27,1643758,AK Okereke,,F,Active,,,,0
 LAL,1610612747,2026-27,1630559,Austin Reaves,,G,Active,,,,0
-LAL,1610612747,2026-27,1643732,Chase Ross,,,Active,,,,0
 LAL,1610612747,2026-27,1629012,Collin Sexton,,G,Active,,,,0
 LAL,1610612747,2026-27,1631306,Cole Swider,,F,Active,,,,0
 LAL,1610612747,2026-27,1642876,Adou Thiero,,G,Active,,,,0
@@ -305,7 +297,6 @@ MEM,1610612763,2026-27,1641707,Taylor Hendricks,,F,Active,,,,0
 MEM,1610612763,2026-27,1641713,GG Jackson,,F,Active,,,,0
 MEM,1610612763,2026-27,1629660,Ty Jerome,,G-F,Active,,,,0
 MEM,1610612763,2026-27,1643510,Karim Lopez,,F,Active,,,,0
-MEM,1610612763,2026-27,1643133,Lawson Lovering,,C,Active,,,,0
 MEM,1610612763,2026-27,1642942,Jahmai Mashack,,G,Active,,,,0
 MEM,1610612763,2026-27,1631200,Kris Murray,,F,Active,,,,0
 MEM,1610612763,2026-27,1642877,Micah Peavy,,G-F,Active,,,,0
@@ -400,7 +391,6 @@ NOP,1610612740,2026-27,1642882,Julian Reese,,F,Active,,,,0
 NOP,1610612740,2026-27,1630570,Trendon Watford,,G-F,Active,,,,0
 NOP,1610612740,2026-27,1629627,Zion Williamson,,F,Active,,,,0
 NYK,1610612752,2026-27,1630534,Ochai Agbaji,,G,Active,,,,0
-NYK,1610612752,2026-27,1643022,Jaden Akins,,G,Active,,,,0
 NYK,1610612752,2026-27,1630631,Jose Alvarado,,G,Active,,,,0
 NYK,1610612752,2026-27,1628384,OG Anunoby,,F-G,Active,,,,0
 NYK,1610612752,2026-27,1628969,Mikal Bridges,,G-F,Active,,,,0
@@ -620,7 +610,6 @@ WAS,1610612764,2026-27,1631211,Trevor Keels,,G,Active,,,,0
 WAS,1610612764,2026-27,1641753,Chris Livingston,,F,Active,,,,0
 WAS,1610612764,2026-27,1630544,Tre Mann,,G,Active,,,,0
 WAS,1610612764,2026-27,203114,Khris Middleton,,F,Active,,,,0
-WAS,1610612764,2026-27,1643564,KeShawn Murphy,,F,Active,,,,0
 WAS,1610612764,2026-27,1643590,Felix Okpara,,C,Active,,,,0
 WAS,1610612764,2026-27,1642860,Will Riley,,F,Active,,,,0
 WAS,1610612764,2026-27,1642259,Alex Sarr,,C,Active,,,,0
