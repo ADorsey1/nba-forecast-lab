@@ -67,6 +67,7 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1643573,Kylan Boswell,CHO,12.0,0.0,100.0,Neutral assumption — no matched history
 1626192,Pat Connaughton,CHO,7.059960317460317,-4.3,100.0,Latest historical season; on-court net rating
 1631217,Moussa Diabaté,CHO,26.013105022831052,10.5,100.0,Latest historical season; on-court net rating
+1643769,Wyatt Fricks,CHO,12.0,0.0,100.0,Neutral assumption — no matched history
 1641790,PJ Hall,CHO,11.230438596491227,-5.4,100.0,Latest historical season; on-court net rating
 1642883,Sion James,CHO,22.479024390243904,3.3,100.0,Latest historical season; on-court net rating
 1641935,Jarkel Joiner,CHO,12.0,0.0,100.0,Neutral assumption — no matched history
@@ -322,6 +323,7 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1643016,Bez Mbeng,MIA,32.812333333333335,-13.2,100.0,Latest historical season; on-court net rating
 1630558,Davion Mitchell,MIA,28.57507142857143,4.2,100.0,Latest historical season; on-court net rating
 1626171,Bobby Portis Jr.,MIA,24.168855721393033,-8.2,100.0,Latest historical season; on-court net rating
+1631311,Lester Quinones,MIA,12.0,0.0,100.0,Neutral assumption — no matched history
 1630208,Nick Richards,MIA,14.598125000000001,-8.4,100.0,Latest historical season; on-court net rating
 1643867,Ian Schieffelin,MIA,12.0,0.0,100.0,Neutral assumption — no matched history
 1630696,Dru Smith,MIA,16.304404761904763,-3.2,100.0,Latest historical season; on-court net rating
@@ -502,6 +504,7 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1642905,Yang Hansen,POR,6.974263565891473,-15.1,100.0,Latest historical season; on-court net rating
 1630703,Scoot Henderson,POR,24.927666666666667,3.2,100.0,Latest historical season; on-court net rating
 201950,Jrue Holiday,POR,29.441540880503144,6.1,100.0,Latest historical season; on-court net rating
+1643876,Lee Hyun-jung,POR,12.0,0.0,100.0,Neutral assumption — no matched history
 1643257,Jayson Kent,POR,4.493333333333333,-2.7,100.0,Latest historical season; on-court net rating
 1630249,Vít Krejčí,POR,21.416923076923077,-1.1,100.0,Latest historical season; on-court net rating
 203081,Damian Lillard,POR,12.0,0.0,100.0,Neutral assumption — no matched history
@@ -517,12 +520,12 @@ player_id,player_name,team_abbr,minutes,impact,availability,evidence
 1641778,Leaky Black,SAC,28.871777777777776,-9.9,100.0,Latest historical season; on-court net rating
 1642928,Dylan Cardwell,SAC,20.603143939393938,-2.5,100.0,Latest historical season; on-court net rating
 1642363,Nique Clifford,SAC,25.092333333333332,-4.5,100.0,Latest historical season; on-court net rating
+1642398,Sean East II,SAC,12.0,0.0,100.0,Neutral assumption — no matched history
 1641745,Adam Flagler,SAC,12.0,0.0,100.0,Neutral assumption — no matched history
 1629631,De'Andre Hunter,SAC,26.121925925925925,-0.9,100.0,Latest historical season; on-court net rating
 1642284,Alex Karaban,SAC,12.0,0.0,100.0,Neutral assumption — no matched history
 1642940,Viktor Lakhin,SAC,12.0,0.0,100.0,Neutral assumption — no matched history
 203897,Zach LaVine,SAC,31.39136752136752,-12.6,100.0,Latest historical season; on-court net rating
-1629225,Tyrone Marshall Jr.,SAC,12.0,0.0,100.0,Neutral assumption — no matched history
 1642367,Jonathan Mogbo,SAC,6.222416666666667,-10.2,100.0,Latest historical season; on-court net rating
 1628370,Malik Monk,SAC,21.99424731182796,-8.3,100.0,Latest historical season; on-court net rating
 1631099,Keegan Murray,SAC,34.48246376811594,-10.7,100.0,Latest historical season; on-court net rating
